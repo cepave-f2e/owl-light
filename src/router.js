@@ -9,6 +9,7 @@ module.exports = new Router({
   routes: [
     { path: '/alarm', component: require('./containers/alarm') },
     { path: '/graph', component: require('./containers/graph') },
+    { path: '/vuex', component: require('./containers/vuex-page') },
     { path: '*', redirect: '/alarm' },
   ],
 })
