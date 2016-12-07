@@ -10,6 +10,12 @@ module.exports = new window.VueRouter({
       }
     },
     {
+      path: '/portal',
+      component(resolve) {
+        require(['./containers/portal'], resolve)
+      }
+    },
+    {
       path: '/graph',
       component(resolve) {
         require(['./containers/graph'], resolve)
