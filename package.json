@@ -12,7 +12,8 @@
     "lint": "eslint --ext .js src test & stylelint src/**/*.scss --syntax scss"
   },
   "dependencies": {
-    "vue": "^2.1.4"
+    "vue": "^2.1.4",
+    "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.1.5"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
