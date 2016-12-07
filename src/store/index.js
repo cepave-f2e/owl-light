@@ -1,6 +1,7 @@
 module.exports = new window.Vuex.Store({
   strict: true,
   modules: {
-    sample: require('./sample')
+    sample: require('./sample'),
+    userGroup: require('./user-group')
   }
 })
