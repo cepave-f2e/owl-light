@@ -18,11 +18,10 @@ module.exports = {
     alias: {
       '~src': projectSrc,
       '~utils': path.join(projectSrc, 'utils'),
+      'sass': path.join(projectSrc, 'sass'),
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
+
   module: {
     loaders: [
       {
