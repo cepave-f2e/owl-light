@@ -1,6 +1,7 @@
 const path = require('path')
 const config = require('../config')
-const projectRoot = path.resolve(__dirname, '../')
+const projectRoot = path.join(__dirname, '../')
+const projectSrc = path.join(projectRoot, 'src')
 const env = process.env.NODE_ENV
 
 module.exports = {
@@ -9,30 +10,19 @@ module.exports = {
   },
   output: {
     path: config.build.assetsRoot,
-    publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
+    publicPath: env === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
     filename: '[name].js'
   },
   resolve: {
     extensions: ['', '.js'],
-    fallback: [path.join(__dirname, '../node_modules')],
     alias: {
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      '~src': projectSrc,
+      '~utils': path.join(projectSrc, 'utils'),
+      'sass': path.join(projectSrc, 'sass'),
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
-  },
+
   module: {
-    preLoaders: [
-      {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: projectRoot,
-        exclude: /node_modules/
-      }
-    ],
     loaders: [
       {
         test: /\.js$/,
@@ -49,8 +39,5 @@ module.exports = {
         ]
       }
     ]
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
   }
 }

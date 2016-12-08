@@ -1,14 +1,3 @@
-@import "normalize.css/normalize.css";
-// css reset
-*, *:after, *:before {
-  box-sizing: border-box;
-}
+:global {
 
-*:after, *:before {
-  content: '';
-}
-
-ol, ul {
-  list-style: none;
-  margin: 0;
 }
