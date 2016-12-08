@@ -47,6 +47,7 @@
     "json-loader": "^0.5.4",
     "nightwatch": "^0.9.8",
     "node-sass": "^3.13.0",
+    "normalize.css": "^5.0.0",
     "ora": "^0.3.0",
     "sass-loader": "^4.0.2",
     "selenium-server": "2.53.1",

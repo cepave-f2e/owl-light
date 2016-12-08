@@ -9,18 +9,6 @@ module.exports = new Vue({
   render(h) {
     return (
       <div id="app" class={s.app}>
-        hello owl-light!
-        <ul>
-          <li>
-            <router-link to="/alarm">Alarm</router-link>
-          </li>
-          <li>
-            <router-link to="/graph">Graph</router-link>
-          </li>
-          <li>
-            <router-link to="/vuex">Vuex Sample</router-link>
-          </li>
-        </ul>
         <router-view />
       </div>
     )
