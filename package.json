@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js src test & stylelint src/**/*.scss --syntax scss"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "vue": "^2.1.4",
     "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.1.5"
   },
