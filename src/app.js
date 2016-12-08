@@ -1,11 +1,7 @@
-import Vue from 'vue'
-import router from './router'
-import store from './store'
 import s from './app.scss'
 
-module.exports = new Vue({
-  router,
-  store,
+module.exports = {
+  name: 'App',
   render(h) {
     return (
       <div id="app" class={s.app}>
@@ -13,4 +9,4 @@ module.exports = new Vue({
       </div>
     )
   }
-})
+}

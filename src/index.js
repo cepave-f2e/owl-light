@@ -1,3 +1,10 @@
+import Vue from 'vue'
 import App from './app'
+import router from './router'
+import store from './store'
 
-App.$mount('#app')
+new Vue({
+  router,
+  store,
+  ...App
+}).$mount('#app')
