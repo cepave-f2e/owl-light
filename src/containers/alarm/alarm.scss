@@ -1,0 +1,21 @@
+@import "~sass/colors";
+.alarmPage {
+  font-size: 14px;
+}
+.wrapper {
+  padding: 12px 24px;
+  height: 40px;
+  position: relative;
+  background: $colorGrayLightest;
+  position: relative;
+  display: flex;
+}
+.opeartionInline {
+  display: flex;
+  align-items: baseline;
+  .opeartions {
+    margin: 0 5px;
+    text-decoration: underline;
+    color: $colorPrimary;
+  }
+}
