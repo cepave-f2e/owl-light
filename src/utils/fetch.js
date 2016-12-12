@@ -15,19 +15,28 @@ module.exports = (opts = {}) => {
     })
   }
 
-  return axios(opts)
+  return new Promise((resolve, reject) => {
+    axios({
+      baseURL: process.env.NODE_ENV === 'production' ? __conf.prod.apiBase : __conf.dev.apiBase,
+      ...opts
+    })
     .then((res)=> {
-      opts.spin.forEach((el) => {
-        el.style.visibility = 'hidden'
-      })
+      if (hasSpin) {
+        opts.spin.forEach((el) => {
+          el.style.visibility = 'hidden'
+        })
+      }
 
-      return res
+      resolve(res)
     })
-    .catch((er) => {
-      opts.spin.forEach((el) => {
-        el.style.visibility = 'hidden'
-      })
+    .catch((err) => {
+      if (hasSpin) {
+        opts.spin.forEach((el) => {
+          el.style.visibility = 'hidden'
+        })
+      }
 
-      return er
+      reject(err)
     })
+  })
 }
