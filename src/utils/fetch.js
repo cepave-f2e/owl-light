@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { isBrowser } from './is-env'
 
 module.exports = (opts = {}) => {
@@ -16,7 +15,7 @@ module.exports = (opts = {}) => {
   }
 
   return new Promise((resolve, reject) => {
-    axios({
+    window.axios({
       baseURL: process.env.NODE_ENV === 'production' ? __conf.prod.apiBase : __conf.dev.apiBase,
       ...opts
     })

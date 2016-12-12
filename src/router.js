@@ -1,10 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-
-Vue.use(Router)
-
 // http://router.vuejs.org/en/advanced/lazy-loading.html
-module.exports = new Router({
+module.exports = new window.VueRouter({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
