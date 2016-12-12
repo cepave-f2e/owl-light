@@ -26,6 +26,12 @@ module.exports = new Router({
         require(['./containers/vuex-page'], resolve)
       }
     },
+    {
+      path: '/profile',
+      component(resolve) {
+        require(['./containers/profile'], resolve)
+      }
+    },
     { path: '*', redirect: '/alarm' },
   ],
 })
