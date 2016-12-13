@@ -2816,6 +2816,10 @@ jade@0.26.3:
     commander "0.6.1"
     mkdirp "0.3.0"
 
+jeet@^7.1.0:
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/jeet/-/jeet-7.1.0.tgz#4aeaa0a939306b29607de8fcfa96967d9305a752"
+
 jodid25519@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/jodid25519/-/jodid25519-1.0.2.tgz#06d4912255093419477d425633606e0e90782967"
