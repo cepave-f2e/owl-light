@@ -18,6 +18,7 @@ module.exports = {
     alias: {
       '~src': projectSrc,
       '~utils': path.join(projectSrc, 'utils'),
+      '~coms': path.join(projectSrc, 'components'),
       '~sass': path.join(projectSrc, 'sass'), // for js
       'sass': path.join(projectSrc, 'sass'), // for scss
     }
