@@ -1,12 +1,16 @@
-*, *:after, *:before {
+*,
+*:after,
+*:before {
   box-sizing: border-box;
 }
 
-*:after, *:before {
+*:after,
+*:before {
   content: '';
 }
 
-ol, ul {
+ol,
+ul {
   margin: 0;
   list-style: none;
 }
