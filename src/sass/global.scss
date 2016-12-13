@@ -1,3 +1,19 @@
-:global {
+.inline {
+  display: inline;
+}
 
+.inlineBlock {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
+
+.pullRight {
+  float: right;
+}
+
+.pullLeft {
+  float: left;
 }
