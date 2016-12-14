@@ -1,6 +1,7 @@
 import App from './app'
 import router from './router'
 import store from './store'
+import './sneak'
 
 new window.Vue({
   router,
