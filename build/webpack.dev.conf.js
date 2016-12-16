@@ -23,6 +23,7 @@ module.exports = merge(baseWebpackConfig, {
     new webpack.NoErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
+      min: (process.env.NODE_ENV === 'production' ? '.min' : ''),
       template: './src/index.html',
     })
   ]
