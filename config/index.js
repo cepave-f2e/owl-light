@@ -28,6 +28,6 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
-    apiBase: 'http://115.63.103.4:8088/api/v1',
+    apiBase: 'http://113.207.30.198:8088/api/v1',
   }
 }
