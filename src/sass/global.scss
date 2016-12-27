@@ -1,6 +1,7 @@
 @import "~sass/colors";
 @import "~sass/grid";
 @import "~sass/forms";
+@import "./mixins";
 
 .inline {
   display: inline;
@@ -20,4 +21,21 @@
 
 .pullLeft {
   float: left;
+}
+
+.ratio4x3 {
+  @include ratio(4/3);
+}
+
+.ratio16x9 {
+  @include ratio(16/9);
+}
+
+.fbox {
+  display: flex;
+}
+
+.fboxSplit {
+  @extend .fbox;
+  justify-content: space-between;
 }
