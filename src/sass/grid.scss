@@ -9,7 +9,7 @@
   @include center;
 }
 
-// generate `column` and `offse`t class name
+// generate `column` and `offset` class name
 $colNum: 1;
 $rowWidth: 12;
 @while $colNum <= $rowWidth {
