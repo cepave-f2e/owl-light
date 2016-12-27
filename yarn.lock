@@ -5836,29 +5836,17 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-"vue-owl-ui@github:cepave-f2e/vue-owl-ui#v0.1.5":
-  version "0.1.5"
-  resolved "https://codeload.github.com/cepave-f2e/vue-owl-ui/tar.gz/9ddd0f7301e576218ac841fd015378487d6830de"
+"vue-owl-ui@github:cepave-f2e/vue-owl-ui#v0.2.0":
+  version "0.2.0"
+  resolved "https://codeload.github.com/cepave-f2e/vue-owl-ui/tar.gz/03b54d01587f27aa95eda762abc2719ca9ad9bee"
   dependencies:
     delegate-to "^0.1.2"
     owl-icons "github:cepave-f2e/owl-icons"
-    vue "^2.1.4"
+    vue "^2.1.7"
 
-"vue-owl-ui@github:cepave-f2e/vue-owl-ui#v0.1.6":
-  version "0.1.6"
-  resolved "https://codeload.github.com/cepave-f2e/vue-owl-ui/tar.gz/6f87dade2e96df409a5e8b402c5cdc5b86b5c1b0"
-  dependencies:
-    delegate-to "^0.1.2"
-    owl-icons "github:cepave-f2e/owl-icons"
-    vue "^2.1.6"
-
-vue@^2.1.4:
-  version "2.1.4"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.4.tgz#d490f8fcf696847d8cf7f8eb9168e9a5dd806bfc"
-
-vue@^2.1.6:
-  version "2.1.6"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.6.tgz#2fc0024c07479ac6bc7d34a2cd5ef9ca5e90b143"
+vue@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.7.tgz#747880cb70a50c66cb8791aacfee7a6dab7fc842"
 
 walker@~1.0.5:
   version "1.0.7"
