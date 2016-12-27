@@ -31,11 +31,15 @@
   @include ratio(16/9);
 }
 
-.fbox {
+.flex {
   display: flex;
 }
 
-.fboxSplit {
-  @extend .fbox;
+.flexSplit {
+  @extend .flex;
   justify-content: space-between;
+  &:after,
+  &:before {
+    content: none;
+  }
 }
