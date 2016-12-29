@@ -34,6 +34,7 @@ module.exports = new window.VueRouter({
       }
     },
     {
+<<<<<<< HEAD
 
       path: '/login',
       component(resolve) {
@@ -56,6 +57,11 @@ module.exports = new window.VueRouter({
       path: '/template/:id',
       component(resolve) {
         require(['./containers/template/edit'], resolve)
+=======
+      path: '/aggregator',
+      component(resolve) {
+        require(['./containers/aggregator'], resolve)
+>>>>>>> [aggregator] add router
       }
     },
     { path: '*', redirect: '/alarm' },
