@@ -43,3 +43,17 @@
     content: none;
   }
 }
+
+.flexMid {
+  @extend .flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearfix {
+  &:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
