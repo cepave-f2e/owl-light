@@ -9,7 +9,7 @@ const ECharts = {
     size: {
       type: [Number, String],
       default: '600x375',
-    }
+    },
   },
 
   mounted() {
@@ -23,6 +23,12 @@ const ECharts = {
         this.$emit(ev, params)
       })
     })
+  },
+
+  watch: {
+    options(newOptions) {
+      this.Chart.setOption(newOptions)
+    }
   },
 
   computed: {
