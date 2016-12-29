@@ -5,6 +5,9 @@ import UserList from './user-list'
 
 const User = {
   name: 'User',
+  mounted() {
+    this.$store.dispatch('getUsers')
+  },
   render(h) {
     return (
       <div class={[s.contactPage]}>

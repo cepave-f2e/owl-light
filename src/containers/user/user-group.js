@@ -1,41 +1,121 @@
 import s from './user.scss'
-import { Grid, Input, Button, Icon, LightBox, Dual } from 'vue-owl-ui'
+import { Grid, Input, Button, Icon, LightBox, DualList, Loading } from 'vue-owl-ui'
 
 const UserGroup = {
   name: 'UserGroup',
   data() {
     return {
+      heads: [
+        {
+          col: 'User group name',
+          width: '35.7%',
+          sort: -1
+        },
+        {
+          col: 'Users',
+          width: '32.3%',
+          sort: -1
+        },
+        {
+          col: 'Creator',
+          width: '16.6%',
+          sort: -1
+        },
+        {
+          col: 'Opeartions',
+          width: '15.4%'
+        }
+      ],
       userGroupData: {
-        heads: [
-          {
-            col: 'User group name',
-            width: '35.7%',
-            sort: -1
-          },
-          {
-            col: 'Users',
-            width: '32.3%',
-            sort: -1
-          },
-          {
-            col: 'Creator',
-            width: '16.6%',
-            sort: -1
-          },
-          {
-            col: 'Opeartions',
-            width: '15.4%'
-          }
-        ],
-        rows: [
-          {
-            groupName:'aaa', groupMember: 'myhung yao0505 hhlin', creator: 'myhung'
-          },
-          {
-            groupName:'aaa', groupMember: 'myhung kordan', creator: 'myhung'
-          }
-        ]
+        rowsRender() {},
+      },
+      selectedUsers: [],
+      editTeamId: 0,
+      editTeamName: '',
+      dupliTeamId: 0,
+      dupliTeamName: '',
+      deleteTeamId: 0,
+      deleteTeamName: '',
+      editUsers: [],
+    }
+  },
+  mounted() {
+    this.$store.dispatch('getUserGroups')
+  },
+  methods: {
+    createUserGroup() {
+      this.$store.dispatch('newUserGroup', {
+        team_name: this.$refs.newUserGroupName.value,
+        resume: 'some description',
+        users: Object.keys(this.selectedUsers).reduce((preVal, curVal) => {
+          preVal.push(this.selectedUsers[curVal].id)
+          return preVal
+        }, [])
+      })
+      .then(() => {
+        this.$refs.newUserGroupName.val = ''
+      })
+    },
+    deleteUserGroup(id) {
+      this.$store.dispatch('deleteUserGroup', {
+        id
+      })
+    },
+    editUserGroup(id) {
+      this.$store.dispatch('editUserGroup', {
+        team_name: this.$refs.editGroupName.value,
+        team_id: id,
+        resume: '',
+        users: Object.keys(this.editUsers).reduce((preVal, curVal) => {
+          preVal.push(this.editUsers[curVal].id)
+          return preVal
+        }, [])
+      })
+    },
+    duplicateUserGroup(teamName) {
+      this.$store.dispatch('newUserGroup', {
+        team_name: this.$refs.duplicateGroupName.value,
+        resume: 'some description',
+        users: Object.keys(this.editUsers).reduce((preVal, curVal) => {
+          preVal.push(this.editUsers[curVal].id)
+          return preVal
+        }, [])
+      })
+    },
+    searchUserGroup(e) {
+      if ((e.type === 'keypress' && e.charCode === 13) || e.type === 'click') {
+        this.$store.dispatch('searchGroup', {
+          q: this.$refs.searchGroup.value
+        })
       }
+    },
+    getOneTeam(id) {
+      this.$store.dispatch('getOneTeam', {
+        team_id: id,
+      })
+    },
+    handleNewUser(data) {
+      this.selectedUsers = data
+    },
+    handleEditUsers(data) {
+      this.editUsers = data
+    },
+    edit(e, teamId, teamName) {
+      this.editTeamId = teamId
+      this.editTeamName = teamName
+      this.$refs.editGroup.open(e)
+      this.getOneTeam(teamId)
+    },
+    duplicate(e, teamId, teamName) {
+      this.dupliTeamId = teamId
+      this.dupliTeamName = teamName
+      this.$refs.duplicateGroup.open(e)
+      this.getOneTeam(teamId)
+    },
+    deleteTeam(e, teamId, teamName) {
+      this.deleteTeamId = teamId
+      this.deleteTeamName = teamName
+      this.$refs.deleteGroup.open(e)
     }
   },
   created() {
@@ -46,85 +126,25 @@ const UserGroup = {
         <Grid.Col>{row.creator}</Grid.Col>,
         <Grid.Col>
           <div class={[s.opeartionInline]}>
-            <LightBox ref="editGroup" closeOnClickMask closeOnESC>
-              <LightBox.Open>
-                <a class={[s.opeartions]}>edit</a>
-              </LightBox.Open>
-              <LightBox.View>
-                <p>Edit user group</p>
-                <div class={[s.inputGroup]}>
-                  <p>Name</p>
-                  <Input placeholder="user group name" class={[s.input]} />
-                </div>
-                <div class={[s.userLists]}>
-                  <p>Users</p>
-                  <Dual.Group class={[s.groupSelect]} />
-                </div>
-                <div class={[s.lightboxFooter]}>
-                  <LightBox.Close>
-                    <Button status="primaryOutline">Cancel</Button>
-                  </LightBox.Close>
-                  <LightBox.Close>
-                    <Button status="primary" class={[s.submitBtn]}>Submit</Button>
-                  </LightBox.Close>
-                </div>
-              </LightBox.View>
-            </LightBox>
-            <LightBox closeOnClickMask closeOnESC>
-              <LightBox.Open>
-                <a class={[s.opeartions]}>Duplicate</a>
-              </LightBox.Open>
-              <LightBox.View>
-                <p>Edit user group</p>
-                <div class={[s.inputGroup]}>
-                  <p>Name</p>
-                  <Input placeholder="user group name" class={[s.input]} />
-                </div>
-                <div class={[s.userLists]}>
-                  <p>Users</p>
-                  <Dual.Group class={[s.groupSelect]} />
-                </div>
-                <div class={[s.lightboxFooter]}>
-                  <LightBox.Close>
-                    <Button status="primaryOutline">Cancel</Button>
-                  </LightBox.Close>
-                  <LightBox.Close>
-                    <Button status="primary" class={[s.submitBtn]}>Submit</Button>
-                  </LightBox.Close>
-                </div>
-              </LightBox.View>
-            </LightBox>
-            <LightBox closeOnClickMask closeOnESC>
-              <LightBox.Open>
-                <a class={[s.opeartions]}>Delete</a>
-              </LightBox.Open>
-              <LightBox.View>
-                <p>Delete user group</p>
-                <p class={[s.deleteDes]}>You will remove this user group. Are you sure？</p>
-                <div class={[s.buttonGroup]}>
-                  <LightBox.Close class={[s.btnWrapper]}>
-                    <Button status="primary" class={[s.buttonBig]}>Yes</Button>
-                  </LightBox.Close>
-                  <LightBox.Close class={[s.btnWrapper]}>
-                    <Button status="primaryOutline" class={[s.buttonBig]}>Cancel</Button>
-                  </LightBox.Close>
-                </div>
-              </LightBox.View>
-            </LightBox>
+            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row.id, row.groupName)}>edit</span>
+            <span class={[s.opeartions]} on-click={(e) => this.duplicate(e, row.id, row.groupName)}>Duplicate</span>
+            <span class={[s.opeartions]} on-click={(e) => this.deleteTeam(e, row.id, row.groupName)}>Delete</span>
           </div>
         </Grid.Col>
       ]
     }
   },
   render(h) {
-    const { userGroupData } = this
-    const props = { ...userGroupData }
+    const { userGroupData, handleNewUser, handleEditUsers, createUserGroup,
+            searchUserGroup, editUserGroup, deleteUserGroup, duplicateUserGroup, heads, getSingleTeamLoading } = this
+    const { userGroupHeads, rows, userListRows, singleTeamUsers, singleTeamUsersToSelect } = this.$store.state.userGroup
+    const props = { ...userGroupData,  heads, ...{ rows } }
     return (
       <div>
         <div class={[s.contactSearchWrapper]}>
           <div class={[s.searchInputGroup]}>
-            <Input icon={['search', '#b8bdbf']} placeholder="User group name..." class={[s.contactSearch]} />
-            <Button status="primary">Search</Button>
+            <Input icon={['search', '#b8bdbf']} placeholder="user group name... search all:.+" ref="searchGroup" nativeOn-keypress={searchUserGroup} class={[s.contactSearch]} />
+            <Button status="primary" nativeOn-click={searchUserGroup}>Search</Button>
           </div>
           <LightBox ref="createGroup" closeOnClickMask closeOnESC>
             <LightBox.Open>
@@ -137,18 +157,18 @@ const UserGroup = {
               <p>Add user group</p>
               <div class={[s.inputGroup]}>
                 <p>Name</p>
-                <Input placeholder="user group name" class={[s.input]} />
+                <Input placeholder="user group name" class={[s.input]} ref="newUserGroupName" />
               </div>
               <div class={[s.userLists]}>
                 <p>Users</p>
-                <Dual.Group class={[s.groupSelect]} />
+                <DualList class={[s.groupSelect]} items={userListRows} displayKey="name" onChange={handleNewUser} />
               </div>
               <div class={[s.lightboxFooter]}>
                 <LightBox.Close>
                   <Button status="primaryOutline">Cancel</Button>
                 </LightBox.Close>
                 <LightBox.Close>
-                  <Button status="primary" class={[s.submitBtn]}>Submit</Button>
+                  <Button status="primary" class={[s.submitBtn]} nativeOn-click={createUserGroup}>Submit</Button>
                 </LightBox.Close>
               </div>
             </LightBox.View>
@@ -157,6 +177,64 @@ const UserGroup = {
         <div class={[s.contactWrapper]}>
           <Grid { ...{ props } } />
         </div>
+        <LightBox ref="editGroup" closeOnClickMask closeOnESC>
+          <LightBox.View>
+            <p>Edit user group</p>
+            <div class={[s.inputGroup]}>
+              <p>Name</p>
+              <Input class={[s.input]} ref="editGroupName" val={this.editTeamName} />
+            </div>
+            <div class={[s.userLists]}>
+              <p>Users</p>
+              <DualList leftLoading={getSingleTeamLoading} class={[s.groupSelect]} items={singleTeamUsersToSelect} selectedItems={singleTeamUsers} displayKey="name" onChange={handleEditUsers} />
+            </div>
+            <div class={[s.lightboxFooter]}>
+              <LightBox.Close>
+                <Button status="primaryOutline">Cancel</Button>
+              </LightBox.Close>
+              <LightBox.Close>
+                <Button status="primary" class={[s.submitBtn]} nativeOn-click={() => editUserGroup(this.editTeamId)}>Submit</Button>
+              </LightBox.Close>
+            </div>
+          </LightBox.View>
+        </LightBox>
+
+        <LightBox ref="duplicateGroup" closeOnClickMask closeOnESC>
+          <LightBox.View>
+            <p>Edit user group</p>
+            <div class={[s.inputGroup]}>
+              <p>Name</p>
+              <Input placeholder="user group name" ref="duplicateGroupName" class={[s.input]} val={`${this.dupliTeamName}_1`} />
+            </div>
+            <div class={[s.userLists]}>
+              <p>Users</p>
+              <DualList class={[s.groupSelect]} items={singleTeamUsersToSelect} selectedItems={singleTeamUsers} displayKey="name" onChange={handleEditUsers} />
+            </div>
+            <div class={[s.lightboxFooter]}>
+              <LightBox.Close>
+                <Button status="primaryOutline">Cancel</Button>
+              </LightBox.Close>
+              <LightBox.Close>
+                <Button status="primary" class={[s.submitBtn]} nativeOn-click={() => duplicateUserGroup(this.dupliTeamName)}>Submit</Button>
+              </LightBox.Close>
+            </div>
+          </LightBox.View>
+        </LightBox>
+
+        <LightBox ref="deleteGroup" closeOnClickMask closeOnESC>
+          <LightBox.View>
+            <p>Delete user group</p>
+            <p class={[s.deleteDes]}>You will remove this user group: <b>{this.deleteTeamName}</b>. Are you sure？</p>
+            <div class={[s.buttonGroup]}>
+              <LightBox.Close class={[s.btnWrapper]}>
+                <Button status="primary" class={[s.buttonBig]} nativeOn-click={() => deleteUserGroup(this.deleteTeamId)}>Yes</Button>
+              </LightBox.Close>
+              <LightBox.Close class={[s.btnWrapper]}>
+                <Button status="primaryOutline" class={[s.buttonBig]}>Cancel</Button>
+              </LightBox.Close>
+            </div>
+          </LightBox.View>
+        </LightBox>
       </div>
     )
   }

@@ -3,6 +3,7 @@ module.exports = new window.Vuex.Store({
   modules: {
     sample: require('./sample'),
     templateList: require('./template/list'),
-    templateUpdate: require('./template/update')
+    templateUpdate: require('./template/update'),
+    userGroup: require('./user-group')
   }
 })
