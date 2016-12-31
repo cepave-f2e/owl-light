@@ -18,7 +18,11 @@
     ]
   },
   "dependencies": {
-    "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.2.0"
+    "awesomplete": "^1.1.1",
+    "jquery": "^2.2.4",
+    "lodash": "^4.17.3",
+    "select2": "^4.0.3",
+    "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.1.6"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

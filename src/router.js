@@ -1,4 +1,7 @@
 // http://router.vuejs.org/en/advanced/lazy-loading.html
+const User = {
+  template: '<div>User</div>'
+}
 module.exports = new window.VueRouter({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),

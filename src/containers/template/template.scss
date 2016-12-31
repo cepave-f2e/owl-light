@@ -11,9 +11,15 @@
 }
 
 .inputMetric{
-  width: 100px;
+  width: 300px;
 }
-.inputTags{
+.newParentSelect{
+  width: 300px;
+}
+.newTeamSelect{
+  width: 300px;
+}
+.inputA{
   width: 100px;
 }
 .inputMax{
@@ -24,4 +30,17 @@
 }
 .inputNote{
   width: 100px;
+}
+
+.updateTplButDiv {
+  left: 10px;
+  position: relative;
+  bottom: 3px;
+}
+
+.newParentSelectDiv{
+  .select2-container--default{
+    bottom: 3px;
+    left: 5px;
+  }
 }

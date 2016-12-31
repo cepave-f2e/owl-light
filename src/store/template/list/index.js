@@ -2,7 +2,9 @@
 
 const tpl = {
   state: {
-    rows: []
+    rows: [],
+    simpleTList: [],
+    createRepose: '',
   },
   actions: require('./actions'),
   mutations: require('./mutations'),
