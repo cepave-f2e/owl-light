@@ -22,5 +22,4 @@ module.exports = (opts = {}) => {
         reject(err)
       })
   })
-
 }

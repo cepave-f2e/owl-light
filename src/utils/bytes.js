@@ -46,7 +46,6 @@ module.exports = (val, opts = {}) => {
       }
       throw new Error('The units are not: K, M, G and T')
     }
-
   } else {
     throw new Error(`${val} is not a number or string`)
   }
