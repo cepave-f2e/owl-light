@@ -3,6 +3,7 @@ import g from 'sass/global.scss'
 import s from './portal.scss'
 
 import HostListInGroup from './host-list-in-group'
+import PluginsList from './plugins-list'
 
 const hostGroups = {
   name: 'HostGroups',
@@ -304,6 +305,7 @@ const hostGroups = {
                   </span>
                 </div>
               </div>
+              <PluginsList />
             </div>
           </LightBox.View>
         </LightBox>
