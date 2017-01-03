@@ -1,0 +1,68 @@
+@import "~sass/global";
+
+.searchInputWrapper {
+  padding: 12px 24px;
+  background: $colorGrayLightest;
+}
+
+.searchInput {
+  @extend .inputGroups;
+  width: 500px;
+}
+
+.createBtn {
+  position: absolute;
+  right: 24px;
+  top: 62px;
+}
+
+.deleteViewBox {
+  width: 404px;
+}
+
+.dualBox {
+  @include center;
+  padding-top: 20px;
+}
+
+.lbViewBox {
+  @include center;
+  padding-top: 24px;
+}
+
+.cancelBtn {
+  @include col(2/12, $offset: 8/12);
+}
+
+.lbText {
+  line-height: 34px;
+}
+
+.gridWrapper {
+  padding: 24px;
+}
+
+.gridWrapperBox {
+  background: #fff;
+}
+
+.hostGroupsContent {
+  background: $colorGrayLighter;
+}
+
+.operrationItem {
+  float: left;
+}
+
+.operrationItem + .operrationItem {
+  margin-left: 12px;
+}
+
+.operration {
+  color: $colorPrimary;
+}
+
+.hostGroupEditWrapper,
+.pluginsListWrapper {
+  padding-top: 24px;
+}
