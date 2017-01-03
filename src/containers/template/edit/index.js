@@ -55,7 +55,10 @@ const TemplatePage = {
         2: action.before_callback_mail,
         3: action.after_callback_sms,
         4: action.after_callback_mail,
-      }
+      },
+      updateStrategyError: [],
+      newStrategyError: [],
+      strategyId: 0,
     }
   },
   created() {
@@ -70,7 +73,7 @@ const TemplatePage = {
         <Grid.Col>{row[4].col}</Grid.Col>,
         <Grid.Col>
           <a href="" sid={row[5].col} saction="update" onClick={(e) => this.getStragtegy(e, this)}>更新</a>
-          <a href="" sid={row[5].col} saction="delete" onClick={(e) => this.deleteStragtegy(e, this)}>删除</a>
+          <a href="" sid={row[5].col} saction="delete" onClick={(e) => this.deleteStrategyLink(e, this)}>删除</a>
         </Grid.Col>,
       ]
     }
@@ -90,9 +93,7 @@ const TemplatePage = {
     },
     getTemplate() {
       const { $store, $refs } = this
-      $store.dispatch('getTemplate', {
-        id: parseInt(this.$route.params.id),
-      })
+      $store.dispatch('getTemplate', parseInt(this.$route.params.id))
     },
     getMetric() {
       const { $store, $refs } = this
@@ -105,9 +106,7 @@ const TemplatePage = {
       e.preventDefault()
       const id = e.currentTarget.attributes.sid.value
       const { $store, $refs } = this
-      $store.dispatch('getStrategy', {
-        id,
-      })
+      $store.dispatch('getStrategy', id)
       this.getMetric()
       this.$refs.LStragtegy.open(e)
     },
@@ -121,9 +120,21 @@ const TemplatePage = {
     urlOnChnage(data) {
       console.log(data)
     },
-    changeMetric(metric) {
-      // this.metric = metric
-      console.log('got metric', metric)
+    checkFormating(data) {
+      const err = []
+      if (data.right_value === '') {
+        err.push('right_value is empty')
+      }
+      if (data.op === '') {
+        err.push('op is empty')
+      }
+      if (data.metric === '') {
+        err.push('metric is empty')
+      }
+      if (data.max_step === 0 || data.max_step === '') {
+        err.push('max_step is not set')
+      }
+      return err
     },
     updateMetric(e) {
       const { $store } = this
@@ -140,10 +151,16 @@ const TemplatePage = {
         id: parseInt(this.$refs.updateId.value) || 0,
         func: this.$refs.updateFunc.value
       }
-      console.log(UpdateStrategy)
-      $store.dispatch('updateStrategy', {
-        ...UpdateStrategy
-      })
+      const err = this.checkFormating(UpdateStrategy)
+      // console.log(UpdateStrategy, err)
+      this.updateStrategyError = err
+      if (err.length === 0) {
+        $store.dispatch('updateStrategy', {
+          data: UpdateStrategy,
+          id: `${$store.state.templateUpdate.name.id}`,
+        })
+        this.$refs.LStragtegy.close(e)
+      }
     },
     newMetric(e) {
       const { $store } = this
@@ -160,13 +177,17 @@ const TemplatePage = {
         max_step:  parseInt(this.$refs.newMaxStep.value) || 0,
         func: this.$refs.newFunc.value
       }
-      console.log(NewStrategy)
-      $store.dispatch('newStrategy', {
-        ...NewStrategy
-      })
-    },
-    setMetric(metric) {
-      console.log(`metric ${metric} selected`)
+      const err = this.checkFormating(NewStrategy)
+      // console.log(NewStrategy, err)
+      this.newStrategyError = err
+      if (err.length === 0) {
+        $store.dispatch('newStrategy', {
+          data: NewStrategy,
+          id: `${$store.state.templateUpdate.name.id}`,
+        })
+        this.getTemplate()
+        this.$refs.NStragtegy.close(e)
+      }
     },
     SaveTemplate(m) {
       const { $store, $refs } = this
@@ -176,8 +197,10 @@ const TemplatePage = {
         parent_id: parseInt(parentId || this.parentId),
         name: $store.state.templateUpdate.name.name,
       }
-      console.log(postbody)
-      $store.dispatch('updateTemplate', postbody)
+      $store.dispatch('updateTemplate', {
+        data: postbody,
+        id: `${$store.state.templateUpdate.name.id}`,
+      })
     },
     SaveAction(m) {
       const { $store, $refs } = this
@@ -193,15 +216,31 @@ const TemplatePage = {
         after_callback_sms:  (this.callbackActions['3']) ? 1 : 0,
         after_callback_mail:  (this.callbackActions['4']) ? 1 : 0,
       }
-      console.log(action)
       if (action.id === 0) {
         //create a new action
-        $store.dispatch('createAction', action)
+        $store.dispatch('createAction', {
+          data: action,
+          id: `${$store.state.templateUpdate.name.id}`,
+        })
       } else {
         //update a action
-        $store.dispatch('updateAction', action)
+        $store.dispatch('updateAction', {
+          id: `${$store.state.templateUpdate.name.id}`,
+          data: action,
+        })
       }
     },
+    deleteStrategyLink(e) {
+      this.$refs.DeleteStrategy.open(e)
+      this.strategyId = e.target.getAttribute('sid')
+    },
+    deleteStrategy(id) {
+      const { $store, $refs } = this
+      $store.dispatch('deleteStrategy', {
+        id: this.strategyId,
+        tid: $store.state.templateUpdate.name.id,
+      })
+    }
   },
   render(h) {
     const { $store, $refs, $slots, gridData } = this
@@ -227,8 +266,17 @@ const TemplatePage = {
     const runEnd = $store.state.templateUpdate.ustrategy.run_end
     //UpdateStrategyView
     const UpdateStrategyView = (
-      <LightBox ref="LStragtegy">
+      <LightBox ref="LStragtegy" closeOnClickMask closeOnESC>
         <LightBox.View>
+          <div class="displayError" ref="updateStrategyError">
+            {this.updateStrategyError.map((o) => {
+              return (
+                <div style="display: flex;">
+                  <Label typ="tag" status="error">{o}</Label>
+                </div>
+              )
+            })}
+          </div>
           <input class={s.inputA} placeholder="id" type="hidden" value={id.toString()} ref="updateId" />
           <input class='updateInputMetric' type="hidden" value={metric} ref="updateMetric"></input>
           <Select2 {...{ props: { setclass: 'updateInputMetric', ...merticProps } } } />
@@ -243,7 +291,7 @@ const TemplatePage = {
             <input class={s.inputA} placeholder="reght value" value={rightValue} ref="updateRightValue" />
           </div>
           <div style="display: flex;">
-            <input class={s.inputA} placeholder="run begin" value={runBegin} ref="updateRunBegin" />
+            <input class={[s.inputA]} placeholder="run begin" value={runBegin} ref="updateRunBegin" />
             <input class={s.inputA} placeholder="run end" value={runEnd} ref="updateRunEnd" />
             <input class={s.inputA} placeholder="note" value={note} ref="updateNote" />
           </div>
@@ -262,8 +310,17 @@ const TemplatePage = {
     }
     //NewStrategyView
     const NewStrategyView = (
-      <LightBox ref="NStragtegy">
+      <LightBox ref="NStragtegy" closeOnClickMask closeOnESC>
         <LightBox.View>
+          <div class="displayError" ref="newStrategyError">
+            {this.newStrategyError.map((o) => {
+              return (
+                <div style="display: flex;">
+                  <Label typ="tag" status="error">{o}</Label>
+                </div>
+              )
+            })}
+          </div>
           <input class='newInputMetric' type="hidden" ref="newMetric"></input>
           <Select2 {...{ props: { ...newMerticProps } } }  />
           <div style="display: flex;">
@@ -289,12 +346,22 @@ const TemplatePage = {
     )
     //DeleteStrategyView
     const DeleteStrategyView = (
-      <LightBox ref="DStragtegy">
-        <LightBox.View>
-          <div>刪我阿, 笨蛋!</div>
-        </LightBox.View>
-      </LightBox>
+      <LightBox ref="DeleteStrategy" closeOnClickMask closeOnESC>
+       <LightBox.View>
+         <p>Delete a strategy</p>
+         <p class={[u.deleteDes]}>You will remove this template: {this.strategyId}, Are you sure？</p>
+         <div class={[u.buttonGroup]}>
+           <LightBox.Close class={[u.btnWrapper]}>
+             <Button status="primary" class={[u.buttonBig]} nativeOn-click={(e) => this.deleteStrategy(this.strategyId)}>Yes</Button>
+           </LightBox.Close>
+           <LightBox.Close class={[u.btnWrapper]}>
+             <Button status="primaryOutline" class={[u.buttonBig]}>Cancel</Button>
+           </LightBox.Close>
+         </div>
+       </LightBox.View>
+     </LightBox>
     )
+
     const tplProps = {
       options: $store.state.templateList.simpleTList,
       value: $store.state.templateUpdate.parent.name,
@@ -321,7 +388,7 @@ const TemplatePage = {
                 <div style="width: 150px;">
                   name: <Label  typ="tag">{props.tname}</Label>
                 </div>
-                <div style="display: flex;" class={s.newParentSelectDiv}>
+                <div style="display: flex; min-width: 350px;" class={s.newParentSelectDiv}>
                   parent: <input type="hidden" class='newParent' placeholder="请输入模板名称" ref="updateParent" value={tplProps.pid}></input>
                   <Select2 { ...{ props: tplProps } } />
                   <div class={s.updateTplButDiv}>
@@ -355,7 +422,7 @@ const TemplatePage = {
               </div>
             </div>
           </Tab.Content>
-          <Tab.Head slot="tabHead" name="profile">编辑告警策略</Tab.Head>
+          <Tab.Head slot="tabHead" name="profile" >编辑告警策略</Tab.Head>
           <Tab.Content slot="tabContent" name="template">
             <div>
               <div class={[u.contactSearchWrapper]}>

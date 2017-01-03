@@ -27,7 +27,7 @@ module.exports = {
               col: tpl.template.create_user
             },
             {
-              col: [[`/#/template/${tpl.template.id}`], [`/#/template/${tpl.template.id}`]]
+              col: [[`/#/template/${tpl.template.id}`], [tpl.template.id]]
             }
           ]
         })
@@ -52,10 +52,10 @@ module.exports = {
         commit('getSimpleTplList', tpls)
       })
   },
-  'createTemplate'({ commit, state }, data) {
+  'createTemplate'({ commit, state, dispatch }, d) {
     const opts = {
       url: 'template',
-      data,
+      data: d.data,
       method: 'POST',
       commit,
       mutation: 'createTemplate',
@@ -64,6 +64,19 @@ module.exports = {
     return vfetch(opts)
       .then((res) => {
         commit('createTemplate', res.data)
+        dispatch('getTemplates', d.q)
+      })
+  },
+  'deleteTemplate'({ commit, state, dispatch }, d) {
+    const opts = {
+      url: `/template/${d.id}`,
+      method: 'DELETE',
+      commit,
+    }
+
+    return vfetch(opts)
+      .then((res) => {
+        dispatch('getTemplates', d.q)
       })
   }
 }

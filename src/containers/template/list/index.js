@@ -36,7 +36,8 @@ const TemplatePage = {
           }
         ],
         rowsRender() {},
-      }
+      },
+      tplId: 0,
     }
   },
   created() {
@@ -47,7 +48,7 @@ const TemplatePage = {
         <Grid.Col>{row[2].col}</Grid.Col>,
         <Grid.Col>
           <a href={row[3].col[0]}>更新</a>
-          <a href={row[3].col[1]}>删除</a>
+          <a href="" tip={row[3].col[1]} onClick={(e) => this.deleteTemplateLink(e)}>删除</a>
         </Grid.Col>,
       ]
     }
@@ -72,13 +73,28 @@ const TemplatePage = {
       if (name !== '') {
         const { $store, $refs } = this
         $store.dispatch('createTemplate', {
-          name,
-          parent_id: 0,
+          data: {
+            name,
+            parent_id: 0,
+          },
+          q: this.$refs.inputRef.value || '.+'
         })
+        this.$refs.NTemplate.close(e)
       } else {
         console.log('error name', name)
       }
     },
+    deleteTemplateLink(e) {
+      this.tplId = e.target.getAttribute('tip')
+      this.$refs.DeleteTemplate.open(e)
+    },
+    deleteTemplate(id) {
+      const { $store, $refs } = this
+      $store.dispatch('deleteTemplate', {
+        id,
+        q: this.$refs.inputRef.value || '.+',
+      })
+    }
   },
   render(h) {
     const { $store, $refs, $slots, gridData } = this
@@ -88,7 +104,7 @@ const TemplatePage = {
     }
     //NewTemplateView
     const NewTemplateView = (
-      <LightBox ref="NTemplate">
+      <LightBox ref="NTemplate" closeOnClickMask closeOnESC>
         <LightBox.View>
           <h3>新增模板</h3>
           <input class='newName' placeholder="name" ref="tplName"></input>
@@ -97,6 +113,23 @@ const TemplatePage = {
           </Button>
         </LightBox.View>
       </LightBox>
+    )
+
+    const DeleteTemplateView = (
+      <LightBox ref="DeleteTemplate" closeOnClickMask closeOnESC>
+       <LightBox.View>
+         <p>Delete a template</p>
+         <p class={[u.deleteDes]}>You will remove this template: {this.tplId}, Are you sure？</p>
+         <div class={[u.buttonGroup]}>
+           <LightBox.Close class={[u.btnWrapper]}>
+             <Button status="primary" class={[u.buttonBig]} nativeOn-click={(e) => this.deleteTemplate(this.tplId)}>Yes</Button>
+           </LightBox.Close>
+           <LightBox.Close class={[u.btnWrapper]}>
+             <Button status="primaryOutline" class={[u.buttonBig]}>Cancel</Button>
+           </LightBox.Close>
+         </div>
+       </LightBox.View>
+     </LightBox>
     )
 
     return (
@@ -120,6 +153,7 @@ const TemplatePage = {
                 <Grid {...{ props }} />
               </div>
               {NewTemplateView}
+              {DeleteTemplateView}
             </div>
           </Tab.Content>
         </Tab>

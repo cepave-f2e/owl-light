@@ -1,7 +1,7 @@
 import vfetch from '~utils/fetch'
 
 module.exports = {
-  'getStrategy'({ commit, state }, { id }) {
+  'getStrategy'({ commit, state }, id) {
     const opts = {
       url: `strategy/${id}`,
       method: 'GET',
@@ -16,7 +16,7 @@ module.exports = {
         commit('getStrategy', err)
       })
   },
-  'getTemplate'({ commit, state }, { id }) {
+  'getTemplate'({ commit, state }, id) {
     const opts = {
       url: `template/${id}`,
       method: 'GET',
@@ -79,13 +79,13 @@ module.exports = {
         commit('getMetric', metricMap)
       })
   },
-  'newStrategy'({ commit, state }, data) {
+  'newStrategy'({ commit, state, dispatch }, d) {
     const opts = {
       url: `strategy`,
       method: 'POST',
       commit,
       data: {
-        ...data
+        ...d.data
       },
       mutation: 'newStrategy',
     }
@@ -93,16 +93,17 @@ module.exports = {
     return vfetch(opts)
     .then((res) => {
       console.log(res)
+      dispatch('getTemplate', d.id)
       // commit('newStrategy', res.data)
     })
   },
-  'updateStrategy'({ commit, state }, data) {
+  'updateStrategy'({ commit, state, dispatch }, d) {
     const opts = {
       url: `strategy`,
       method: 'PUT',
       commit,
       data: {
-        ...data
+        ...d.data
       },
       mutation: 'updateStrategy',
     }
@@ -110,10 +111,11 @@ module.exports = {
     return vfetch(opts)
       .then((res) => {
         console.log(res)
+        dispatch('getTemplate', d.id)
         // commit('updateStrategy', res.data)
       })
   },
-  'getTeamList'({ commit, state }, {}) {
+  'getTeamList'({ commit, state, dispatch }, {}) {
     const opts = {
       url: `team`,
       method: 'GET',
@@ -128,12 +130,12 @@ module.exports = {
         commit('getTeamList', teams)
       })
   },
-  'updateTemplate'({ commit, state }, data) {
+  'updateTemplate'({ commit, state, dispatch }, d) {
     const opts = {
       url: `template`,
       method: 'PUT',
       data: {
-        ...data
+        ...d.data
       },
       commit,
       mutation: 'getReponse',
@@ -141,14 +143,15 @@ module.exports = {
     return vfetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
+        dispatch('getTemplate', d.id)
       })
   },
-  'createAction'({ commit, state }, data) {
+  'createAction'({ commit, state, dispatch }, d) {
     const opts = {
       url: `template/action`,
       method: 'POST',
       data: {
-        ...data
+        ...d.data
       },
       commit,
       mutation: 'getReponse',
@@ -156,14 +159,15 @@ module.exports = {
     return vfetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
+        dispatch('getTemplate', d.id)
       })
   },
-  'updateAction'({ commit, state }, data) {
+  'updateAction'({ commit, state, dispatch }, d) {
     const opts = {
       url: `template/action`,
       method: 'PUT',
       data: {
-        ...data
+        ...d.data
       },
       commit,
       mutation: 'getReponse',
@@ -171,6 +175,19 @@ module.exports = {
     return vfetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
+        dispatch('getTemplate', d.id)
       })
   },
+  'deleteStrategy'({ commit, state, dispatch }, d) {
+    const opts = {
+      url: `/strategy/${d.id}`,
+      method: 'DELETE',
+      commit,
+    }
+
+    return vfetch(opts)
+      .then((res) => {
+        dispatch('getTemplate', d.tid)
+      })
+  }
 }
