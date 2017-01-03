@@ -1,5 +1,6 @@
 // Portal container
 import { Tab } from 'vue-owl-ui'
+import HostGroups from './host-groups'
 import HostList from './host-list'
 
 const Portal = {
@@ -14,6 +15,7 @@ const Portal = {
           <Tab.Head slot="tabHead" name="2">Hosts</Tab.Head>
 
           <Tab.Content slot="tabContent" name="1">
+            <HostGroups />
           </Tab.Content>
           <Tab.Content slot="tabContent" name="2">
             <HostList />
