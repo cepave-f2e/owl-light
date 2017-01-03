@@ -2,6 +2,8 @@ import { Input, Button, Grid, Icon, LightBox, DualList } from 'vue-owl-ui'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
+import HostListInGroup from './host-list-in-group'
+
 const hostGroups = {
   name: 'HostGroups',
 
@@ -278,6 +280,7 @@ const hostGroups = {
                   </span>
                 </div>
               </div>
+              <HostListInGroup />
             </div>
           </LightBox.View>
         </LightBox>
