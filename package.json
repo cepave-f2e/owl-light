@@ -9,7 +9,7 @@
     "build": "babel-node build/build.js",
     "e2e": "babel-node test/e2e/runner.js",
     "test": "npm run lint && jest --coverage",
-    "lint": "eslint --ext .js src test & stylelint src/**/*.scss --syntax scss",
+    "lint": "eslint --ext .js src test && stylelint src/**/*.scss --syntax scss",
     "coveralls": "cat coverage/lcov.info | coveralls"
   },
   "jest": {
