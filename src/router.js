@@ -22,6 +22,12 @@ module.exports = new window.VueRouter({
       }
     },
     {
+      path: '/user',
+      component(resolve) {
+        require(['./containers/user'], resolve)
+      }
+    },
+    {
       path: '/profile',
       component(resolve) {
         require(['./containers/profile'], resolve)
