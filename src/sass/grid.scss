@@ -1,9 +1,5 @@
-@import "~jeet/jeet";
-
 // jeet API https://github.com/mojotech/jeet/blob/master/docs/api.md
-@mixin col($args...) {
-  @include column($args...);
-}
+@import "~jeet/jeet";
 
 .container {
   @include center;
@@ -13,13 +9,12 @@
 $colNum: 1;
 $rowWidth: 12;
 @while $colNum <= $rowWidth {
-
   .col#{$colNum} {
-    @include col(($colNum/$rowWidth));
+    @include column($colNum/$rowWidth);
   }
 
   .offset#{$colNum} {
-    @include col(1, $offset: $colNum/$rowWidth);
+    @include column(1, $offset: $colNum/$rowWidth);
   }
 
   $colNum: $colNum + 1;
