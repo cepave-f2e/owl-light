@@ -1,4 +1,7 @@
 // http://router.vuejs.org/en/advanced/lazy-loading.html
+const User = {
+  template: '<div>User</div>'
+}
 module.exports = new window.VueRouter({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
@@ -22,9 +25,27 @@ module.exports = new window.VueRouter({
       }
     },
     {
+      path: '/user',
+      component(resolve) {
+        require(['./containers/user'], resolve)
+      }
+    },
+    {
       path: '/profile',
       component(resolve) {
         require(['./containers/profile'], resolve)
+      }
+    },
+    {
+      path: '/template',
+      component(resolve) {
+        require(['./containers/template/list'], resolve)
+      }
+    },
+    {
+      path: '/template/:id',
+      component(resolve) {
+        require(['./containers/template/edit'], resolve)
       }
     },
     { path: '*', redirect: '/alarm' },
