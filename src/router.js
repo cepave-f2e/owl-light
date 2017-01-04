@@ -34,6 +34,7 @@ module.exports = new window.VueRouter({
       }
     },
     {
+
       path: '/login',
       component(resolve) {
         require(['./containers/login'], resolve)
@@ -43,6 +44,18 @@ module.exports = new window.VueRouter({
       path: '/signup',
       component(resolve) {
         require(['./containers/signup'], resolve)
+      }
+    },
+    {
+      path: '/template',
+      component(resolve) {
+        require(['./containers/template/list'], resolve)
+      }
+    },
+    {
+      path: '/template/:id',
+      component(resolve) {
+        require(['./containers/template/edit'], resolve)
       }
     },
     { path: '*', redirect: '/alarm' },

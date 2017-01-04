@@ -6,5 +6,7 @@ module.exports = new window.Vuex.Store({
     signup: require('./signup'),
     login: require('./login'),
     graph: require('./graph'),
+    templateList: require('./template/list'),
+    templateUpdate: require('./template/update'),
   }
 })
