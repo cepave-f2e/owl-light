@@ -46,9 +46,6 @@ const TemplatePage = {
     return {
       gridData: gridBase,
       metricMap: [],
-      tplId: $store.state.templateUpdate.name.id,
-      tplName: $store.state.templateUpdate.name.name,
-      actionId: action.id || 0,
       callback: action.callback || 1,
       callbackActions: {
         1: action.before_callback_sms,
@@ -117,9 +114,6 @@ const TemplatePage = {
       const id = e.currentTarget.attributes.sid.value
       this.$refs.DStragtegy.open(e)
     },
-    urlOnChnage(data) {
-      console.log(data)
-    },
     checkFormating(data) {
       const err = []
       if (data.right_value === '') {
@@ -152,7 +146,6 @@ const TemplatePage = {
         func: this.$refs.updateFunc.value
       }
       const err = this.checkFormating(UpdateStrategy)
-      // console.log(UpdateStrategy, err)
       this.updateStrategyError = err
       if (err.length === 0) {
         $store.dispatch('updateStrategy', {

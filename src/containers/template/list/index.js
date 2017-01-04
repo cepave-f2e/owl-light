@@ -80,8 +80,6 @@ const TemplatePage = {
           q: this.$refs.inputRef.value || '.+'
         })
         this.$refs.NTemplate.close(e)
-      } else {
-        console.log('error name', name)
       }
     },
     deleteTemplateLink(e) {

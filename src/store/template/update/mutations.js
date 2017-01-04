@@ -26,7 +26,7 @@ module.exports = {
   'getTeamList'(state, teams) {
     state.teamList = teams
   },
-  'getReponse'(state, data){
+  'getReponse'(state, data) {
     state.apiRepose = data
   }
 }
