@@ -3,7 +3,7 @@ const Link = {
   functional: true,
   render(h, { data, children }) {
     return (
-      <router-link exact {...data} >{ children }</router-link>
+      <router-link class="router-link" exact {...data} >{ children }</router-link>
     )
   }
 }

@@ -1,2 +1,9 @@
 // app.scss
-@import './sass/reset';
+@import "./sass/reset";
+@import "./sass/global";
+
+.main {
+  padding: 20px;
+  margin-left: 56px;
+  min-height: 100vh;
+}
