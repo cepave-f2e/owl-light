@@ -6,7 +6,6 @@ module.exports = {
     state.simpleTList = tpls
   },
   'createTemplate'(state, repose) {
-    console.log(repose)
     state.createRepose = repose
   },
 }

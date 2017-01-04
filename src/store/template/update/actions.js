@@ -92,7 +92,6 @@ module.exports = {
 
     return vfetch(opts)
     .then((res) => {
-      console.log(res)
       dispatch('getTemplate', d.id)
       // commit('newStrategy', res.data)
     })
@@ -110,7 +109,6 @@ module.exports = {
 
     return vfetch(opts)
       .then((res) => {
-        console.log(res)
         dispatch('getTemplate', d.id)
         // commit('updateStrategy', res.data)
       })
