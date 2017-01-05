@@ -19,9 +19,6 @@
   "dependencies": {
     "delegate-to": "^0.1.2",
     "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.2.1"
-    "awesomplete": "^1.1.1",
-    "jquery": "^2.2.4",
-    "select2": "^4.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

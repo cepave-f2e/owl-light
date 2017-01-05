@@ -2,7 +2,7 @@ import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox } from 'vue-o
 import s from '../template.scss'
 import u from '../../user/user.scss'
 import Select2 from '../common/select2'
-import Select2Muti from '../common/select2_multi'
+import Select2Muti from '../common/select2-multi'
 
 const gridBase = {
   heads: [

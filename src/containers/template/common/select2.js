@@ -1,9 +1,5 @@
-import $ from 'jquery'
-import 'select2'
-import s from '../template.scss'
-import './select2.css'
-import 'select2/dist/css/select2.min.css'
-const { _ } = window
+import './select2.scss'
+const { _, $ } = window
 
 const Select2 =  {
   name: 'Select2',
@@ -25,10 +21,8 @@ const Select2 =  {
     }
   },
   mounted() {
-    const tt = this
     $(this.$el)
       .select2({ data: this.options, ...this.select2Base })
-    // $(`.${this.setclass}`).val(_.first(_.keys(this.options))).trigger('change')
   },
   watch: {
     value(value) {

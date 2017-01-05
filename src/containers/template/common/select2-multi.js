@@ -1,10 +1,5 @@
-import $ from 'jquery'
-import 'select2'
-import s from '../template.scss'
-import './select2.css'
-import 'select2/dist/css/select2.min.css'
-const { _ } = window
-
+import './select2.scss'
+const { _, $ } = window
 
 // this is only working for contact select mutiple item,
 // if you want use this you need copy this as a new one and change those code below.
@@ -26,7 +21,6 @@ const Select2Muti =  {
     }
   },
   mounted() {
-    const tt = this
     $(this.$el)
       .select2({ data: this.options, ...this.select2Base })
   },

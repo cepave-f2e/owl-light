@@ -1,6 +1,4 @@
-import Awesomplete from 'awesomplete/awesomplete.min'
-import 'awesomplete/awesomplete.css'
-import $ from 'jquery'
+const { $, Awesomplete } = window
 
 const AutoComplete = {
   name: 'AutoComplete',
