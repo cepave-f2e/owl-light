@@ -1,7 +1,7 @@
 import { Tab, Input, Button, Grid, Icon, LightBox } from 'vue-owl-ui'
 import s from '../template.scss'
 import u from '../../user/user.scss'
-import _ from 'lodash'
+const { _ } = window
 
 const TemplatePage = {
   name: 'TemplatePage',

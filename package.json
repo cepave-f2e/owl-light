@@ -21,7 +21,6 @@
     "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.2.1"
     "awesomplete": "^1.1.1",
     "jquery": "^2.2.4",
-    "lodash": "^4.17.3",
     "select2": "^4.0.3"
   },
   "devDependencies": {

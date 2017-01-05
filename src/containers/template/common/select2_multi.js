@@ -3,7 +3,7 @@ import 'select2'
 import s from '../template.scss'
 import './select2.css'
 import 'select2/dist/css/select2.min.css'
-import _ from 'lodash'
+const { _ } = window
 
 
 // this is only working for contact select mutiple item,
