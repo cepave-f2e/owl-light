@@ -1,5 +1,4 @@
-// import vfetch from '~utils/vuex-fetch'
-import vfetch from '~utils/fetch'
+import fetch from '~utils/fetch'
 
 module.exports = {
   'getTemplates'({ commit, state }, { q }) {
@@ -13,7 +12,7 @@ module.exports = {
       mutation: 'getTemplates',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         const tpls = res.data.templates.map((tpl) => {
           return [
@@ -44,7 +43,7 @@ module.exports = {
       mutation: 'getSimpleTplList',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         const tpls = res.data.map((tpl) => {
           return { id: tpl.id.toString(), text: tpl.tpl_name }
@@ -61,7 +60,7 @@ module.exports = {
       mutation: 'createTemplate',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         commit('createTemplate', res.data)
         dispatch('getTemplates', d.q)
@@ -74,7 +73,7 @@ module.exports = {
       commit,
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         dispatch('getTemplates', d.q)
       })

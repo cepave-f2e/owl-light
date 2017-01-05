@@ -1,4 +1,4 @@
-import vfetch from '~utils/fetch'
+import fetch from '~utils/fetch'
 
 module.exports = {
   'getStrategy'({ commit, state }, id) {
@@ -8,7 +8,7 @@ module.exports = {
       commit,
       mutation: 'getStrategy',
     }
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         commit('getStrategy', res.data)
       })
@@ -24,7 +24,7 @@ module.exports = {
       mutation: 'getTemplate',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         const tpl = res.data.template
         const caction = res.data.action
@@ -71,7 +71,7 @@ module.exports = {
       mutation: 'getMetric',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         const metricMap = res.data.map((m) =>{
           return { id: m, text: m }
@@ -90,7 +90,7 @@ module.exports = {
       mutation: 'newStrategy',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
     .then((res) => {
       dispatch('getTemplate', d.id)
       // commit('newStrategy', res.data)
@@ -107,7 +107,7 @@ module.exports = {
       mutation: 'updateStrategy',
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         dispatch('getTemplate', d.id)
         // commit('updateStrategy', res.data)
@@ -120,7 +120,7 @@ module.exports = {
       commit,
       mutation: 'getTeamList',
     }
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         const teams = res.data.map((t) => {
           return { id: t.Team.id.toString(), text: t.Team.name }
@@ -138,7 +138,7 @@ module.exports = {
       commit,
       mutation: 'getReponse',
     }
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
         dispatch('getTemplate', d.id)
@@ -154,7 +154,7 @@ module.exports = {
       commit,
       mutation: 'getReponse',
     }
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
         dispatch('getTemplate', d.id)
@@ -170,7 +170,7 @@ module.exports = {
       commit,
       mutation: 'getReponse',
     }
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         commit('getReponse', res.data)
         dispatch('getTemplate', d.id)
@@ -183,7 +183,7 @@ module.exports = {
       commit,
     }
 
-    return vfetch(opts)
+    return fetch(opts)
       .then((res) => {
         dispatch('getTemplate', d.tid)
       })
