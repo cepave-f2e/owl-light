@@ -23,9 +23,7 @@ module.exports = {
 
     'comma-style': [2, 'last'],
     'comma-spacing': ['error', {'before': false, 'after': true}],
-    'no-debugger': 1,
     'no-unused-vars': 0,
-
     'no-const-assign': 1,
     'no-var': 1,
     'indent': ['error', 2],
