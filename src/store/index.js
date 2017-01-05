@@ -3,6 +3,7 @@ module.exports = new window.Vuex.Store({
   modules: {
     sample: require('./sample'),
     userGroup: require('./user-group'),
-    profile: require('./profile')
+    signup: require('./signup'),
+    login: require('./login')
   }
 })
