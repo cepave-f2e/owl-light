@@ -59,7 +59,7 @@ module.exports = {
      * @url: http://stylelint.io/user-guide/rules/#selector-list
      */
     'selector-list-comma-space-before': 'never',
-    'selector-list-comma-newline-after': 'always',
+    'selector-list-comma-newline-after': 'always-multi-line',
 
     /**
      * at rules
