@@ -27,6 +27,10 @@ module.exports = {
     state.selectedHosts = hosts
   },
 
+  'updateEditHostGroup'(state, hosts) {
+    state.editSelectedHosts = hosts
+  },
+
   'addHostsIntoNewHostGroup.start'(state) {
     state.hasCreateLoading = true
   },
@@ -90,6 +94,7 @@ module.exports = {
   'getHostsList.success'(state, { data }) {
     state.hostList.hostListItems = data.hosts
     state.hostList.hostGroup = data.hostgroup.grp_name
+    state.hostList.hostGroupId = data.hostgroup.id
   },
 
   'getHostsList.fail'(state, { data }) {

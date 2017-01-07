@@ -3,6 +3,7 @@ import g from 'sass/global.scss'
 import s from './portal.scss'
 
 import HostListInGroup from './host-list-in-group'
+import HostGroupEdit from './host-group-edit'
 import PluginsList from './plugins-list'
 
 const hostGroups = {
@@ -289,6 +290,7 @@ const hostGroups = {
         {/* LightBox Host Group Edit */}
         <LightBox class={[g.inline]} ref="lbHostGroupEdit" width="788px" closeOnClickMask closeOnESC>
           <LightBox.View>
+            <HostGroupEdit lbRef={this.$refs.lbHostGroupEdit} />
           </LightBox.View>
         </LightBox>
 
