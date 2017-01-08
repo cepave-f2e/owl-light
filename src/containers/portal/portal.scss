@@ -31,7 +31,7 @@
 }
 
 .cancelBtn {
-  @include col(2/12, $offset: 8/12);
+  @include column(2/12, $offset: 8/12);
 }
 
 .lbText {
