@@ -1,4 +1,4 @@
-import { Tab } from 'vue-owl-ui'
+import { Tab } from '@cepave/owl-ui'
 import s from './user.scss'
 import UserGroup from './user-group'
 import UserList from './user-list'

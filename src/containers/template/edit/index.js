@@ -1,4 +1,4 @@
-import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox } from 'vue-owl-ui'
+import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox } from '@cepave/owl-ui'
 import s from '../template.scss'
 import u from '../../user/user.scss'
 import Select2 from '../common/select2'

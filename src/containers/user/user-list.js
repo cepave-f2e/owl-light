@@ -1,4 +1,4 @@
-import { Grid, Input, Button, LightBox } from 'vue-owl-ui'
+import { Grid, Input, Button, LightBox } from '@cepave/owl-ui'
 import s from './user.scss'
 const UserList = {
   name: 'UserList',

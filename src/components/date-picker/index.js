@@ -1,4 +1,4 @@
-import { Icon } from 'vue-owl-ui'
+import { Icon } from '@cepave/owl-ui'
 import s from './date-picker.scss'
 import fixUnit from '~utils/fix-unit'
 const { rome, moment } = window

@@ -1,5 +1,5 @@
 import s from './profile.scss'
-import { Tab, Input, Button } from 'vue-owl-ui'
+import { Tab, Input, Button } from '@cepave/owl-ui'
 
 const ProfilePage = {
   name: 'ProfilePage',
