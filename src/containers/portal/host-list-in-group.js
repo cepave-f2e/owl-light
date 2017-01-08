@@ -54,10 +54,10 @@ const hostListInGroup = {
   },
 
   methods: {
-    deleteHostFromGroup(e, lbDeleteHostFromGroup) {
+    deleteHostFromGroup(e) {
       e.preventDefault()
       const { hostName } = e.target.dataset
-      // this.$refs.lbDeleteHostFromGroup.open()
+
       if (confirm(`Remove Host ${hostName} ?`)) {
         this.$store.dispatch('portal/deleteHostFromGroup', e.target.dataset)
       }

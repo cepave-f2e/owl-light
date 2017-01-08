@@ -134,11 +134,11 @@ module.exports = {
     'deleteHostFromGroup'({ commit, state, dispatch }, data) {
       const opts = {
         method: 'put',
-        url: `hostgroup/host`,
+        url: 'hostgroup/host',
         mutation : 'deleteHostFromGroup',
         data: {
-          hostgroup_id: ~~data.groupId,
-          host_id: ~~data.hostId,
+          hostgroup_id: +data.groupId,
+          host_id: +data.hostId,
         },
         commit,
       }
