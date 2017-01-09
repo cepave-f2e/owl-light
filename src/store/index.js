@@ -4,6 +4,7 @@ module.exports = new window.Vuex.Store({
     sample: require('./sample'),
     userGroup: require('./user-group'),
     signup: require('./signup'),
-    login: require('./login')
+    login: require('./login'),
+    graph: require('./graph'),
   }
 })
