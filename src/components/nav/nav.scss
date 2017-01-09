@@ -56,6 +56,12 @@
       opacity: 1;
     }
   }
+  &.isBottom {
+    dl {
+      top: auto;
+      bottom: 0;
+    }
+  }
   dl {
     display: none;
     position: absolute;

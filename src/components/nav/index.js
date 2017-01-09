@@ -12,13 +12,9 @@ const Nav = {
         </div>
 
         <div class={[s.linkIcon]}>
-          <Icon typ="alarm" />
-          <dl>
-            <dt><Icon typ="fold" />Alarm</dt>
-            <dd><Link to="/alarm">Alarm Overview</Link></dd>
-            <dd><Link to="/alarm-latest">Alarm Latest</Link></dd>
-            <dd><Link to="/alarm-history">Alarm History</Link></dd>
-          </dl>
+          <Link to="/alarm">
+            <Icon typ="alarm" />
+          </Link>
         </div>
 
         <div class={[s.linkIcon]}>
@@ -28,9 +24,22 @@ const Nav = {
         </div>
 
         <div class={[s.navBottom]}>
+
           <div class={[s.linkIcon]}>
-            <Icon typ="gear" />
+            <Link to="/profile">
+              <Icon typ="user-group" />
+            </Link>
           </div>
+
+          <div class={[s.linkIcon, s.isBottom]}>
+            <Icon typ="gear" />
+            <dl>
+              <dt><Icon typ="fold" />Setting</dt>
+              <dd><Link to="/portal">Host Group</Link></dd>
+              <dd><Link to="/user">User Group</Link></dd>
+            </dl>
+          </div>
+
         </div>
       </nav>
     )

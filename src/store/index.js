@@ -8,5 +8,6 @@ module.exports = new window.Vuex.Store({
     graph: require('./graph'),
     templateList: require('./template/list'),
     templateUpdate: require('./template/update'),
+    profile: require('./profile')
   }
 })
