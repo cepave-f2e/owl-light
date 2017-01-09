@@ -31,7 +31,7 @@ const Nav = {
             </Link>
           </div>
 
-          <div class={[s.linkIcon]}>
+          <div class={[s.linkIcon, s.isBottom]}>
             <Icon typ="gear" />
             <dl>
               <dt><Icon typ="fold" />Setting</dt>
