@@ -65,8 +65,10 @@ const TemplatePage = {
       this.$refs.NTemplate.open(e)
     },
     submitQuery(e) {
-      const queryString = this.$refs.inputRef.value || '.+'
-      this.getTemplates(queryString)
+      if ((e.type === 'keypress' && e.charCode === 13) || e.type === 'click') {
+        const queryString = this.$refs.inputRef.value || '.+'
+        this.getTemplates(queryString)
+      }
     },
     createTemplate(e) {
       const name = this.$refs.tplName.value
@@ -138,7 +140,7 @@ const TemplatePage = {
             <div>
               <div class={[u.contactSearchWrapper]}>
                 <div style="display: flex;">
-                  <Input class={s.searchInput} name="q" icon={['search', '#919799']} status="normal" placeholder="输入模板关键字查询" ref="inputRef" />
+                  <Input class={s.searchInput} name="q" icon={['search', '#919799']} status="normal" placeholder="输入模板关键字查询" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
                   <Button class={s.submitButton} status="primary" nativeOn-click={(e) => this.submitQuery(e)} >Submit</Button>
                   <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNTemplate(e, this)}>
                     <Icon typ="plus" size={16} />
