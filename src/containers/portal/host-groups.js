@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Icon, LightBox, DualList } from 'vue-owl-ui'
+import { Input, Button, Grid, Icon, LightBox, DualList } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import g from 'sass/global.scss'
 import s from './portal.scss'
