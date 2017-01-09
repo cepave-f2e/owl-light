@@ -1,5 +1,6 @@
 import s from './aggregator.scss'
-import { Tab, Grid, Input, Button, Icon, LightBox } from '@cepave/owl-ui'
+import { Tab, Grid, Input, Button, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import Link from '~coms/link'
 
 const AggregatorPage = {
   name: 'AggregatorPage',
@@ -122,11 +123,14 @@ const AggregatorPage = {
       this.$store.dispatch('deleteAggregator', {
         id: grpId
       })
+    },
+    newAggregator(e) {
+      this.$refs.newAggregator.open(e)
     }
   },
 
   render(h) {
-    const { heads, rowsRender, addAggregator, grpToEdit, editAggregator, deleteAggregator, duplicateAggregator } = this
+    const { heads, rowsRender, addAggregator, grpToEdit, editAggregator, deleteAggregator, duplicateAggregator, newAggregator } = this
     const { rows } = this.$store.state.aggregator
     const props = { heads, rowsRender, rows }
     return (
@@ -137,13 +141,25 @@ const AggregatorPage = {
           </Tab.Head>
           <Tab.Content slot="tabContent" name="current hostgroup aggregators">
             <div class={[s.head]}>
-              <LightBox ref="newAggregator" closeOnClickMask closeOnESC>
-                <LightBox.Open class={[s.buttonPosition]}>
-                  <Button status="primary" class={[s.buttonIcon]}>
+              <Flex grids={24}>
+                <Flex.Col size="6">
+                  <Link to="/portal" class={[s.linkToPortal]}>
+                    <Button status="primary" class={[s.buttonIcon]}>
+                      <Icon typ="fold" size={16} class={[s.plus]} />
+                      Back to HostGroup List
+                    </Button>
+                </Link>
+                </Flex.Col>
+                <Flex.Col offset="14" size="5">
+                  <Button status="primary" class={[s.buttonIcon]} nativeOnClick={(e) => newAggregator(e)}>
                     <Icon typ="plus" size={16} class={[s.plus]} />
                     Add new aggregator
                   </Button>
-                </LightBox.Open>
+                </Flex.Col>
+              </Flex>
+
+              {/* create a new aggregator */}
+              <LightBox ref="newAggregator" class={[s.headlb]} closeOnClickMask closeOnESC>
                 <LightBox.View>
                   <p>Add a new aggregator</p>
                   <div class={[s.inputGroup]}>
