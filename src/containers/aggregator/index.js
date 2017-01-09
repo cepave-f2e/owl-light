@@ -79,7 +79,7 @@ const AggregatorPage = {
         metric: this.$refs.metric.value,
         tags: this.$refs.tags.value,
         step: +this.$refs.step.value,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     duplicate(e, row) {
@@ -94,7 +94,7 @@ const AggregatorPage = {
         metric: this.$refs.dupliMetric.value,
         tags: this.$refs.dupliTags.value,
         step: +this.$refs.dupliStep.value,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     edit(e, row) {
@@ -111,7 +111,7 @@ const AggregatorPage = {
         metric: this.$refs.editMetric.value || grpToEdit.metric,
         tags: this.$refs.editTags.value || grpToEdit.tags,
         step: +this.$refs.editStep.value || grpToEdit.step,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     delete(e, grpId) {
