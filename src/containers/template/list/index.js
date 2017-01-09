@@ -1,4 +1,4 @@
-import { Tab, Input, Button, Grid, Icon, LightBox } from 'vue-owl-ui'
+import { Tab, Input, Button, Grid, Icon, LightBox } from '@cepave/owl-ui'
 import s from '../template.scss'
 import u from '../../user/user.scss'
 const { _ } = window

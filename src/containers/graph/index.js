@@ -1,4 +1,4 @@
-import { Tab, DualList, Loading, Button, Page, Icon, Select } from 'vue-owl-ui'
+import { Tab, DualList, Loading, Button, Page, Icon, Select } from '@cepave/owl-ui'
 import LineChart from './line-chart/index.js'
 import sortHosts from './sort-hosts'
 import g from '~sass/global.scss'

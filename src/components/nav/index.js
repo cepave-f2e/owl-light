@@ -1,5 +1,5 @@
 import s from './nav.scss'
-import { Icon } from 'vue-owl-ui'
+import { Icon } from '@cepave/owl-ui'
 import Link from '~coms/link'
 
 const Nav = {

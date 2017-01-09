@@ -1,4 +1,4 @@
-import { Input, Button } from 'vue-owl-ui'
+import { Input, Button } from '@cepave/owl-ui'
 import s from './signup.scss'
 
 const SignupPage = {

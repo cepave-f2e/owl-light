@@ -1,4 +1,4 @@
-import { Input, Button } from 'vue-owl-ui'
+import { Input, Button } from '@cepave/owl-ui'
 import Logo from '~coms/logo'
 import s from './login.scss'
 const mapState = window.Vuex.mapState

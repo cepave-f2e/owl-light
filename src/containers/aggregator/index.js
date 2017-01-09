@@ -1,5 +1,5 @@
 import s from './aggregator.scss'
-import { Tab, Grid, Input, Button, Icon, LightBox } from 'vue-owl-ui'
+import { Tab, Grid, Input, Button, Icon, LightBox } from '@cepave/owl-ui'
 
 const AggregatorPage = {
   name: 'AggregatorPage',

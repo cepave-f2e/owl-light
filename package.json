@@ -17,8 +17,8 @@
     ]
   },
   "dependencies": {
-    "delegate-to": "^0.1.2",
-    "vue-owl-ui": "github:cepave-f2e/vue-owl-ui#v0.2.1"
+    "@cepave/owl-ui": "^0.3.3",
+    "delegate-to": "^0.1.2"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

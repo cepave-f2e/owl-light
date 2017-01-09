@@ -1,6 +1,6 @@
 import EChart from '~coms/echarts'
 import s from './line-chart.scss'
-import { Loading } from 'vue-owl-ui'
+import { Loading } from '@cepave/owl-ui'
 import g from '~sass/global.scss'
 
 const LineChart = {

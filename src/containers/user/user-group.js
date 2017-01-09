@@ -1,5 +1,5 @@
 import s from './user.scss'
-import { Grid, Input, Button, Icon, LightBox, DualList, Loading } from 'vue-owl-ui'
+import { Grid, Input, Button, Icon, LightBox, DualList, Loading } from '@cepave/owl-ui'
 
 const UserGroup = {
   name: 'UserGroup',
