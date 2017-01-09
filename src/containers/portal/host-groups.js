@@ -1,4 +1,5 @@
 import { Input, Button, Grid, Icon, LightBox, DualList } from 'vue-owl-ui'
+import Link from '~coms/link'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
@@ -86,6 +87,9 @@ const hostGroups = {
             </li>
             <li class={[s.operrationItem]}>
               <a class={[s.operration]} href data-group-id={row.id} onClick={(e) => this.openPluginsListLightBox(e, this)}>Plugins</a>
+            </li>
+            <li class={[s.operrationItem]}>
+              <Link class={[s.operration]} to={`aggregator/${row.id}`}>Aggregator</Link>
             </li>
           </ul>
         </Grid.Col>,
