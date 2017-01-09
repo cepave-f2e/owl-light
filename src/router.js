@@ -58,7 +58,7 @@ module.exports = new window.VueRouter({
       }
     },
     {
-      path: '/aggregator',
+      path: '/hostgroup/:id/aggregator',
       component(resolve) {
         require(['./containers/aggregator'], resolve)
       }
