@@ -1,24 +1,51 @@
-# owl-light-vue
+<p align="center">
+  <img width="220" src="https://raw.githubusercontent.com/cepave-f2e/owl-light/dev/assets/logo.png" />
+</p>
 
-> An Open-Falcon Vue.js project.
+<p align="center">
+  <a href="https://circleci.com/gh/cepave-f2e/owl-light" alt="Build Status" target="_blank">
+    <img src="https://img.shields.io/circleci/project/github/cepave-f2e/owl-light/dev.svg" />
+  </a>
+  <a href="https://codecov.io/gh/cepave-f2e/owl-light" alt="Coverage" target="_blank">
+    <img src="https://img.shields.io/codecov/c/github/cepave-f2e/owl-light.svg" />
+  </a>
+  <img src="https://img.shields.io/github/license/cepave-f2e/owl-light/dev.svg" />
+</p>
 
-## Build Setup
 
-``` bash
-# install dependencies
-yarn install
+# OWL Light
 
-# serve with hot reload at localhost:8080
-npm run dev
+OWL Light is an Open-Falcon client-slide project.
 
-# build for production with minification
-npm run build
+## Setup
 
-# run e2e tests
-npm run e2e
+Clone this project
 
-# run all tests
-npm test
+```sh
+git clone https://github.com/cepave-f2e/owl-light.git && cd owl-light
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Install dependencies
+
+Recommend use `yarn` to install.
+
+```sh
+yarn install
+```
+
+
+## Configure
+
+All the related configs are in `/cofig`.
+
+## Development
+```sh
+npm run dev
+```
+
+## Build
+The build files it'll output in `/dist`.
+
+```sh
+npm run build
+```
