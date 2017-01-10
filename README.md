@@ -9,7 +9,7 @@
   <a href="https://codecov.io/gh/cepave-f2e/owl-light" alt="Coverage" target="_blank">
     <img src="https://img.shields.io/codecov/c/github/cepave-f2e/owl-light.svg" />
   </a>
-  <img src="https://img.shields.io/github/license/cepave-f2e/owl-light/dev.svg" />
+  <img src="https://img.shields.io/github/license/cepave-f2e/owl-light.svg" />
 </p>
 
 
