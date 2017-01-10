@@ -1,4 +1,4 @@
-import { Tab, DualList, Loading, Button, Page, Icon, Select } from '@cepave/owl-ui'
+import { Tab, DualList, Loading, Button, Page, Icon, Select, Flex } from '@cepave/owl-ui'
 import LineChart from './line-chart/index.js'
 import sortHosts from './sort-hosts'
 import g from '~sass/global.scss'
@@ -214,8 +214,8 @@ const GraphView = {
               <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>View Graph</Button>
             </div>
 
-            <div class={[s.querySection, g.container]}>
-              <div class={[g.col6]}>
+            <Flex class={[s.querySection]}>
+              <Flex.Col size="auto">
                 <h4>Search Endpoints</h4>
                 <DualList
                   ref="dualEndpoint"
@@ -226,9 +226,8 @@ const GraphView = {
                   onChange={checkBtnStatus}
                   onInputchange={getEndpoints}
                 />
-              </div>
-
-              <div class={[g.col6]}>
+              </Flex.Col>
+              <Flex.Col size="auto">
                 <h4>Search Counters</h4>
                 <DualList
                   apiMode
@@ -239,8 +238,8 @@ const GraphView = {
                   items={graph.counterItems}
                   leftLoading={graph.hasCounterLoading}
                 />
-              </div>
-            </div>
+              </Flex.Col>
+            </Flex>
 
             {
               graph.totalCharts.length
