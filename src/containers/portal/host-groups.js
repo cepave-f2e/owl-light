@@ -33,7 +33,8 @@ const hostGroups = {
           },
         ],
         rows: [],
-      }
+      },
+      currentHostList: 0
     }
   },
 
@@ -178,6 +179,7 @@ const hostGroups = {
 
     openHostsLightBox(e) {
       const data = e.target.dataset
+      this.currentHostList = data.groupId
 
       this.$store.dispatch('portal/getHostsList', data)
       this.$refs.lbHostsList.open(e)
@@ -188,6 +190,15 @@ const hostGroups = {
       this.getEndpoints('.+')
       this.$store.dispatch('portal/getHostsList', data)
       this.$refs.lbHostGroupEdit.open(e)
+    },
+
+    searchHostList(e) {
+      if ((e.type === 'keypress' && e.charCode === 13) || e.type === 'click') {
+        this.$store.dispatch('portal/searchHostList', {
+          id: this.currentHostList,
+          q: this.$refs.searchHostList.value
+        })
+      }
     }
   },
 
@@ -284,9 +295,9 @@ const hostGroups = {
             <div class={[s.lbViewBox]}>
               <div class={[s.searchInput]}>
                 <div class={[s.inputGroups]}>
-                  <Input icon={['search', '#919799']} />
+                  <Input icon={['search', '#919799']} ref="searchHostList" placeholder="search hosts" nativeOnKeypress={this.searchHostList} />
                   <span class={[s.btnAppend]}>
-                    <Button status="primary">Search</Button>
+                    <Button status="primary" nativeOnClick={this.searchHostList}>Search</Button>
                   </span>
                 </div>
               </div>
