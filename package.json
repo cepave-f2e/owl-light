@@ -1,9 +1,8 @@
 {
   "name": "@cepave/owl-light",
   "version": "0.1.0",
-  "description": "An Open-Falcon Vue.js project",
+  "description": "Open-Falcon client-side project",
   "author": "Cepave FrontEnd Team <f2e@cepave.com>",
-  "private": true,
   "main": "index.js",
   "repository": "https://github.com/cepave-f2e/owl-light.git",
   "license": "MIT",

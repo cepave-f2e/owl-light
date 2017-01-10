@@ -9,13 +9,16 @@
   <a href="https://codecov.io/gh/cepave-f2e/owl-light" alt="Coverage" target="_blank">
     <img src="https://img.shields.io/codecov/c/github/cepave-f2e/owl-light.svg" />
   </a>
+  <a href="https://github.com/cepave-f2e/owl-light/releases">
+    <img src="https://img.shields.io/github/tag/cepave-f2e/owl-light.svg" />
+  </a>
   <img src="https://img.shields.io/github/license/cepave-f2e/owl-light.svg" />
 </p>
 
 
 # OWL Light
 
-OWL Light is an [Open-Falcon](https://github.com/open-falcon) client-side project.
+OWL Light is an [Open-Falcon](https://github.com/open-falcon) client-side project. It's based on[vue](https://github.com/vuejs/vue) and [vue-router](https://github.com/vuejs/vue-router) 2 worked as **SPA** (Single Page Application).
 
 ## Setup
 
@@ -34,16 +37,67 @@ yarn install
 ```
 
 
+
+## The Folder Structure
+
+```
+owl-light/
+├── build/ (webpack build and dev server config)
+├── config/ (all project configs)
+├── src/ (source, core code base)
+|    ├─── components/ (global common components)
+|    ├─── containers/ (page container)
+|    ├─── sass/ (global common sass/scss libraries)
+|    ├─── store/ (Vuex store management)
+|    └─── utils/ (global common utility functions)
+├── .babelrc (babel complier config)
+├── .editorconfig (editor config)
+├── .eslintrc.js (eslint config)
+├── .stylelintrc.js (stylelint config)
+├── package.json
+└── yarn.lock (modules cache file)
+```
+
+
 ## Configure
 
-All the related configs are in `/cofig`.
+All the related configs are in `/config`.
+
+
+### API service
+
+Configure you own API service, modify the `apiBase` field in `/config/index.js`:
+
+```js
+module.exports = {
+  build: {
+    ...
+  },
+  dev: {
+    ...
+    apiBase: 'http://113.207.30.198:8088/api/v1',
+  }
+}
+```
+
+
+
+## OWL UI
+
+[OWL UI](https://cepave-f2e.github.io/vue-owl-ui) is a **Component Design System** based on VueJS 2, used by Cepave to run in monitoring system and OWL Light
+
+
 
 ## Development
+
 ```sh
 npm run dev
 ```
 
+
+
 ## Build
+
 The build files it'll output in `/dist`.
 
 ```sh
