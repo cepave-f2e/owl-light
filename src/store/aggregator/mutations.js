@@ -1,7 +1,7 @@
 module.exports = {
   'get/aggregators.success'(state, { data }) {
-    state.rows = data
-    state.aggregatorInfo = data
+    state.rows = data.aggregators
+    state.currentHostGroupName = data.hostgroup
   },
   'get/aggregators.fail'(state, { err }) {
   },
