@@ -8,7 +8,7 @@ const AggregatorPage = {
     return {
       heads: [
         {
-          col: 'HostGroup id',
+          col: 'HostGroup name',
           width: '14%',
           sort: -1
         },
@@ -44,7 +44,8 @@ const AggregatorPage = {
       ],
       rowsRender() {},
       grpToEdit: {},
-      grpToRemove: 0
+      grpToRemove: 0,
+      currentHostGroupName: ''
     }
   },
   mounted() {
@@ -55,7 +56,7 @@ const AggregatorPage = {
   created() {
     this.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{row.grp_id}</Grid.Col>,
+        <Grid.Col>{this.currentHostGroupName}</Grid.Col>,
         <Grid.Col>{row.id}</Grid.Col>,
         <Grid.Col>{row.endpoint}</Grid.Col>,
         <Grid.Col>{row.metric}</Grid.Col>,
@@ -119,9 +120,10 @@ const AggregatorPage = {
       this.grpToRemove = grpId
       this.$refs.deleteAggregator.open(e)
     },
-    deleteAggregator(grpId) {
+    deleteAggregator() {
       this.$store.dispatch('deleteAggregator', {
-        id: grpId
+        id: this.grpToRemove,
+        hostgroup_id: +this.$route.params.id
       })
     },
     newAggregator(e) {
@@ -132,6 +134,7 @@ const AggregatorPage = {
   render(h) {
     const { heads, rowsRender, addAggregator, grpToEdit, editAggregator, deleteAggregator, duplicateAggregator, newAggregator } = this
     const { rows } = this.$store.state.aggregator
+    this.currentHostGroupName = this.$store.state.aggregator.currentHostGroupName
     const props = { heads, rowsRender, rows }
     return (
       <div class={[s.aggregatorPage]}>
