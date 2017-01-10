@@ -196,6 +196,25 @@ module.exports = {
               .then((res) => {
                 dispatch('getBindPluginList', data)
               })
+    },
+
+    'searchHostList'({ commit, state }, data) {
+      const opts = {
+        method: 'GET',
+        url: `/hostgroup/${data.id}?q=${data.q}`
+      }
+
+      return fetch(opts)
+              .then((res) => {
+                commit('searchHostList.success', {
+                  data: res.data
+                })
+              })
+              .catch((err) => {
+                commit('searchHostList.fail', {
+                  err
+                })
+              })
     }
   },
   mutations: require('./mutations'),

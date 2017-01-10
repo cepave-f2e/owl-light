@@ -101,6 +101,14 @@ module.exports = {
 
   },
 
+  'searchHostList.success'(state, { data }) {
+    state.hostList.hostListItems = data.hosts
+  },
+
+  'searchHostList.fail'(state, { err }) {
+
+  },
+
   'hostInGroupList'(state, data) {
     state.hostInGroupList = data
   },
