@@ -18,6 +18,10 @@ module.exports = {
       id: 0,
     },
     hostInGroupList: {},
+    bindPluginCandidate: {
+      groupId: 0,
+    },
+    pluginsList: [],
   },
   actions: {
     'getEndpoints'({ commit, state }, { q }) {
@@ -148,6 +152,51 @@ module.exports = {
                 dispatch('getHostsList', data)
               })
     },
+
+    // List Plugins
+    'getBindPluginList'({ commit, state }, data) {
+      const opts = {
+        method: 'get',
+        url: `hostgroup/${data.groupId}/plugins`,
+        mutation : 'getBindPluginList',
+        commit,
+      }
+
+      return vfetch(opts)
+    },
+
+    // Plugin binding
+    'bindPluginToHostGroup'({ commit, state, dispatch }, data) {
+      const opts = {
+        method: 'post',
+        url: 'plugin',
+        mutation : 'bindPluginToHostGroup',
+        data: {
+          hostgroup_id: data.groupId,
+          dir_path: data.pluginDir,
+        },
+        commit,
+      }
+
+      return vfetch(opts)
+              .then((res) => {
+                dispatch('getBindPluginList', data)
+              })
+    },
+
+    'unbindPluginFromGroup'({ commit, state, dispatch }, data) {
+      const opts = {
+        method: 'delete',
+        url: `plugin/${data.id}`,
+        mutation : 'unbindPluginFromGroup',
+        commit,
+      }
+
+      return vfetch(opts)
+              .then((res) => {
+                dispatch('getBindPluginList', data)
+              })
+    }
   },
   mutations: require('./mutations'),
 }

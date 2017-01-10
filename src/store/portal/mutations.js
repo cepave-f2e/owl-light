@@ -136,4 +136,34 @@ module.exports = {
   'deleteHostFromGroup.fail'(state, err) {
 
   },
+
+  // Get PluginsList
+  'getBindPluginList.start'(state) {},
+  'getBindPluginList.end'(state) {},
+  'getBindPluginList.success'(state, res) {
+    state.pluginsList = res.data
+  },
+  'getBindPluginList.fail'(state, err) {
+    console.error(err)
+  },
+
+  // Plugin binding
+  'bindPluginCandidate'(state, data) {
+    state.bindPluginCandidate.groupId = +data.groupId
+  },
+
+  'bindPluginToHostGroup.start'(state) {},
+  'bindPluginToHostGroup.end'(state) {},
+  'bindPluginToHostGroup.success'(state, data) {},
+  'bindPluginToHostGroup.fail'(state, err) {
+    console.error(err)
+  },
+
+  // Plugin unbind from hostgroup
+  'unbindPluginFromGroup.start'(state) {},
+  'unbindPluginFromGroup.end'(state) {},
+  'unbindPluginFromGroup.success'(state, data) {},
+  'unbindPluginFromGroup.fail'(state, err) {
+    console.error(err)
+  },
 }

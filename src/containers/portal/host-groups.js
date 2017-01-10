@@ -169,6 +169,10 @@ const hostGroups = {
     },
 
     openPluginsListLightBox(e) {
+      const data = e.target.dataset
+
+      this.$store.commit('portal/bindPluginCandidate', data)
+      this.$store.dispatch('portal/getBindPluginList', data)
       this.$refs.lbPluginsList.open(e)
     },
 
@@ -302,17 +306,7 @@ const hostGroups = {
         <LightBox class={[g.inline]} ref="lbPluginsList" closeOnClickMask closeOnESC>
           <LightBox.View>
             <p>Plugins List</p>
-            <div class={[s.lbViewBox]}>
-              <div class={[s.searchInput]}>
-                <div class={[s.inputGroups]}>
-                  <Input icon={['search', '#919799']} />
-                  <span class={[s.btnAppend]}>
-                    <Button status="primary">Search</Button>
-                  </span>
-                </div>
-              </div>
-              <PluginsList />
-            </div>
+            <PluginsList />
           </LightBox.View>
         </LightBox>
       </div>

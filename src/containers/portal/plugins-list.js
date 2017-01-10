@@ -6,10 +6,10 @@ const pluginsList = {
   name: 'PluginsList',
   data() {
     return {
-      gridData: {
+      pluginData: {
         heads: [
           {
-            col: 'Plugin Name',
+            col: 'Plugin Dir',
             width: '40%',
             sort: -1,
           },
@@ -23,52 +23,33 @@ const pluginsList = {
             width: '20%',
           },
         ],
-        rows: [
-          [
-            {
-              name: 'basic/sys'
-            },
-            {
-              creator: 'Timmy'
-            },
-          ],
-          [
-            {
-              name: 'basic/sys'
-            },
-            {
-              creator: 'Timmy'
-            },
-          ]
-        ]
+        rows: [],
       }
     }
   },
 
   created() {
-    this.gridData.rowsRender = (h, { row, index }) => {
+    this.pluginData.rowsRender = (h, { row, index }) => {
       return [
         <Grid.Col>
-          {row[0].name}
+          {row.dir}
         </Grid.Col>,
         <Grid.Col>
-          {row[1].creator}
+          {row.create_user}
         </Grid.Col>,
         <Grid.Col>
           <ul>
             <li class={[s.operrationItem]}>
-              <LightBox class={[g.inline]} closeOnClickMask closeOnESC>
-                <LightBox.Open>
-                  <a class={[s.operration]} href>Delete</a>
-                </LightBox.Open>
-                <LightBox.View>
-                  <p>Delete this Host Group ?</p>
-                  <div class={[s.lbViewBox]}>
-                    <Button class={[g.col6]} status="primary">Yes</Button>
-                    <Button class={[g.col6]} status="primaryOutline">NO</Button>
-                  </div>
-                </LightBox.View>
-              </LightBox>
+              <a
+                class={[s.operration]}
+                href
+                data-group-id={row.grp_id}
+                data-dir={row.dir}
+                data-id={row.id}
+                onClick={this.unbindPluginHandler}
+              >
+                Unbind
+              </a>
             </li>
           </ul>
         </Grid.Col>,
@@ -77,18 +58,67 @@ const pluginsList = {
   },
 
   methods: {
+    getBindPluginList(groupId) {
+      this.$store.dispatch('portal/getBindPluginList', groupId)
+    },
+
+    bindInputHandler(e) {
+      if (e.charCode === 13) {
+        this.bindPluginHandler()
+      }
+    },
+
+    bindPluginHandler() {
+      const plugin = this.$refs.pluginBindInput.value || ''
+      if (!plugin.length) {
+        return
+      }
+
+      const data = {
+        groupId: this.$store.state.portal.bindPluginCandidate.groupId,
+        pluginDir: plugin,
+      }
+
+      this.$store.dispatch('portal/bindPluginToHostGroup', data)
+    },
+
+    unbindPluginHandler(e) {
+      e.preventDefault()
+      const { dir, id } = e.target.dataset
+
+      if (confirm(`Unbind ${dir} ?`)) {
+        this.$store.dispatch('portal/unbindPluginFromGroup', e.target.dataset)
+      }
+    },
 
   },
 
   render(h) {
-    const { gridData } = this
+    const { pluginData, $store } = this
     const props = {
-      ...gridData
+      ...pluginData,
+      rows: $store.state.portal.pluginsList
     }
 
     return (
-      <div class={[s.pluginsListWrapper]}>
-        <Grid {...{ props }}></Grid>
+      <div class={[s.lbViewBox]}>
+        <div class={[s.searchInput]}>
+          <div class={[s.inputGroups]}>
+            <Input
+              ref="pluginBindInput"
+              nativeOnKeypress={(e) => this.bindInputHandler(e)}
+            />
+            <span class={[s.btnAppend]}>
+              <Button status="primary" nativeOnClick={this.bindPluginHandler}>
+                <Icon class="create-icon" typ="plus" fill="#fff" size={18} />
+                Bind
+              </Button>
+            </span>
+          </div>
+        </div>
+        <div class={[s.pluginsListWrapper]}>
+          <Grid {...{ props }}></Grid>
+        </div>
       </div>
     )
   }
