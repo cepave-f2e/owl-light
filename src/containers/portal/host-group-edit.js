@@ -1,4 +1,4 @@
-import { Button, LightBox, DualList } from '@cepave/owl-ui'
+import { Button, LightBox, DualList, Flex } from '@cepave/owl-ui'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
@@ -67,31 +67,45 @@ const hostGroupEdit = {
     const hosts = _.differenceBy(state.portal.hosts, hasBindHostListItems, 'endpoint')
 
     return (
-      <div class={[s.hostGroupEditWrapper]}>
-        <h2>Host Group Edit</h2>
-        <div class={[g.container]}>
-          <div class={[g.col2, s.lbText]}>Group Name</div>
-          <div class={[g.col10, s.lbText]}>
-            <b>{state.portal.hostList.hostGroup}</b>
-          </div>
-        </div>
+      <div class={[s.hostGroupEditWrapper, s.lb]}>
+        <h2>Edit HostGroup</h2>
+        <Flex>
+          <Flex.Col size="2">
+            <div class={[s.lbText]}>Group Name</div>
+          </Flex.Col>
+          <Flex.Col size="10">
+            <div class={[s.lbText]}>
+              <b>{state.portal.hostList.hostGroup}</b>
+            </div>
+          </Flex.Col>
+        </Flex>
         <div class={[s.dualBox]}>
-          <div class={[g.col2, s.lbText]}>Hosts</div>
-          <div class={[g.col10]}>
-            <DualList
-              apiMode
-              onInputchange={newHostsListHandle}
-              onChange={newHostsSelectHandle}
-              items={hosts}
-              selectedItems={hasBindHostListItems}
-              displayKey="endpoint"
-              leftLoading={state.portal.hasEndpointLoading}
-            />
-          </div>
+          <Flex>
+            <Flex.Col size="2">
+              <div class={[s.lbText]}>Hosts</div>
+            </Flex.Col>
+            <Flex.Col size="10">
+              <DualList
+                apiMode
+                onInputchange={newHostsListHandle}
+                onChange={newHostsSelectHandle}
+                items={hosts}
+                selectedItems={hasBindHostListItems}
+                displayKey="endpoint"
+                leftLoading={state.portal.hasEndpointLoading}
+              />
+            </Flex.Col>
+          </Flex>
         </div>
         <div class={[s.lbViewBox]}>
-          <Button class={[s.cancelBtn]} status="primaryOutline" nativeOnClick={this.closeLb}>Cancel</Button>
-          <Button class={[g.col2]} status="primary" nativeOnClick={this.save}>Save</Button>
+          <Flex class={[s.lbViewBox]}>
+            <Flex.Col offset="8" size="2">
+              <Button class={[s.cancelBtn]} status="primaryOutline" nativeOnClick={this.closeLb}>Cancel</Button>
+            </Flex.Col>
+            <Flex.Col size="auto">
+              <Button class={[s.buttonAlignRight]} status="primary" nativeOnClick={this.save}>Save</Button>
+            </Flex.Col>
+          </Flex>
         </div>
       </div>
     )

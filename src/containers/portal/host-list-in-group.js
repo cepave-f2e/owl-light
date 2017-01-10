@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Icon, LightBox } from '@cepave/owl-ui'
+import { Input, Button, Grid, Icon, LightBox, Flex } from '@cepave/owl-ui'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
@@ -80,8 +80,14 @@ const hostListInGroup = {
           <LightBox.View>
             <p>Delete this Host Group ?</p>
             <div class={[s.lbViewBox]}>
-              <Button class={[g.col6]} status="primary">Yes</Button>
-              <Button class={[g.col6]} status="primaryOutline" nativeOnClick={(e) => this.$refs.lbDeleteHostFromGroup.close(e)}>NO</Button>
+              <Flex>
+                <Flex.Col size="auto">
+                  <Button status="primary" class={[s.buttonBig]}>Yes</Button>
+                </Flex.Col>
+                <Flex.Col size="auto">
+                  <Button status="primaryOutline" class={[s.buttonBig]} nativeOnClick={(e) => this.$refs.lbDeleteHostFromGroup.close(e)}>NO</Button>
+                </Flex.Col>
+              </Flex>
             </div>
           </LightBox.View>
         </LightBox>

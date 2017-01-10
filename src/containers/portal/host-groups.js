@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Icon, LightBox, DualList } from '@cepave/owl-ui'
+import { Input, Button, Grid, Icon, LightBox, DualList, Flex } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import g from 'sass/global.scss'
 import s from './portal.scss'
@@ -240,31 +240,45 @@ const hostGroups = {
               </Button>
             </LightBox.Open>
             <LightBox.View>
-              <h2>Create HostGroup</h2>
-              <div class={[g.container]}>
-                <div class={[g.col2, s.lbText]}>Group Name</div>
-                <div class={[g.col10]}>
-                  <Input ref="newHostGroupName"></Input>
+              <div class={[s.lb]}>
+                <h2>Create HostGroup</h2>
+                <div>
+                  <Flex>
+                    <Flex.Col size="2">
+                      <div class={[s.lbText]}>Group Name</div>
+                    </Flex.Col>
+                    <Flex.Col size="10">
+                      <Input ref="newHostGroupName"></Input>
+                    </Flex.Col>
+                  </Flex>
+                  <Flex class={[s.dualBox]}>
+                    <Flex.Col size="2">
+                      <div class={[s.lbText]}>Hosts</div>
+                    </Flex.Col>
+                    <Flex.Col size="10">
+                      <DualList
+                        apiMode
+                        onInputchange={this.newHostsListHandle}
+                        onChange={this.newHostsSelectHandle}
+                        items={hosts}
+                        displayKey="endpoint"
+                        leftLoading={state.portal.hasEndpointLoading}
+                      />
+                    </Flex.Col>
+                  </Flex>
                 </div>
-              </div>
-              <div class={[s.dualBox]}>
-                <div class={[g.col2, s.lbText]}>Hosts</div>
-                <div class={[g.col10]}>
-                  <DualList
-                    apiMode
-                    onInputchange={this.newHostsListHandle}
-                    onChange={this.newHostsSelectHandle}
-                    items={hosts}
-                    displayKey="endpoint"
-                    leftLoading={state.portal.hasEndpointLoading}
-                  />
+                <div>
+                  <LightBox.Close class={[s.cancelBtn]}>
+                    <Flex class={[s.lbViewBox]}>
+                      <Flex.Col offset="8" size="2">
+                        <Button status="primaryOutline">Cancel</Button>
+                      </Flex.Col>
+                      <Flex.Col size="auto">
+                        <Button status="primary" class={[s.buttonAlignRight]} nativeOnClick={this.createHostGroup}>Save</Button>
+                      </Flex.Col>
+                    </Flex>
+                  </LightBox.Close>
                 </div>
-              </div>
-              <div class={[s.lbViewBox]}>
-                <LightBox.Close class={[s.cancelBtn]}>
-                  <Button status="primaryOutline">Cancel</Button>
-                </LightBox.Close>
-                <Button class={[g.col2]} status="primary" nativeOnClick={this.createHostGroup}>Save</Button>
               </div>
             </LightBox.View>
           </LightBox>
@@ -282,8 +296,14 @@ const hostGroups = {
             <p>You will remove this host group: <b>{state.portal.tempDeleteCandidate.name}</b>.</p>
             <p> Are you sure ?</p>
             <div class={[s.lbViewBox]}>
-              <Button class={[g.col6]} status="primary" nativeOnClick={(e) => this.submitDeleteHostGroupHandle(e, this)}>Yes</Button>
-              <Button class={[g.col6]} status="primaryOutline" nativeOnClick={(e) => this.$refs.lbDeleteHostGroupList.close(e)}>NO</Button>
+              <Flex>
+                <Flex.Col size="auto">
+                  <Button status="primary" class={[s.buttonBig]} nativeOnClick={(e) => this.submitDeleteHostGroupHandle(e, this)}>Yes</Button>
+                </Flex.Col>
+                <Flex.Col size="auto">
+                  <Button status="primaryOutline" class={[s.buttonBig]} nativeOnClick={(e) => this.$refs.lbDeleteHostGroupList.close(e)}>NO</Button>
+                </Flex.Col>
+              </Flex>
             </div>
           </LightBox.View>
         </LightBox>
