@@ -37,6 +37,7 @@ const Nav = {
               <dt><Icon typ="fold" />Setting</dt>
               <dd><Link to="/portal">Host Group</Link></dd>
               <dd><Link to="/user">User Group</Link></dd>
+              <dd><Link to="/template">Template</Link></dd>
             </dl>
           </div>
 
