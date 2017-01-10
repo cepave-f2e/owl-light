@@ -1,5 +1,6 @@
 import s from './aggregator.scss'
-import { Tab, Grid, Input, Button, Icon, LightBox } from '@cepave/owl-ui'
+import { Tab, Grid, Input, Button, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import Link from '~coms/link'
 
 const AggregatorPage = {
   name: 'AggregatorPage',
@@ -7,7 +8,7 @@ const AggregatorPage = {
     return {
       heads: [
         {
-          col: 'HostGroup id',
+          col: 'HostGroup name',
           width: '14%',
           sort: -1
         },
@@ -43,7 +44,8 @@ const AggregatorPage = {
       ],
       rowsRender() {},
       grpToEdit: {},
-      grpToRemove: 0
+      grpToRemove: 0,
+      currentHostGroupName: ''
     }
   },
   mounted() {
@@ -54,7 +56,7 @@ const AggregatorPage = {
   created() {
     this.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{row.grp_id}</Grid.Col>,
+        <Grid.Col>{this.currentHostGroupName}</Grid.Col>,
         <Grid.Col>{row.id}</Grid.Col>,
         <Grid.Col>{row.endpoint}</Grid.Col>,
         <Grid.Col>{row.metric}</Grid.Col>,
@@ -79,7 +81,7 @@ const AggregatorPage = {
         metric: this.$refs.metric.value,
         tags: this.$refs.tags.value,
         step: +this.$refs.step.value,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     duplicate(e, row) {
@@ -94,7 +96,7 @@ const AggregatorPage = {
         metric: this.$refs.dupliMetric.value,
         tags: this.$refs.dupliTags.value,
         step: +this.$refs.dupliStep.value,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     edit(e, row) {
@@ -111,23 +113,28 @@ const AggregatorPage = {
         metric: this.$refs.editMetric.value || grpToEdit.metric,
         tags: this.$refs.editTags.value || grpToEdit.tags,
         step: +this.$refs.editStep.value || grpToEdit.step,
-        hostgroup_id: this.$route.params.id
+        hostgroup_id: +this.$route.params.id
       })
     },
     delete(e, grpId) {
       this.grpToRemove = grpId
       this.$refs.deleteAggregator.open(e)
     },
-    deleteAggregator(grpId) {
+    deleteAggregator() {
       this.$store.dispatch('deleteAggregator', {
-        id: grpId
+        id: this.grpToRemove,
+        hostgroup_id: +this.$route.params.id
       })
+    },
+    newAggregator(e) {
+      this.$refs.newAggregator.open(e)
     }
   },
 
   render(h) {
-    const { heads, rowsRender, addAggregator, grpToEdit, editAggregator, deleteAggregator, duplicateAggregator } = this
+    const { heads, rowsRender, addAggregator, grpToEdit, editAggregator, deleteAggregator, duplicateAggregator, newAggregator } = this
     const { rows } = this.$store.state.aggregator
+    this.currentHostGroupName = this.$store.state.aggregator.currentHostGroupName
     const props = { heads, rowsRender, rows }
     return (
       <div class={[s.aggregatorPage]}>
@@ -137,13 +144,25 @@ const AggregatorPage = {
           </Tab.Head>
           <Tab.Content slot="tabContent" name="current hostgroup aggregators">
             <div class={[s.head]}>
-              <LightBox ref="newAggregator" closeOnClickMask closeOnESC>
-                <LightBox.Open class={[s.buttonPosition]}>
-                  <Button status="primary" class={[s.buttonIcon]}>
+              <Flex grids={24}>
+                <Flex.Col size="6">
+                  <Link to="/portal" class={[s.linkToPortal]}>
+                    <Button status="primary" class={[s.buttonIcon]}>
+                      <Icon typ="fold" size={16} class={[s.plus]} />
+                      Back to HostGroup List
+                    </Button>
+                </Link>
+                </Flex.Col>
+                <Flex.Col offset="14" size="5">
+                  <Button status="primary" class={[s.buttonIcon]} nativeOnClick={(e) => newAggregator(e)}>
                     <Icon typ="plus" size={16} class={[s.plus]} />
                     Add new aggregator
                   </Button>
-                </LightBox.Open>
+                </Flex.Col>
+              </Flex>
+
+              {/* create a new aggregator */}
+              <LightBox ref="newAggregator" class={[s.headlb]} closeOnClickMask closeOnESC>
                 <LightBox.View>
                   <p>Add a new aggregator</p>
                   <div class={[s.inputGroup]}>

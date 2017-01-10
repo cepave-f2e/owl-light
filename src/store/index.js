@@ -9,6 +9,7 @@ module.exports = new window.Vuex.Store({
     templateList: require('./template/list'),
     templateUpdate: require('./template/update'),
     profile: require('./profile'),
-    aggregator: require('./aggregator')
+    aggregator: require('./aggregator'),
+    portal: require('./portal'),
   }
 })
