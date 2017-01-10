@@ -15,7 +15,7 @@
 
 # OWL Light
 
-OWL Light is an Open-Falcon client-slide project.
+OWL Light is an [Open-Falcon](https://github.com/open-falcon) client-side project.
 
 ## Setup
 
