@@ -22,12 +22,6 @@ module.exports = new window.VueRouter({
       }
     },
     {
-      path: '/vuex',
-      component(resolve) {
-        require(['./containers/vuex-page'], resolve)
-      }
-    },
-    {
       path: '/user',
       component(resolve) {
         require(['./containers/user'], resolve)
