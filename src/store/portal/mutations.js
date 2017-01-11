@@ -43,12 +43,13 @@ module.exports = {
 
   },
 
+  // getHostGroupList
   'getHostGroupList.start'(state) {
-
+    state.searchHostGrooupLoading = true
   },
 
   'getHostGroupList.end'(state) {
-
+    state.searchHostGrooupLoading = false
   },
 
   'getHostGroupList.success'(state, { data }) {
@@ -59,12 +60,13 @@ module.exports = {
 
   },
 
+  // searchHostGroup
   'searchHostGroup.start'(state) {
-
+    state.searchHostGrooupLoading = true
   },
 
   'searchHostGroup.end'(state) {
-
+    state.searchHostGrooupLoading = false
   },
 
   'searchHostGroup.success'(state, { data }) {
@@ -83,12 +85,13 @@ module.exports = {
     state.tempDeleteCandidate = data
   },
 
+  // getHostsList
   'getHostsList.start'(state) {
-
+    state.getHostsListLoading = true
   },
 
   'getHostsList.end'(state) {
-
+    state.getHostsListLoading = false
   },
 
   'getHostsList.success'(state, { data }) {
@@ -113,6 +116,7 @@ module.exports = {
     state.hostInGroupList = data
   },
 
+  // deleteHostGroup
   'deleteHostGroup.start'(state) {
 
   },
@@ -146,8 +150,12 @@ module.exports = {
   },
 
   // Get PluginsList
-  'getBindPluginList.start'(state) {},
-  'getBindPluginList.end'(state) {},
+  'getBindPluginList.start'(state) {
+    state.getBindPluginListLoading = true
+  },
+  'getBindPluginList.end'(state) {
+    state.getBindPluginListLoading = false
+  },
   'getBindPluginList.success'(state, res) {
     state.pluginsList = res.data
   },

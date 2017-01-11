@@ -225,6 +225,7 @@ const hostGroups = {
                   <Input
                     ref="hostGroupSearchInput"
                     icon={['search', '#919799']}
+                    loading={state.portal.searchHostGrooupLoading}
                     nativeOnKeypress={this.searchInputHandler}
                     val={state.portal.searchHostGroupInput}
                     placeholder="Enter Host Group Name..."
@@ -321,7 +322,13 @@ const hostGroups = {
             <div class={[s.lbViewBox]}>
               <div class={[s.searchInput]}>
                 <div class={[s.inputGroups]}>
-                  <Input icon={['search', '#919799']} ref="searchHostList" placeholder="search hosts" nativeOnKeypress={this.searchHostList} />
+                  <Input
+                    icon={['search', '#919799']}
+                    ref="searchHostList"
+                    loading={state.portal.getHostsListLoading}
+                    placeholder="search hosts"
+                    nativeOnKeypress={this.searchHostList}
+                  />
                   <span class={[s.btnAppend]}>
                     <Button status="primary" nativeOnClick={this.searchHostList}>Search</Button>
                   </span>

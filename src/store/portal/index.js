@@ -7,6 +7,9 @@ module.exports = {
     hostGroups: [],
     hosts: [],
     hasEndpointLoading: true,
+    searchHostGrooupLoading: false,
+    getHostsListLoading: false,
+    getBindPluginListLoading: false,
     searchHostGroupInput: '.+',
     hostGroupListItems: [],
     hostList: {
@@ -63,7 +66,7 @@ module.exports = {
         })
     },
 
-    'addHostsIntoNewHostGroup'({ commit, state }, { id, hosts }) {
+    'addHostsIntoNewHostGroup'({ commit, state, dispatch }, { id, hosts }) {
       const opts = {
         method: 'post',
         url: 'hostgroup/host',
@@ -76,6 +79,9 @@ module.exports = {
       }
 
       return vfetch(opts)
+        .then((res) => {
+          dispatch('getHostGroupList')
+        })
     },
 
     'getHostGroupList'({ commit, state }) {
@@ -116,9 +122,9 @@ module.exports = {
       }
 
       return vfetch(opts)
-              .then((res) => {
-                commit('hostInGroupList', data)
-              })
+        .then((res) => {
+          commit('hostInGroupList', data)
+        })
     },
 
     'deleteHostGroup'({ commit, state, dispatch }, data) {
@@ -130,9 +136,9 @@ module.exports = {
       }
 
       return vfetch(opts)
-              .then((res) => {
-                dispatch('getHostGroupList')
-              })
+        .then((res) => {
+          dispatch('getHostGroupList')
+        })
     },
 
     'deleteHostFromGroup'({ commit, state, dispatch }, data) {
@@ -148,9 +154,9 @@ module.exports = {
       }
 
       return vfetch(opts)
-              .then((res) => {
-                dispatch('getHostsList', data)
-              })
+        .then((res) => {
+          dispatch('getHostsList', data)
+        })
     },
 
     // List Plugins
@@ -179,9 +185,9 @@ module.exports = {
       }
 
       return vfetch(opts)
-              .then((res) => {
-                dispatch('getBindPluginList', data)
-              })
+        .then((res) => {
+          dispatch('getBindPluginList', data)
+        })
     },
 
     'unbindPluginFromGroup'({ commit, state, dispatch }, data) {
@@ -193,9 +199,9 @@ module.exports = {
       }
 
       return vfetch(opts)
-              .then((res) => {
-                dispatch('getBindPluginList', data)
-              })
+        .then((res) => {
+          dispatch('getBindPluginList', data)
+        })
     },
 
     'searchHostList'({ commit, state }, data) {
@@ -205,16 +211,16 @@ module.exports = {
       }
 
       return fetch(opts)
-              .then((res) => {
-                commit('searchHostList.success', {
-                  data: res.data
-                })
-              })
-              .catch((err) => {
-                commit('searchHostList.fail', {
-                  err
-                })
-              })
+        .then((res) => {
+          commit('searchHostList.success', {
+            data: res.data
+          })
+        })
+        .catch((err) => {
+          commit('searchHostList.fail', {
+            err
+          })
+        })
     }
   },
   mutations: require('./mutations'),
