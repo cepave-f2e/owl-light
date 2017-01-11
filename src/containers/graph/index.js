@@ -176,46 +176,55 @@ const GraphView = {
 
     return (
       <div>
-        <Tab>
+        <Tab class={[s.tab]}>
           <Tab.Head slot="tabHead" isSelected name="graph">Graph</Tab.Head>
           <Tab.Content slot="tabContent" name="graph">
-            <div class={[g.flexSplit, s.submitSection]}>
-              <div class={[g.flex]}>
-                <span class={[s.vpoint]}>
-                  View Point
-                </span>
-                <Button.Group onChange={switchViewPoint} options={[
-                   { value: 'endpoint', title: 'Endpoint', selected: true },
-                   { value: 'counter', title: 'Counter' },
-                   { value: 'combo', title: 'Combo' },
-                ]} />
+            <Flex split class={[s.topCtrl]}>
+              <Flex.Col>
+                <Flex>
+                  <Flex.Col size="auto">
+                    <Flex mid>
+                      Start <DatePicker ref="startTime" onChange={onChangeStartTime} readOnly height={34} class={[s.picker]} opts={{
+                        max: new Date(),
+                        initialValue: new Date(graph.startTime * 1000),
+                      }} />
+                    </Flex>
+                  </Flex.Col>
+                  <Flex.Col size="auto">
+                    <Flex mid>
+                      End <DatePicker ref="endTime" onChange={onChangeEndTime} readOnly height={34} class={[s.picker]} opts={{
+                        max: new Date(),
+                        initialValue: new Date(graph.endTime * 1000),
+                      }} />
+                    </Flex>
+                  </Flex.Col>
+                  <Flex.Col size="auto">
+                    <Flex mid>
+                      Sampling
+                      <Select class={[s.sampling]} ref="sampling" options={samplingOptions} />
+                    </Flex>
+                  </Flex.Col>
+                </Flex>
+              </Flex.Col>
 
-                <div class={[g.flex, s.datePicker]}>
-                  <div class={[g.flexMid]}>
-                    Start <DatePicker ref="startTime" onChange={onChangeStartTime} readOnly height={34} class={[s.picker]} opts={{
-                      max: new Date(),
-                      initialValue: new Date(graph.startTime * 1000),
-                    }} />
-                  </div>
+              <Flex.Col>
+                <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>View Graph</Button>
+              </Flex.Col>
+            </Flex>
 
-                  <div class={[g.flexMid]}>
-                    End <DatePicker ref="endTime" onChange={onChangeEndTime} readOnly height={34} class={[s.picker]} opts={{
-                      max: new Date(),
-                      initialValue: new Date(graph.endTime * 1000),
-                    }} />
-                  </div>
-
-                  <div class={[g.flexMid]}>
-                    Sampling
-                    <Select ref="sampling" options={samplingOptions} />
-                  </div>
-                </div>
-              </div>
-              <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>View Graph</Button>
-            </div>
+            <Flex class={[s.submitSection]}>
+              <span class={[s.vpoint]}>
+                View Point
+              </span>
+              <Button.Group onChange={switchViewPoint} options={[
+                 { value: 'endpoint', title: 'Endpoint', selected: true },
+                 { value: 'counter', title: 'Counter' },
+                 { value: 'combo', title: 'Combo' },
+              ]} />
+            </Flex>
 
             <Flex class={[s.querySection]}>
-              <Flex.Col size="auto">
+              <Flex.Col size="6">
                 <h4>Search Endpoints</h4>
                 <DualList
                   ref="dualEndpoint"
@@ -227,7 +236,7 @@ const GraphView = {
                   onInputchange={getEndpoints}
                 />
               </Flex.Col>
-              <Flex.Col size="auto">
+              <Flex.Col size="6">
                 <h4>Search Counters</h4>
                 <DualList
                   apiMode
