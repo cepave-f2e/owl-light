@@ -1,5 +1,14 @@
 @import "~sass/global";
 
+.tab {
+  background: #fff;
+  padding-bottom: 40px;
+}
+
+.topCtrl {
+  margin: 20px;
+}
+
 .qDual {
   position: relative;
 }
@@ -79,13 +88,9 @@
   }
 }
 
-.datePicker {
-  margin-left: 16px;
-}
 
-.picker {
-  margin-left: 8px;
-  margin-right: 20px;
+.picker, .sampling {
+  margin-left: 4px;
 }
 
 @for $i from 1 through 4 {
