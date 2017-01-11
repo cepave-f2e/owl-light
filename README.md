@@ -18,7 +18,7 @@
 
 # OWL Light
 
-OWL Light is an [Open-Falcon](https://github.com/open-falcon) client-side project. It's based on[vue](https://github.com/vuejs/vue) and [vue-router](https://github.com/vuejs/vue-router) 2 worked as **SPA** (Single Page Application).
+OWL Light is an [Open-Falcon](https://github.com/open-falcon) client-side project. It's based on [vue](https://github.com/vuejs/vue) and [vue-router](https://github.com/vuejs/vue-router) 2 worked as **SPA** (Single Page Application).
 
 ## Setup
 
