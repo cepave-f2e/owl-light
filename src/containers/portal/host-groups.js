@@ -218,70 +218,76 @@ const hostGroups = {
     return (
       <div class={[s.hostGroupsContent]}>
         <div class={[s.searchInputWrapper]}>
-          <div class={[s.searchInput]}>
-            <div class={[s.inputGroups]}>
-              <Input
-                ref="hostGroupSearchInput"
-                icon={['search', '#919799']}
-                nativeOnKeypress={this.searchInputHandler}
-                val={state.portal.searchHostGroupInput}
-                placeholder="Enter Host Group Name..."
-              />
-              <span class={[s.btnAppend]}>
-                <Button status="primary" nativeOnClick={this.searchHostGroupNameHandler}>Search</Button>
-              </span>
-            </div>
-          </div>
-          <LightBox class={[s.createBtn]} closeOnClickMask closeOnESC width="788">
-            <LightBox.Open>
-              <Button status="primary" nativeOnClick={() => this.getEndpoints('.+')}>
-                <Icon class="create-icon" typ="plus" fill="#fff" size={18} />
-                Create HostGroups
-              </Button>
-            </LightBox.Open>
-            <LightBox.View>
-              <div class={[s.lb]}>
-                <h2>Create HostGroup</h2>
-                <div>
-                  <Flex>
-                    <Flex.Col size="2">
-                      <div class={[s.lbText]}>Group Name</div>
-                    </Flex.Col>
-                    <Flex.Col size="10">
-                      <Input ref="newHostGroupName"></Input>
-                    </Flex.Col>
-                  </Flex>
-                  <Flex class={[s.dualBox]}>
-                    <Flex.Col size="2">
-                      <div class={[s.lbText]}>Hosts</div>
-                    </Flex.Col>
-                    <Flex.Col size="10">
-                      <DualList
-                        apiMode
-                        onInputchange={this.newHostsListHandle}
-                        onChange={this.newHostsSelectHandle}
-                        items={hosts}
-                        displayKey="endpoint"
-                        leftLoading={state.portal.hasEndpointLoading}
-                      />
-                    </Flex.Col>
-                  </Flex>
-                </div>
-                <div>
-                  <LightBox.Close class={[s.cancelBtn]}>
-                    <Flex class={[s.lbViewBox]}>
-                      <Flex.Col offset="8" size="2">
-                        <Button status="primaryOutline">Cancel</Button>
-                      </Flex.Col>
-                      <Flex.Col size="auto">
-                        <Button status="primary" class={[s.buttonAlignRight]} nativeOnClick={this.createHostGroup}>Save</Button>
-                      </Flex.Col>
-                    </Flex>
-                  </LightBox.Close>
+          <Flex split>
+            <Flex.Col>
+              <div class={[s.searchInput]}>
+                <div class={[s.inputGroups]}>
+                  <Input
+                    ref="hostGroupSearchInput"
+                    icon={['search', '#919799']}
+                    nativeOnKeypress={this.searchInputHandler}
+                    val={state.portal.searchHostGroupInput}
+                    placeholder="Enter Host Group Name..."
+                  />
+                  <span class={[s.btnAppend]}>
+                    <Button status="primary" nativeOnClick={this.searchHostGroupNameHandler}>Search</Button>
+                  </span>
                 </div>
               </div>
-            </LightBox.View>
-          </LightBox>
+            </Flex.Col>
+            <Flex.Col>
+              <LightBox closeOnClickMask closeOnESC width="788">
+                <LightBox.Open>
+                  <Button status="primary" nativeOnClick={() => this.getEndpoints('.+')}>
+                    <Icon class="create-icon" typ="plus" fill="#fff" size={18} />
+                    Create HostGroups
+                  </Button>
+                </LightBox.Open>
+                <LightBox.View>
+                  <div class={[s.lb]}>
+                    <h2>Create HostGroup</h2>
+                    <div>
+                      <Flex>
+                        <Flex.Col size="2">
+                          <div class={[s.lbText]}>Group Name</div>
+                        </Flex.Col>
+                        <Flex.Col size="10">
+                          <Input ref="newHostGroupName"></Input>
+                        </Flex.Col>
+                      </Flex>
+                      <Flex class={[s.dualBox]}>
+                        <Flex.Col size="2">
+                          <div class={[s.lbText]}>Hosts</div>
+                        </Flex.Col>
+                        <Flex.Col size="10">
+                          <DualList
+                            apiMode
+                            onInputchange={this.newHostsListHandle}
+                            onChange={this.newHostsSelectHandle}
+                            items={hosts}
+                            displayKey="endpoint"
+                            leftLoading={state.portal.hasEndpointLoading}
+                          />
+                        </Flex.Col>
+                      </Flex>
+                    </div>
+                    <div>
+                      <LightBox.Close class={[s.cancelBtn]}>
+                        <Flex class={[s.lbViewBox]}>
+                          <Flex.Col offset="8" size="2">
+                            <Button status="primaryOutline">Cancel</Button>
+                          </Flex.Col>
+                          <Flex.Col size="auto">
+                            <Button status="primary" class={[s.buttonAlignRight]} nativeOnClick={this.createHostGroup}>Save</Button>
+                          </Flex.Col>
+                        </Flex>
+                      </LightBox.Close>
+                    </div>
+                  </div>
+                </LightBox.View>
+              </LightBox>
+            </Flex.Col>
+          </Flex>
         </div>
 
         <div class={[s.gridWrapper]}>
