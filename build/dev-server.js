@@ -1,5 +1,7 @@
 require('./check-versions')()
 const config = require('../config')
+const pkg = require('../package.json')
+
 if (!process.env.NODE_ENV) process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 const path = require('path')
 const express = require('express')
@@ -58,12 +60,23 @@ app.use(hotMiddleware)
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
+
+const cli = require('commander')
+
+cli
+  .version(pkg.version)
+  .option('-o, --open', 'Open browser')
+  .parse(process.argv);
+
 module.exports = app.listen(port, function (err) {
   if (err) {
     console.log(err)
     return
   }
   const uri = 'http://0.0.0.0:' + port
-  require('open')(uri)
+
+  if (cli.open) {
+    require('open')(uri)
+  }
   console.log('Listening at ' + uri + '\n')
 })
