@@ -371,7 +371,7 @@ const TemplatePage = {
     }
 
     return (
-      <div>
+      <div class={[s.templatePage]}>
         <Tab>
           <Tab.Head slot="tabHead" name="profile" isSelected={true}>编辑告警模板</Tab.Head>
           <Tab.Content slot="tabContent" name="template">
