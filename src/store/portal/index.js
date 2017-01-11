@@ -66,7 +66,7 @@ module.exports = {
         })
     },
 
-    'addHostsIntoNewHostGroup'({ commit, state }, { id, hosts }) {
+    'addHostsIntoNewHostGroup'({ commit, state, dispatch }, { id, hosts }) {
       const opts = {
         method: 'post',
         url: 'hostgroup/host',
@@ -79,6 +79,9 @@ module.exports = {
       }
 
       return vfetch(opts)
+              .then((res) => {
+                dispatch('getHostGroupList')
+              })
     },
 
     'getHostGroupList'({ commit, state }) {
