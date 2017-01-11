@@ -30,7 +30,9 @@ module.exports = {
       <div id="app" class={[s.app, classes]}>
         <Nav />
         <div class={[s.main]}>
-          <router-view />
+          <keep-alive>
+            <router-view />
+          </keep-alive>
         </div>
       </div>
     )
