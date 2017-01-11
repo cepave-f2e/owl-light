@@ -11,15 +11,33 @@ const Nav = {
           <Icon typ="brand-circle" size={40} />
         </div>
 
-        <div class={[s.linkIcon]}>
+        {/* <div class={[s.linkIcon]}>
           <Link to="/alarm">
-            <Icon typ="alarm" />
+            <Icon typ="alarm-1" />
+          </Link>
+        </div> */}
+
+        <div class={[s.linkIcon]}>
+          <Link to="/graph">
+            <Icon typ="linechart-1" />
           </Link>
         </div>
 
         <div class={[s.linkIcon]}>
-          <Link to="/graph">
-            <Icon typ="graph" />
+          <Link to="/portal">
+            <Icon typ="host-1" />
+          </Link>
+        </div>
+
+        <div class={[s.linkIcon]}>
+          <Link to="/user">
+            <Icon typ="user-group-1" />
+          </Link>
+        </div>
+
+        <div class={[s.linkIcon]}>
+          <Link to="/template">
+            <Icon typ="template" />
           </Link>
         </div>
 
@@ -27,18 +45,12 @@ const Nav = {
 
           <div class={[s.linkIcon]}>
             <Link to="/profile">
-              <Icon typ="user-group" />
+              <Icon typ="person" />
             </Link>
           </div>
 
           <div class={[s.linkIcon, s.isBottom]}>
-            <Icon typ="gear" />
-            <dl>
-              <dt><Icon typ="fold" />Setting</dt>
-              <dd><Link to="/portal">Host Group</Link></dd>
-              <dd><Link to="/user">User Group</Link></dd>
-              <dd><Link to="/template">Template</Link></dd>
-            </dl>
+            <Icon typ="gear-1" />
           </div>
 
         </div>
