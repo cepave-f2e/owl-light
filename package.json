@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@cepave/owl-ui": "^0.3.3",
+    "@cepave/owl-ui": "^0.4.1",
     "delegate-to": "^0.1.2"
   },
   "devDependencies": {
