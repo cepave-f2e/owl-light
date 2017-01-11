@@ -69,6 +69,6 @@ module.exports = new window.VueRouter({
         require(['./containers/aggregator'], resolve)
       }
     },
-    { path: '*', redirect: '/alarm' },
+    { path: '*', redirect: '/graph' },
   ],
 })
