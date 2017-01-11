@@ -4,11 +4,8 @@ machine:
 
 test:
   override:
-    - case $CIRCLE_NODE_INDEX in 0) npm run lint ;; 1) npm run build ;; esac:
+    - node scripts/parallel-test:
         parallel: true
-  post:
-    - npm test
-    - npm run codecov
 
 deployment:
   release:
@@ -18,7 +15,8 @@ deployment:
       - git config --global user.name "CircleCI"
       - echo -e "cepave\n${NPM_PASSWD}\nrwu@cepave.com" | npm login
       - npm run build
-      - npm run deploy
+#      deploy
+      - node scripts/git-tags
 
 general:
   branches:

@@ -14,10 +14,8 @@
   "scripts": {
     "dev": "babel-node build/dev-server.js",
     "build": "babel-node build/build.js",
-    "test": "jest --coverage",
     "lint": "eslint src test && stylelint src/**/*.scss --syntax scss",
-    "codecov": "curl -s https://codecov.io/bash | bash",
-    "deploy": "babel-node scripts/git-tags"
+    "test": "jest --coverage"
   },
   "jest": {
     "testPathDirs": [
