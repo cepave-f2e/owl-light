@@ -1,5 +1,5 @@
 // http://router.vuejs.org/en/advanced/lazy-loading.html
-module.exports = new window.VueRouter({
+const router = new window.VueRouter({
   mode: 'hash',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
@@ -66,3 +66,13 @@ module.exports = new window.VueRouter({
     { path: '*', redirect: '/graph' },
   ],
 })
+
+/**
+ * TODO
+ * Reset Vuex's state, probably do in the scope. need more research.
+ */
+router.beforeEach((to, from, next) => {
+  next()
+})
+
+module.exports = router
