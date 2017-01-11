@@ -7,6 +7,9 @@ module.exports = {
     hostGroups: [],
     hosts: [],
     hasEndpointLoading: true,
+    searchHostGrooupLoading: false,
+    getHostsListLoading: false,
+    getBindPluginListLoading: false,
     searchHostGroupInput: '.+',
     hostGroupListItems: [],
     hostList: {

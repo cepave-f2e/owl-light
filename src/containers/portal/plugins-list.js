@@ -106,6 +106,7 @@ const pluginsList = {
           <div class={[s.inputGroups]}>
             <Input
               ref="pluginBindInput"
+              loading={$store.state.portal.getBindPluginListLoading}
               nativeOnKeypress={(e) => this.bindInputHandler(e)}
             />
             <span class={[s.btnAppend]}>
