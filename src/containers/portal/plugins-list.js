@@ -48,7 +48,7 @@ const pluginsList = {
                 data-id={row.id}
                 onClick={this.unbindPluginHandler}
               >
-                Unbind
+                Delete
               </a>
             </li>
           </ul>
