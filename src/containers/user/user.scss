@@ -1,8 +1,10 @@
 @import "~sass/colors";
+
 .contactPage {
   background: #fff;
   font-size: 14px;
 }
+
 .contactSearchWrapper {
   padding: 12px 24px;
   position: relative;
@@ -15,9 +17,14 @@
     }
   }
 }
+
 .contactWrapper {
   padding: 20px 24px;
-  background: #e6ebf0;
+  background: $colorGrayLighter;
+}
+
+.gridWrapperBox {
+  background: #fff;
 }
 
 .buttonIcon {

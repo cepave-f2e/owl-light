@@ -8,7 +8,7 @@ const UserGroup = {
       heads: [
         {
           col: 'User group name',
-          width: '35.7%',
+          width: '30.7%',
           sort: -1
         },
         {
@@ -23,7 +23,7 @@ const UserGroup = {
         },
         {
           col: 'Opeartions',
-          width: '15.4%'
+          width: '20.4%'
         }
       ],
       userGroupData: {
@@ -175,7 +175,9 @@ const UserGroup = {
           </LightBox>
         </div>
         <div class={[s.contactWrapper]}>
-          <Grid { ...{ props } } />
+          <div class={[s.gridWrapperBox]}>
+            <Grid { ...{ props } } />
+          </div>
         </div>
         <LightBox ref="editGroup" closeOnClickMask closeOnESC>
           <LightBox.View>

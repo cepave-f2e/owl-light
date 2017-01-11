@@ -76,7 +76,9 @@ const UserList = {
           </div>
         </div>
         <div class={[s.contactWrapper]}>
-          <Grid { ...{ props } } />
+          <div class={[s.gridWrapperBox]}>
+            <Grid { ...{ props } } />
+          </div>
         </div>
       </div>
     )
