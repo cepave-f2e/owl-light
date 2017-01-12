@@ -4,18 +4,40 @@ const { _, $ } = window
 const Select2 =  {
   name: 'Select2',
   props: {
-    setMetric: { tyep: Function },
-    options: { type: Array, default: [] },
-    value: {},
-    class: { type: String, default: 'myselect' },
-    setclass: { type: String, default: 'myselect_back' },
-    accpetTag: { type: Boolean, default: false }
+    setMetric: {
+      type: Function
+    },
+    options: {
+      type: Array,
+      default: () => {
+        return []
+      }
+    },
+    value: {
+      type: [String, Number]
+    },
+    class: {
+      type: String,
+      default: 'myselect'
+    },
+    setclass: {
+      type: String,
+      default: 'myselect_back'
+    },
+    accpetTag: {
+      type: Boolean,
+      default: false
+    },
+    placeholder: {
+      type: String,
+      default: ''
+    }
   },
   data() {
     return {
       select2Base: {
         tags: this.accpetTag,
-        placeholder: '请选择',
+        placeholder: this.placeholder,
         allowClear: true
       }
     }
@@ -49,12 +71,15 @@ const Select2 =  {
     $(this.$el).off().select2('destroy')
   },
   render(h) {
+    const { placeholder } = this
     return (
       <select class={this.class} back={this.setclass}>
-        <option value="0" selected="selected" disabled> 请选择 </option>
-        {this.options.map((option) => {
-          return (<option value={option.id}> { option.text } </option>)
-        })}
+        <option value="0" selected="selected" disabled>{placeholder}</option>
+        {
+          this.options.map((option) => {
+            return <option value={option.id}>{option.text}</option>
+          })
+        }
       </select>
     )
   }
