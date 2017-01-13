@@ -1,4 +1,5 @@
-import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox } from '@cepave/owl-ui'
+import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox, Flex, Select } from '@cepave/owl-ui'
+import Link from '~coms/link'
 import s from '../template.scss'
 import u from '../../user/user.scss'
 import Select2 from '../common/select2'
@@ -8,7 +9,7 @@ const gridBase = {
   heads: [
     {
       width: '30%',
-      col: '监控项/标签/备忘',
+      col: 'Metric/Tag/Note',
       render(h, head) {
         return (
           <b>{head.col}</b>
@@ -17,11 +18,11 @@ const gridBase = {
     },
     {
       width: '15%',
-      col: '条件'
+      col: 'Condition'
     },
     {
       width: '10%',
-      col: 'max'
+      col: 'Max'
     },
     {
       width: '10%',
@@ -29,11 +30,11 @@ const gridBase = {
     },
     {
       width: '10%',
-      col: 'run'
+      col: 'Run'
     },
     {
       width: '25%',
-      col: 'operation'
+      col: 'Operation'
     }
   ],
   rowsRender() {},
@@ -56,6 +57,14 @@ const TemplatePage = {
       updateStrategyError: [],
       newStrategyError: [],
       strategyId: 0,
+      opOptions: [
+        { value: '==', title: '==', selected: true },
+        { value: '!=', title: '!=' },
+        { value: '<', title: '<' },
+        { value: '<=', title: '<=' },
+        { value: '>', title: '>' },
+        { value: '>=', title: '>=' },
+      ],
     }
   },
   created() {
@@ -69,8 +78,10 @@ const TemplatePage = {
         <Grid.Col>{row[3].col}</Grid.Col>,
         <Grid.Col>{row[4].col}</Grid.Col>,
         <Grid.Col>
-          <a href="" sid={row[5].col} saction="update" onClick={(e) => this.getStragtegy(e, this)}>更新</a>
-          <a href="" sid={row[5].col} saction="delete" onClick={(e) => this.deleteStrategyLink(e, this)}>删除</a>
+          <div class={[u.opeartionInline]}>
+            <span class={[u.opeartions]} sid={row[5].col} saction="update" onClick={(e) => this.getStragtegy(e, this)}>Edit</span>
+            <span class={[u.opeartions]} sid={row[5].col} saction="delete" onClick={(e) => this.deleteStrategyLink(e, this)}>Delete</span>
+          </div>
         </Grid.Col>,
       ]
     }
@@ -249,6 +260,7 @@ const TemplatePage = {
       options: $store.state.templateUpdate.metrics,
       value: $store.state.templateUpdate.ustrategy.metric,
       class: s.inputMetric,
+      placeholder: 'Select a metric',
       accpetTag: true,
     }
     const { tags, priority, func, op, note, id, metric  } = $store.state.templateUpdate.ustrategy
@@ -260,36 +272,71 @@ const TemplatePage = {
     const UpdateStrategyView = (
       <LightBox ref="LStragtegy" closeOnClickMask closeOnESC>
         <LightBox.View>
-          <div class="displayError" ref="updateStrategyError">
-            {this.updateStrategyError.map((o) => {
-              return (
-                <div style="display: flex;">
-                  <Label typ="tag" status="error">{o}</Label>
+          <div class={[s.formWrapper]}>
+            <Flex>
+              <Flex.Col size="6">
+                <p>Metric</p>
+                <div>
+                  <input class='newInputMetric' type="hidden" ref="newMetric"></input>
+                  <Select2 {...{ props: { ...merticProps } } }  />
                 </div>
-              )
-            })}
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>Tags</p>
+                <Input class={[s.inputGrid6]} placeholder="tags" val={tags} ref="updateTags" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="6">
+                <p>run begin</p>
+                <Input class={[s.inputGrid6]} placeholder="run begin: 00:00" val={runBegin} ref="updateRunBegin" />
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>run end</p>
+                <Input class={[s.inputGrid6]} placeholder="run end: 00:00" val={runEnd} ref="updateRunEnd" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="6">
+                <p>Max</p>
+                <Input class={[s.inputGrid6]} placeholder="max" val={maxStep} ref="updateMaxStep" />
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>P</p>
+                <Input class={[s.inputGrid6]} placeholder="p" val={priority} ref="updatePriority" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="4">
+                <p>Function</p>
+                <Input placeholder="func" val={func} ref="updateFunc" />
+              </Flex.Col>
+              <Flex.Col size="3">
+                <p>Op</p>
+                {/* <Select options={this.opOptions} ref="newOp" class={[s.inputGrid4]} /> */}
+                <Input class={[s.inputGrid4]} placeholder="op" val={op} ref="updateOp" />
+              </Flex.Col>
+              <Flex.Col size="5">
+                <p>Right Value</p>
+                <Input class={[s.inputGrid5]} placeholder="reght value" val={rightValue} ref="updateRightValue" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="12">
+                <p>Notes</p>
+                <Input class={[s.inputGrid12]} placeholder="note" val={note} ref="updateNote" />
+              </Flex.Col>
+            </Flex>
           </div>
-          <input class={s.inputA} placeholder="id" type="hidden" value={id.toString()} ref="updateId" />
-          <input class='updateInputMetric' type="hidden" value={metric} ref="updateMetric"></input>
-          <Select2 {...{ props: { setclass: 'updateInputMetric', ...merticProps } } } />
-          <div style="display: flex;">
-            <input class={s.inputA} placeholder="tags" value={tags} ref="updateTags" />
-            <input class={s.inputA} placeholder="max" value={maxStep.toString()} ref="updateMaxStep" />
-            <input class={s.inputA} placeholder="p" value={priority.toString()} ref="updatePriority" />
+          <div>
+            <Flex>
+              <Flex.Col size="2" offset="10">
+                <Button status="primary" nativeOn-click={(e) => this.updateMetric(e, this)}>
+                  Save
+                </Button>
+              </Flex.Col>
+            </Flex>
           </div>
-          <div style="display: flex;">
-            <input class={s.inputA} placeholder="func" value={func} ref="updateFunc" />
-            <input class={s.inputA} placeholder="op" value={op} ref="updateOp" />
-            <input class={s.inputA} placeholder="reght value" value={rightValue} ref="updateRightValue" />
-          </div>
-          <div style="display: flex;">
-            <input class={[s.inputA]} placeholder="run begin" value={runBegin} ref="updateRunBegin" />
-            <input class={s.inputA} placeholder="run end" value={runEnd} ref="updateRunEnd" />
-            <input class={s.inputA} placeholder="note" value={note} ref="updateNote" />
-          </div>
-          <Button status="primary" nativeOn-click={(e) => this.updateMetric(e, this)}>
-            储存
-          </Button>
         </LightBox.View>
       </LightBox>
     )
@@ -298,41 +345,77 @@ const TemplatePage = {
       value: '',
       class: s.inputMetric,
       setclass: 'newInputMetric',
+      placeholder: 'Select a metric',
       accpetTag: true,
     }
     //NewStrategyView
     const NewStrategyView = (
       <LightBox ref="NStragtegy" closeOnClickMask closeOnESC>
         <LightBox.View>
-          <div class="displayError" ref="newStrategyError">
-            {this.newStrategyError.map((o) => {
-              return (
-                <div style="display: flex;">
-                  <Label typ="tag" status="error">{o}</Label>
+          <div class={[s.formWrapper]}>
+            <Flex>
+              <Flex.Col size="6">
+                <p>Metric</p>
+                <div>
+                  <input class='newInputMetric' type="hidden" ref="newMetric"></input>
+                  <Select2 {...{ props: { ...newMerticProps } } }  />
                 </div>
-              )
-            })}
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>Tags</p>
+                <Input class={[s.inputGrid6]} placeholder="tags" ref="newTags" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="6">
+                <p>run begin</p>
+                <Input class={[s.inputGrid6]} placeholder="run begin: 00:00" ref="newRunBegin" />
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>run end</p>
+                <Input class={[s.inputGrid6]} placeholder="run end: 00:00" ref="newRunEnd" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="6">
+                <p>Max</p>
+                <Input class={[s.inputGrid6]} placeholder="max" ref="newMaxStep" />
+              </Flex.Col>
+              <Flex.Col size="6">
+                <p>P</p>
+                <Input class={[s.inputGrid6]} placeholder="p" ref="newPriority" />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="4">
+                <p>Function</p>
+                <Input placeholder="func" ref="newFunc" />
+              </Flex.Col>
+              <Flex.Col size="3">
+                <p>Op</p>
+                <Select options={this.opOptions} ref="newOp" class={[s.inputGrid4]} />
+              </Flex.Col>
+              <Flex.Col size="5">
+                <p>Right Value</p>
+                <Input placeholder="reght value" ref="newRightValue" class={[s.inputGrid5]} />
+              </Flex.Col>
+            </Flex>
+            <Flex>
+              <Flex.Col size="12">
+                <p>Notes</p>
+                <Input class={[s.inputGrid12]} placeholder="note" ref="newNote" />
+              </Flex.Col>
+            </Flex>
           </div>
-          <input class='newInputMetric' type="hidden" ref="newMetric"></input>
-          <Select2 {...{ props: { ...newMerticProps } } }  />
-          <div style="display: flex;">
-            <input class={s.inputA} placeholder="tags" ref="newTags" />
-            <input class={s.inputA} placeholder="max" ref="newMaxStep" />
-            <input class={s.inputA} placeholder="p" ref="newPriority" />
+          <div>
+            <Flex>
+              <Flex.Col size="2" offset="10">
+                <Button status="primary" nativeOn-click={(e) => this.newMetric(e, this)}>
+                  Save
+                </Button>
+              </Flex.Col>
+            </Flex>
           </div>
-          <div style="display: flex;">
-            <input class={s.inputA} placeholder="func" ref="newFunc" />
-            <input class={s.inputA} placeholder="op" ref="newOp" />
-            <input class={s.inputA} placeholder="reght value" ref="newRightValue" />
-          </div>
-          <div style="display: flex;">
-            <input class={s.inputA} placeholder="run begin" ref="newRunBegin" />
-            <input class={s.inputA} placeholder="run end" ref="newRunEnd" />
-            <input class={s.inputA} placeholder="note" ref="newNote" />
-          </div>
-          <Button status="primary" nativeOn-click={(e) => this.newMetric(e, this)}>
-            储存
-          </Button>
         </LightBox.View>
       </LightBox>
     )
@@ -360,6 +443,7 @@ const TemplatePage = {
       pid: $store.state.templateUpdate.parent.id,
       class: 'newParentSelect',
       setclass: 'newParent',
+      placeholder: 'Select a template',
       accpetTag: false,
     }
     const teamProps = {
@@ -373,57 +457,70 @@ const TemplatePage = {
     return (
       <div class={[s.templatePage]}>
         <Tab>
-          <Tab.Head slot="tabHead" name="profile" isSelected={true}>编辑告警模板</Tab.Head>
-          <Tab.Content slot="tabContent" name="template">
+          <Tab.Head slot="tabHead" name="profile" isSelected={true}>Edit Template</Tab.Head>
+          <Tab.Content slot="tabContent" name="template" class={[s.templatePage]}>
             <div class={[u.contactWrapper, s.lightDivButtom]} style="top: 0px">
-              <div style="display: flex">
-                <div style="width: 150px;">
-                  name: <Label  typ="tag">{props.tname}</Label>
-                </div>
-                <div style="display: flex; min-width: 350px;" class={s.newParentSelectDiv}>
-                  parent: <input type="hidden" class='newParent' placeholder="请输入模板名称" ref="updateParent" value={tplProps.pid}></input>
-                  <Select2 { ...{ props: tplProps } } />
-                  <div class={s.updateTplButDiv}>
+              <div class={[s.nameGroup]}>
+                <Flex class={[s.flexWrapper]}>
+                  <Flex.Col size="4">
+                    <span class={[s.title]}>name:</span>
+                    <Label typ="tag">{props.tname}</Label>
+                  </Flex.Col>
+                  <Flex.Col size="7">
+                    <span class={[s.title]}>parent:</span>
+                    <input type="hidden" class='newParent' placeholder="请输入模板名称" ref="updateParent" value={tplProps.pid}></input>
+                    <Select2 { ...{ props: tplProps } } />
+                  </Flex.Col>
+                  <Flex.Col size="1">
                     <Button status="primary" nativeOn-click={(m) => this.SaveTemplate(m, this)}>
-                      储存
+                      Save
                     </Button>
+                  </Flex.Col>
+                </Flex>
+              </div>
+              <div class={[s.templateGroup]}>
+                <Flex class={[s.flexWrapper]}>
+                  <Flex.Col size="11">
+                    <p class={[s.templateTitle]}>报警接收组(在UIC中管理报警组，快捷入口):</p>
+                    <div class={[s.questionBlock]}>
+                      <input class='newTeam' type="hidden" placeholder="告警组" ref="updateTeam" value={props.uics}></input>
+                      <Select2Muti { ...{ props: teamProps } } />
+                    </div>
+                  </Flex.Col>
+                  <Flex.Col size="1">
+                    <Button status="primary" nativeOn-click={(m) => this.SaveAction(m, this)}>
+                      Save
+                    </Button>
+                  </Flex.Col>
+                </Flex>
+                <div>
+                  <p class={[s.templateTitle]}>callback地址(只支持http get方式回调):</p>
+                  <div class={[s.questionBlock]}>
+                    <Input class={s.searchInput} name="q" placeholder="callback url" val={props.action.url} ref="action.url" />
+                  </div>
+                  <div class={[s.questionBlock]}>
+                    <Checkbox.Group onChange={this.getCheckboxData}>
+                      <Checkbox name="1" checked={props.action.before_callback_sms} >回调之前发提醒短信</Checkbox>
+                      <Checkbox name="2" checked={props.action.before_callback_mail} >回调之前发提醒邮件</Checkbox>
+                      <Checkbox name="3" checked={props.action.after_callback_sms} >回调之后发结果短信</Checkbox>
+                      <Checkbox name="4" checked={props.action.after_callback_mail} >回调之后发结果邮件</Checkbox>
+                    </Checkbox.Group>
                   </div>
                 </div>
               </div>
-              <div>
-                <div>
-                  <h4>def alarm(): #配置了UIC组才会发报警</h4>
-                  报警接收组（在UIC中管理报警组，快捷入口）：
-                  <input class='newTeam' type="hidden" placeholder="告警组" ref="updateTeam" value={props.uics}></input>
-                  <Select2Muti { ...{ props: teamProps } } />
-                </div>
-                <div>
-                  <h4>def callback(): #高级用法，配置了callback地址才会触发回调</h4>
-                  callback地址（只支持http get方式回调）：
-                  <input class={s.searchInput} name="q" placeholder="callback url" value={props.action.url} ref="action.url" />
-                  <Checkbox.Group onChange={this.getCheckboxData}>
-                    <Checkbox name="1" checked={props.action.before_callback_sms} >回调之前发提醒短信</Checkbox>
-                    <Checkbox name="2" checked={props.action.before_callback_mail} >回调之前发提醒邮件</Checkbox>
-                    <Checkbox name="3" checked={props.action.after_callback_sms} >回调之后发结果短信</Checkbox>
-                    <Checkbox name="4" checked={props.action.after_callback_mail} >回调之后发结果邮件</Checkbox>
-                  </Checkbox.Group>
-                </div>
-                <Button status="primary" nativeOn-click={(m) => this.SaveAction(m, this)}>
-                  储存
-                </Button>
-              </div>
             </div>
           </Tab.Content>
-          <Tab.Head slot="tabHead" name="profile" >编辑告警策略</Tab.Head>
+          <Tab.Head slot="tabHead" name="profile" >Edit Strategy</Tab.Head>
           <Tab.Content slot="tabContent" name="template">
             <div>
               <div class={[u.contactSearchWrapper]}>
-                <a href="/#/template">
-                  <Button class={s.submitButton}status="primary">回模板列表</Button>
-                </a>
+                <Button class={[s.submitButton]} status="primary">
+                  <Icon fill="#fff" typ="fold" size={16} />
+                  <Link class={[s.link]} to="/template">Back to Template List</Link>
+                </Button>
                 <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNewStragtegy(e, this) }>
-                  <Icon typ="plus" size={16} />
-                    新增策略
+                  <Icon fill="#fff" typ="plus" size={16} />
+                    Add new strategy
                 </Button>
                 {UpdateStrategyView}
                 {NewStrategyView}
@@ -434,7 +531,9 @@ const TemplatePage = {
                   <Label  typ="tag">{props.tname}</Label>
                 </div>
                 { $slots.default }
-                <Grid {...{ props }} />
+                <div class={[u.gridWrapperBox]}>
+                  <Grid {...{ props }} />
+                </div>
               </div>
             </div>
           </Tab.Content>

@@ -1,4 +1,5 @@
-import { Tab, Input, Button, Grid, Icon, LightBox } from '@cepave/owl-ui'
+import { Tab, Input, Button, Grid, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import Link from '~coms/link'
 import s from '../template.scss'
 import u from '../../user/user.scss'
 const { _ } = window
@@ -11,7 +12,7 @@ const TemplatePage = {
       gridData: {
         heads: [
           {
-            col: '模板名称',
+            col: 'Template Name',
             sort: -1,
             width: '25%',
             render(h, head) {
@@ -21,18 +22,18 @@ const TemplatePage = {
             }
           },
           {
+            col: 'Parent',
+            sort: -1,
             width: '25%',
-            sort: -1,
-            col: 'parent'
           },
           {
+            col: 'Creator',
+            sort: -1,
             width: '20%',
-            sort: -1,
-            col: '建立者'
           },
           {
+            col: 'Opeartions',
             width: '30%',
-            col: '操作'
           }
         ],
         rowsRender() {},
@@ -47,8 +48,10 @@ const TemplatePage = {
         <Grid.Col>{row[1].col}</Grid.Col>,
         <Grid.Col>{row[2].col}</Grid.Col>,
         <Grid.Col>
-          <a href={row[3].col[0]}>更新</a>
-          <a href="" tip={row[3].col[1]} onClick={(e) => this.deleteTemplateLink(e)}>删除</a>
+          <div class={[u.opeartionInline]}>
+            <a class={[u.opeartions]} href={row[3].col[0]}>Edit</a>
+            <span class={[u.opeartions]} tip={row[3].col[1]} onClick={(e) => this.deleteTemplateLink(e)}>Delete</span>
+          </div>
         </Grid.Col>,
       ]
     }
@@ -107,10 +110,16 @@ const TemplatePage = {
       <LightBox ref="NTemplate" closeOnClickMask closeOnESC>
         <LightBox.View>
           <h3>新增模板</h3>
-          <input class='newName' placeholder="name" ref="tplName"></input>
-          <Button status="primary" nativeOn-click={(e) => this.createTemplate(e, this)}>
-            储存
-          </Button>
+          <Flex class={[s.flexWrapper]}>
+            <Flex.Col size="10">
+              <Input class={[s.searchTemplate]} placeholder="name" ref="tplName" />
+            </Flex.Col>
+            <Flex.Col size="2">
+              <Button status="primary" nativeOn-click={(e) => this.createTemplate(e, this)}>
+                储存
+              </Button>
+            </Flex.Col>
+          </Flex>
         </LightBox.View>
       </LightBox>
     )
@@ -140,7 +149,7 @@ const TemplatePage = {
             <div>
               <div class={[u.contactSearchWrapper]}>
                 <div style="display: flex;">
-                  <Input class={s.searchInput} name="q" icon={['search', '#919799']} status="normal" placeholder="输入模板关键字查询" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
+                  <Input class={s.searchTemplate} name="q" icon={['search', '#919799']} status="normal" placeholder="输入模板关键字查询" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
                   <Button class={s.submitButton} status="primary" nativeOn-click={(e) => this.submitQuery(e)} >Submit</Button>
                   <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNTemplate(e, this)}>
                     <Icon typ="plus" size={16} />
@@ -149,8 +158,10 @@ const TemplatePage = {
                 </div>
               </div>
               <div class={[u.contactWrapper]}>
-                { $slots.default }
-                <Grid {...{ props }} />
+                <div class={[u.gridWrapperBox]}>
+                  { $slots.default }
+                  <Grid {...{ props }} />
+                </div>
               </div>
               {NewTemplateView}
               {DeleteTemplateView}
