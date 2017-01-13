@@ -26,7 +26,7 @@ module.exports = (opts = {}) => {
           }
         ),
       },
-      baseURL: process.env.NODE_ENV === 'production' ? __conf.prod.apiBase : __conf.dev.apiBase,
+      baseURL: __conf.dev.apiBase,
     }, opts))
     .then((res)=> {
       if (hasSpin) {
