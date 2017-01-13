@@ -1,5 +1,4 @@
 import fetch from '~utils/fetch'
-import config from '../../../config'
 
 module.exports = {
   'get/userGroups'(o = {}) {
