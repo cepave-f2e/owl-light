@@ -182,4 +182,36 @@ module.exports = {
   'unbindPluginFromGroup.fail'(state, err) {
     console.error(err)
   },
+
+  'getBindTemplates.success'(state, { data }) {
+    state.templateData = data
+  },
+  'getBindTemplates.fail'(state, err) {
+
+  },
+  'getTemplates.success'(state, { data }) {
+    state.templates = data.templates.reduce((preVal, curVal, idx) => {
+      preVal.push({
+        id: idx,
+        text: curVal.template.tpl_name,
+        tId: curVal.template.id,
+      })
+      return preVal
+    }, [])
+  },
+  'getTemplates.fail'(state, err) {
+
+  },
+  'bindOneTemplate.success'(state, { data }) {
+
+  },
+  'bindOneTemplate.fail'(state, err) {
+
+  },
+  'unbindOneTemplate.success'(state, { data }) {
+
+  },
+  'unbindOneTemplate.fail'(state, err) {
+
+  },
 }

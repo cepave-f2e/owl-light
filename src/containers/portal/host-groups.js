@@ -6,6 +6,7 @@ import s from './portal.scss'
 import HostListInGroup from './host-list-in-group'
 import HostGroupEdit from './host-group-edit'
 import PluginsList from './plugins-list'
+import TemplateList from './template-list'
 
 const hostGroups = {
   name: 'HostGroups',
@@ -84,7 +85,7 @@ const hostGroups = {
               </a>
             </li>
             <li class={[s.operrationItem]}>
-              <a class={[s.operration]} href>Templates</a>
+              <a class={[s.operration]} href data-group-id={row.id} onClick={(e) => this.openTemplateListLightBox(e)}>Templates</a>
             </li>
             <li class={[s.operrationItem]}>
               <a class={[s.operration]} href data-group-id={row.id} onClick={(e) => this.openPluginsListLightBox(e, this)}>Plugins</a>
@@ -192,6 +193,13 @@ const hostGroups = {
       this.$refs.lbHostGroupEdit.open(e)
     },
 
+    openTemplateListLightBox(e) {
+      const data = e.target.dataset
+      this.$store.dispatch('portal/getBindTemplates', data)
+      this.$store.dispatch('portal/getTemplates', data)
+      this.$refs.lbTemplateList.open(e)
+    },
+
     searchHostList(e) {
       if ((e.type === 'keypress' && e.charCode === 13) || e.type === 'click') {
         this.$store.dispatch('portal/searchHostList', {
@@ -199,6 +207,10 @@ const hostGroups = {
           q: this.$refs.searchHostList.value
         })
       }
+    },
+
+    closeTemplatelb(e) {
+      this.$refs.lbTemplateList.close(e)
     }
   },
 
@@ -343,6 +355,13 @@ const hostGroups = {
         <LightBox class={[g.inline]} ref="lbHostGroupEdit" width="788px" closeOnClickMask closeOnESC>
           <LightBox.View>
             <HostGroupEdit lbRef={this.$refs.lbHostGroupEdit} />
+          </LightBox.View>
+        </LightBox>
+
+        {/* LightBox Template List */}
+        <LightBox class={[g.inline]} ref="lbTemplateList" closeOnClickMask closeOnESC>
+          <LightBox.View>
+            <TemplateList closeTemplatelb={this.closeTemplatelb} />
           </LightBox.View>
         </LightBox>
 

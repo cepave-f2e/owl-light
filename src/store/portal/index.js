@@ -25,6 +25,13 @@ module.exports = {
       groupId: 0,
     },
     pluginsList: [],
+    templateData: {
+      templates: [],
+      hostgroup:{}
+    },
+    templates: [
+      { value: '', title: '' }
+    ]
   },
   actions: {
     'getEndpoints'({ commit, state }, { q }) {
@@ -211,17 +218,104 @@ module.exports = {
       }
 
       return fetch(opts)
-        .then((res) => {
-          commit('searchHostList.success', {
-            data: res.data
-          })
-        })
-        .catch((err) => {
-          commit('searchHostList.fail', {
-            err
-          })
-        })
-    }
+              .then((res) => {
+                commit('searchHostList.success', {
+                  data: res.data
+                })
+              })
+              .catch((err) => {
+                commit('searchHostList.fail', {
+                  err
+                })
+              })
+    },
+
+    'getBindTemplates'({ commit, state }, data) {
+      const opts = {
+        method: 'GET',
+        url: `hostgroup/${data.groupId}/template`
+      }
+
+      return fetch(opts)
+              .then((res) => {
+                commit('getBindTemplates.success', {
+                  data: res.data
+                })
+              })
+              .catch((err) => {
+                commit('getBindTemplates.fail', {
+                  err
+                })
+              })
+    },
+
+    'getTemplates'({ commit, state }, data) {
+      const opts = {
+        method: 'GET',
+        url: 'template'
+      }
+
+      return fetch(opts)
+              .then((res) => {
+                commit('getTemplates.success', {
+                  data: res.data
+                })
+              })
+              .catch((err) => {
+                commit('getTemplates.fail', {
+                  err
+                })
+              })
+    },
+    'bindOneTemplate'({ commit, state, dispatch }, data) {
+      const opts = {
+        method: 'POST',
+        url: 'hostgroup/template',
+        data: {
+          ...data
+        }
+      }
+
+      return fetch(opts)
+              .then((res) => {
+                commit('bindOneTemplate.success', {
+                  data: res.data
+                })
+                dispatch('getBindTemplates', {
+                  groupId: data.grp_id
+                })
+              })
+              .catch((err) => {
+                commit('bindOneTemplate.fail', {
+                  err
+                })
+              })
+    },
+
+    'unbindOneTemplate'({ commit, state, dispatch }, data) {
+      const opts = {
+        method: 'PUT',
+        url: 'hostgroup/template',
+        data: {
+          ...data
+        }
+      }
+
+      return fetch(opts)
+              .then((res) => {
+                commit('unbindOneTemplate.success', {
+                  data: res.data
+                })
+                dispatch('getBindTemplates', {
+                  groupId: data.grp_id
+                })
+              })
+              .catch((err) => {
+                commit('unbindOneTemplate.fail', {
+                  err
+                })
+              })
+    },
   },
   mutations: require('./mutations'),
 }

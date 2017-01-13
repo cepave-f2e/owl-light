@@ -15,6 +15,16 @@
   width: 500px;
 }
 
+.binding {
+  width: 100%;
+}
+
+.createBtn {
+  position: absolute;
+  right: 59px;
+  top: 88px;
+}
+
 .deleteViewBox {
   width: 404px;
 }
@@ -75,4 +85,15 @@
 .hostGroupEditWrapper,
 .pluginsListWrapper {
   padding-top: 24px;
+}
+
+.buttonIcon {
+  padding: 8px 16px;
+  .plus {
+    margin-right: 4px;
+  }
+}
+
+.select2 {
+  float: right;
 }
