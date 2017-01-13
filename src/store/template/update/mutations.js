@@ -2,7 +2,7 @@ module.exports = {
   'getTemplate'(state, u) {
     state.name = { id: u.tpl.id, name: u.tpl.tpl_name }
     state.parent = {
-      id: u.tpl.parent_id.toString() || '0',
+      id: u.tpl.parent_id || '0',
       name: u.parentName,
     }
     state.actionId = u.caction.id
