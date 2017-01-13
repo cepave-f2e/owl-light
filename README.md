@@ -94,7 +94,7 @@ module.exports = {
 npm run dev
 ```
 
-Open http://localhost:8080 to view it in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 
 If you'd like to open browser automation, it just pass the `--open` arg.
