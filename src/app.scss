@@ -1,6 +1,13 @@
 // app.scss
 @import "./sass/reset";
 @import "./sass/global";
+@import "./sass/colors";
+
+:root {
+  --OWL-UI-COLOR-PRIMARY: $colorPrimary !important;
+  --OWL-UI-COLOR-PRIMARY-LIGHT: $colorPrimaryLight !important;
+  --OWL-UI-COLOR-PRIMARY-DARK: $colorPrimaryDark !important;
+}
 
 .main {
   padding: 24px 36px;
