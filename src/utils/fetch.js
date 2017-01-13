@@ -1,10 +1,6 @@
 import { isBrowser } from './is-env'
 
 const { Cookies } = window
-const token = {
-  name: Cookies.get('name'),
-  sig: Cookies.get('sig'),
-}
 
 module.exports = (opts = {}) => {
   const hasSpin = isBrowser && opts.spin
@@ -23,7 +19,12 @@ module.exports = (opts = {}) => {
   return new Promise((resolve, reject) => {
     window.axios(_.merge({
       headers: {
-        ApiToken: JSON.stringify(token),
+        ApiToken: JSON.stringify(
+          {
+            name: Cookies.get('name'),
+            sig: Cookies.get('sig'),
+          }
+        ),
       },
       baseURL: process.env.NODE_ENV === 'production' ? __conf.prod.apiBase : __conf.dev.apiBase,
     }, opts))
