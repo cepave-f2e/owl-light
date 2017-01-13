@@ -66,20 +66,7 @@ All the related configs are in `/config`.
 
 ### API service
 
-Configure you own API service, modify the `apiBase` field in `/config/index.js`:
-
-```js
-module.exports = {
-  build: {
-    ...
-  },
-  dev: {
-    ...
-    apiBase: 'http://113.207.30.198:8088/api/v1',
-  }
-}
-```
-
+Configure you own API service, put the `OWL_LIGHT_API_BASE` environment variable
 
 
 ## OWL UI
