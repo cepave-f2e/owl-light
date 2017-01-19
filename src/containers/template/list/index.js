@@ -109,14 +109,14 @@ const TemplatePage = {
     const NewTemplateView = (
       <LightBox ref="NTemplate" closeOnClickMask closeOnESC>
         <LightBox.View>
-          <h3>新增模板</h3>
+          <h3>Add a new template</h3>
           <Flex class={[s.flexWrapper]}>
             <Flex.Col size="10">
               <Input class={[s.searchTemplate]} placeholder="name" ref="tplName" />
             </Flex.Col>
             <Flex.Col size="2">
               <Button status="primary" nativeOn-click={(e) => this.createTemplate(e, this)}>
-                储存
+                Save
               </Button>
             </Flex.Col>
           </Flex>
@@ -144,16 +144,16 @@ const TemplatePage = {
     return (
       <div class={[s.templatePage]}>
         <Tab>
-          <Tab.Head slot="tabHead" name="profile" isSelected={true}>告警模板</Tab.Head>
+          <Tab.Head slot="tabHead" name="profile" isSelected={true}>Template</Tab.Head>
           <Tab.Content slot="tabContent" name="template">
             <div>
               <div class={[u.contactSearchWrapper]}>
                 <div style="display: flex;">
-                  <Input class={s.searchTemplate} name="q" icon={['search', '#919799']} status="normal" placeholder="输入模板关键字查询" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
+                  <Input class={s.searchTemplate} name="q" icon={['search', '#919799']} status="normal" placeholder="Search templates...search all: .+" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
                   <Button class={s.submitButton} status="primary" nativeOn-click={(e) => this.submitQuery(e)} >Submit</Button>
                   <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNTemplate(e, this)}>
-                    <Icon typ="plus" size={16} />
-                      新增模板
+                    <Icon typ="plus" fill="#fff" size={16} />
+                      Add a new template
                   </Button>
                 </div>
               </div>

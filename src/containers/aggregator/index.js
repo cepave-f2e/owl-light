@@ -64,7 +64,7 @@ const AggregatorPage = {
         <Grid.Col>{row.creator}</Grid.Col>,
         <Grid.Col>
           <div class={[s.opeartionInline]}>
-            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row)}>edit</span>
+            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row)}>Edit</span>
             <span class={[s.opeartions]} on-click={(e) => this.duplicate(e, row)}>Duplicate</span>
             <span class={[s.opeartions]} on-click={(e) => this.delete(e, row.id)}>Delete</span>
           </div>
