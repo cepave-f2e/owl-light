@@ -468,7 +468,7 @@ const TemplatePage = {
                   </Flex.Col>
                   <Flex.Col size="7">
                     <span class={[s.title]}>parent:</span>
-                    <input type="hidden" class='newParent' placeholder="请输入模板名称" ref="updateParent" value={tplProps.pid}></input>
+                    <input type="hidden" class='newParent' placeholder="Enter template name..." ref="updateParent" value={tplProps.pid}></input>
                     <Select2 { ...{ props: tplProps } } />
                   </Flex.Col>
                   <Flex.Col size="1">
@@ -481,9 +481,9 @@ const TemplatePage = {
               <div class={[s.templateGroup]}>
                 <Flex class={[s.flexWrapper]}>
                   <Flex.Col size="11">
-                    <p class={[s.templateTitle]}>报警接收组(在UIC中管理报警组，快捷入口):</p>
+                    <p class={[s.templateTitle]}>Alarm receiving group(management alarm group in the UIC，Quick entry):</p>
                     <div class={[s.questionBlock]}>
-                      <input class='newTeam' type="hidden" placeholder="告警组" ref="updateTeam" value={props.uics}></input>
+                      <input class='newTeam' type="hidden" placeholder="Enter alarm group..." ref="updateTeam" value={props.uics}></input>
                       <Select2Muti { ...{ props: teamProps } } />
                     </div>
                   </Flex.Col>
@@ -494,16 +494,16 @@ const TemplatePage = {
                   </Flex.Col>
                 </Flex>
                 <div>
-                  <p class={[s.templateTitle]}>callback地址(只支持http get方式回调):</p>
+                  <p class={[s.templateTitle]}>callback address(only support HTTP get callback):</p>
                   <div class={[s.questionBlock]}>
                     <Input class={s.searchInput} name="q" placeholder="callback url" val={props.action.url} ref="action.url" />
                   </div>
                   <div class={[s.questionBlock]}>
                     <Checkbox.Group onChange={this.getCheckboxData}>
-                      <Checkbox name="1" checked={props.action.before_callback_sms} >回调之前发提醒短信</Checkbox>
-                      <Checkbox name="2" checked={props.action.before_callback_mail} >回调之前发提醒邮件</Checkbox>
-                      <Checkbox name="3" checked={props.action.after_callback_sms} >回调之后发结果短信</Checkbox>
-                      <Checkbox name="4" checked={props.action.after_callback_mail} >回调之后发结果邮件</Checkbox>
+                      <Checkbox name="1" checked={props.action.before_callback_sms} >Send reminder SMS before the callback</Checkbox>
+                      <Checkbox name="2" checked={props.action.before_callback_mail} >Send reminder email before the callback</Checkbox>
+                      <Checkbox name="3" checked={props.action.after_callback_sms} >Send the SMS after the callback</Checkbox>
+                      <Checkbox name="4" checked={props.action.after_callback_mail} >Send the email after the callback</Checkbox>
                     </Checkbox.Group>
                   </div>
                 </div>
