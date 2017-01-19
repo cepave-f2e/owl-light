@@ -144,7 +144,7 @@ const TemplatePage = {
     return (
       <div class={[s.templatePage]}>
         <Tab>
-          <Tab.Head slot="tabHead" name="profile" isSelected={true}>Alarm Template</Tab.Head>
+          <Tab.Head slot="tabHead" name="profile" isSelected={true}>Alarm template</Tab.Head>
           <Tab.Content slot="tabContent" name="template">
             <div>
               <div class={[u.contactSearchWrapper]}>
