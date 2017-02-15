@@ -126,7 +126,7 @@ const UserGroup = {
         <Grid.Col>{row.creator}</Grid.Col>,
         <Grid.Col>
           <div class={[s.opeartionInline]}>
-            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row.id, row.groupName)}>edit</span>
+            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row.id, row.groupName)}>Edit</span>
             <span class={[s.opeartions]} on-click={(e) => this.duplicate(e, row.id, row.groupName)}>Duplicate</span>
             <span class={[s.opeartions]} on-click={(e) => this.deleteTeam(e, row.id, row.groupName)}>Delete</span>
           </div>
@@ -149,7 +149,7 @@ const UserGroup = {
           <LightBox ref="createGroup" closeOnClickMask closeOnESC>
             <LightBox.Open>
               <Button status="primary" class={[s.buttonIcon]}>
-                <Icon typ="plus" size={16} class={[s.plus]} />
+                <Icon typ="plus" fill="#fff" size={16} class={[s.plus]} />
                 Add new user group
               </Button>
             </LightBox.Open>

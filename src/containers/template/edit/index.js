@@ -481,9 +481,15 @@ const TemplatePage = {
               <div class={[s.templateGroup]}>
                 <Flex class={[s.flexWrapper]}>
                   <Flex.Col size="11">
+<<<<<<< HEAD
                     <p class={[s.templateTitle]}>Alarm receiving group(management alarm group in the UIC，Quick entry):</p>
                     <div class={[s.questionBlock]}>
                       <input class='newTeam' type="hidden" placeholder="Enter alarm group..." ref="updateTeam" value={props.uics}></input>
+=======
+                    <p class={[s.templateTitle]}>Alarm receiving group:</p>
+                    <div class={[s.questionBlock]}>
+                      <input class='newTeam' type="hidden" placeholder="select user groups" ref="updateTeam" value={props.uics}></input>
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
                       <Select2Muti { ...{ props: teamProps } } />
                     </div>
                   </Flex.Col>
@@ -494,16 +500,39 @@ const TemplatePage = {
                   </Flex.Col>
                 </Flex>
                 <div>
+<<<<<<< HEAD
                   <p class={[s.templateTitle]}>callback address(only support HTTP get callback):</p>
+=======
+                  <p class={[s.templateTitle]}>call address(only support http get callback):</p>
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
                   <div class={[s.questionBlock]}>
                     <Input class={s.searchInput} name="q" placeholder="callback url" val={props.action.url} ref="action.url" />
                   </div>
                   <div class={[s.questionBlock]}>
                     <Checkbox.Group onChange={this.getCheckboxData}>
+<<<<<<< HEAD
                       <Checkbox name="1" checked={props.action.before_callback_sms} >Send reminder SMS before the callback</Checkbox>
                       <Checkbox name="2" checked={props.action.before_callback_mail} >Send reminder email before the callback</Checkbox>
                       <Checkbox name="3" checked={props.action.after_callback_sms} >Send the SMS after the callback</Checkbox>
                       <Checkbox name="4" checked={props.action.after_callback_mail} >Send the email after the callback</Checkbox>
+=======
+                      <Flex>
+                        <Flex.Col size="2">
+                          <Checkbox name="1" checked={props.action.before_callback_sms} >send text message before callback</Checkbox>
+                        </Flex.Col>
+                        <Flex.Col size="2">
+                          <Checkbox name="3" checked={props.action.after_callback_sms} >send result text message after callback</Checkbox>
+                        </Flex.Col>
+                      </Flex>
+                      <Flex>
+                        <Flex.Col size="2">
+                          <Checkbox name="2" checked={props.action.before_callback_mail} >send e-mail before callback</Checkbox>
+                        </Flex.Col>
+                        <Flex.Col size="2">
+                          <Checkbox name="4" checked={props.action.after_callback_mail} >send result e-mail after callback</Checkbox>
+                        </Flex.Col>
+                      </Flex>
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
                     </Checkbox.Group>
                   </div>
                 </div>

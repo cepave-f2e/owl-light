@@ -109,7 +109,11 @@ const TemplatePage = {
     const NewTemplateView = (
       <LightBox ref="NTemplate" closeOnClickMask closeOnESC>
         <LightBox.View>
+<<<<<<< HEAD
           <h3>Add template</h3>
+=======
+          <h3>Add a new template</h3>
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
           <Flex class={[s.flexWrapper]}>
             <Flex.Col size="10">
               <Input class={[s.searchTemplate]} placeholder="name" ref="tplName" />
@@ -144,16 +148,28 @@ const TemplatePage = {
     return (
       <div class={[s.templatePage]}>
         <Tab>
+<<<<<<< HEAD
           <Tab.Head slot="tabHead" name="profile" isSelected={true}>Alarm Template</Tab.Head>
+=======
+          <Tab.Head slot="tabHead" name="profile" isSelected={true}>Template</Tab.Head>
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
           <Tab.Content slot="tabContent" name="template">
             <div>
               <div class={[u.contactSearchWrapper]}>
                 <div style="display: flex;">
+<<<<<<< HEAD
                   <Input class={s.searchTemplate} name="q" icon={['search', '#919799']} status="normal" placeholder="Enter template keywords..." nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
                   <Button class={s.submitButton} status="primary" nativeOn-click={(e) => this.submitQuery(e)} >Submit</Button>
                   <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNTemplate(e, this)}>
                     <Icon typ="plus" size={16} />
                       Add template
+=======
+                  <Input class={s.searchTemplate} name="q" icon={['search', '#919799']} status="normal" placeholder="Search templates...search all: .+" nativeOn-keypress={(e) => this.submitQuery(e)} ref="inputRef" />
+                  <Button class={s.submitButton} status="primary" nativeOn-click={(e) => this.submitQuery(e)} >Submit</Button>
+                  <Button status="primary" class={u.buttonIcon} nativeOn-click={(e) => this.openNTemplate(e, this)}>
+                    <Icon typ="plus" fill="#fff" size={16} />
+                      Add a new template
+>>>>>>> 8104175316cff237633219f5e0c8bd2d4e74371d
                   </Button>
                 </div>
               </div>
