@@ -481,9 +481,6 @@ const TemplatePage = {
               <div class={[s.templateGroup]}>
                 <Flex class={[s.flexWrapper]}>
                   <Flex.Col size="11">
-                    <p class={[s.templateTitle]}>Alarm receiving group(management alarm group in the UIC，Quick entry):</p>
-                    <div class={[s.questionBlock]}>
-                      <input class='newTeam' type="hidden" placeholder="Enter alarm group..." ref="updateTeam" value={props.uics}></input>
                     <p class={[s.templateTitle]}>Alarm receiving group:</p>
                     <div class={[s.questionBlock]}>
                       <input class='newTeam' type="hidden" placeholder="select user groups" ref="updateTeam" value={props.uics}></input>
@@ -498,7 +495,6 @@ const TemplatePage = {
                 </Flex>
                 <div>
                   <p class={[s.templateTitle]}>callback address(only support HTTP get callback):</p>
-                  <p class={[s.templateTitle]}>call address(only support http get callback):</p>
                   <div class={[s.questionBlock]}>
                     <Input class={s.searchInput} name="q" placeholder="callback url" val={props.action.url} ref="action.url" />
                   </div>
