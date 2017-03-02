@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Icon, LightBox, DualList, Flex } from '@cepave/owl-ui'
+import { Input, Button, Grid, Icon, LightBox, DualList, Flex, Legacy } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import g from 'sass/global.scss'
 import s from './portal.scss'
@@ -42,13 +42,13 @@ const hostGroups = {
   created() {
     this.hostGroupsData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>
+        <Legacy.Grid.Col>
           {row.grp_name}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           {row.create_user}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <a
             class={[s.operration]}
             href
@@ -58,8 +58,8 @@ const hostGroups = {
           >
             view hosts
           </a>
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <ul>
             <li class={[s.operrationItem]}>
               <a
@@ -94,7 +94,7 @@ const hostGroups = {
               <Link class={[s.operration]} to={`aggregator/${row.id}`}>Aggregator</Link>
             </li>
           </ul>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
   },
@@ -305,7 +305,7 @@ const hostGroups = {
 
         <div class={[s.gridWrapper]}>
           <div class={[s.gridWrapperBox]}>
-            <Grid {...{ props }} />
+            <Legacy.Grid {...{ props }} />
           </div>
         </div>
 

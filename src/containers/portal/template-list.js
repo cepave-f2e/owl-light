@@ -1,4 +1,4 @@
-import { Button, Grid, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import { Button, Grid, Icon, LightBox, Flex, Legacy } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import Select2 from '../template/common/select2'
 import g from 'sass/global.scss'
@@ -38,13 +38,13 @@ const templateList = {
   created() {
     this.templateData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>
+        <Legacy.Grid.Col>
           {row.tpl_name}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           {row.create_user}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <ul>
             <li class={[s.operrationItem]}>
                 <Link class={[s.operration]} to={`template/${row.id}`} nativeOn-click={this.closelb}>Edit</Link>
@@ -62,7 +62,7 @@ const templateList = {
               </a>
             </li>
           </ul>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
   },
@@ -114,7 +114,7 @@ const templateList = {
           </Flex>
         </div>
         <div class={[s.pluginsListWrapper]}>
-          <Grid {...{ props }}></Grid>
+          <Legacy.Grid {...{ props }}></Legacy.Grid>
         </div>
       </div>
     )
