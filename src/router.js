@@ -63,6 +63,18 @@ const router = new window.VueRouter({
         require(['./containers/aggregator'], resolve)
       }
     },
+    {
+      path: '/nqm-agent-list',
+      component(resolve) {
+        require(['./containers/nqm-agent-list'], resolve)
+      }
+    },
+    {
+      path: '/nqm-target',
+      component(resolve) {
+        require(['./containers/nqm-target'], resolve)
+      }
+    },
     { path: '*', redirect: '/graph' },
   ],
 })

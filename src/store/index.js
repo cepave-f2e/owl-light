@@ -10,5 +10,6 @@ module.exports = new window.Vuex.Store({
     profile: require('./profile'),
     aggregator: require('./aggregator'),
     portal: require('./portal'),
+    nqmAgentList: require('./nqm-agent-list'),
   }
 })
