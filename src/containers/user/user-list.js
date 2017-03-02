@@ -1,4 +1,4 @@
-import { Grid, Input, Button, LightBox } from '@cepave/owl-ui'
+import { Grid, Input, Button, LightBox, Legacy } from '@cepave/owl-ui'
 import s from './user.scss'
 const UserList = {
   name: 'UserList',
@@ -44,12 +44,12 @@ const UserList = {
   created() {
     this.userListData.rowsRender = (h, { row, index }) => {
       const result = [
-        <Grid.Col>{row.name}</Grid.Col>,
-        <Grid.Col>{row.cnname}</Grid.Col>,
-        <Grid.Col>{row.email}</Grid.Col>,
-        <Grid.Col>{row.phone}</Grid.Col>,
-        <Grid.Col>{row.qq}</Grid.Col>,
-        <Grid.Col>{row.im}</Grid.Col>
+        <Legacy.Grid.Col>{row.name}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.cnname}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.email}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.phone}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.qq}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.im}</Legacy.Grid.Col>
       ]
       return result
     }
@@ -77,7 +77,7 @@ const UserList = {
         </div>
         <div class={[s.contactWrapper]}>
           <div class={[s.gridWrapperBox]}>
-            <Grid { ...{ props } } />
+            <Legacy.Grid { ...{ props } } />
           </div>
         </div>
       </div>

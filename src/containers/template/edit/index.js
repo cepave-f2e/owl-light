@@ -1,4 +1,4 @@
-import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox, Flex, Select } from '@cepave/owl-ui'
+import { Tab, Input, Button, Grid, Icon, Checkbox, Label, LightBox, Flex, Select, Legacy } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import s from '../template.scss'
 import u from '../../user/user.scss'
@@ -72,17 +72,17 @@ const TemplatePage = {
     this.getMetric()
     this.gridData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{row[0].col}</Grid.Col>,
-        <Grid.Col>{row[1].col}</Grid.Col>,
-        <Grid.Col>{row[2].col}</Grid.Col>,
-        <Grid.Col>{row[3].col}</Grid.Col>,
-        <Grid.Col>{row[4].col}</Grid.Col>,
-        <Grid.Col>
+        <Legacy.Grid.Col>{row[0].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[1].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[2].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[3].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[4].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <div class={[u.opeartionInline]}>
             <span class={[u.opeartions]} sid={row[5].col} saction="update" onClick={(e) => this.getStragtegy(e, this)}>Edit</span>
             <span class={[u.opeartions]} sid={row[5].col} saction="delete" onClick={(e) => this.deleteStrategyLink(e, this)}>Delete</span>
           </div>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
   },
@@ -544,7 +544,7 @@ const TemplatePage = {
                 </div>
                 { $slots.default }
                 <div class={[u.gridWrapperBox]}>
-                  <Grid {...{ props }} />
+                  <Legacy.Grid {...{ props }} />
                 </div>
               </div>
             </div>
