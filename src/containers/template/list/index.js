@@ -1,4 +1,4 @@
-import { Tab, Input, Button, Grid, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import { Tab, Input, Button, Grid, Icon, LightBox, Flex, Legacy } from '@cepave/owl-ui'
 import Link from '~coms/link'
 import s from '../template.scss'
 import u from '../../user/user.scss'
@@ -44,15 +44,15 @@ const TemplatePage = {
   created() {
     this.gridData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{row[0].col}</Grid.Col>,
-        <Grid.Col>{row[1].col}</Grid.Col>,
-        <Grid.Col>{row[2].col}</Grid.Col>,
-        <Grid.Col>
+        <Legacy.Grid.Col>{row[0].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[1].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row[2].col}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <div class={[u.opeartionInline]}>
             <a class={[u.opeartions]} href={row[3].col[0]}>Edit</a>
             <span class={[u.opeartions]} tip={row[3].col[1]} onClick={(e) => this.deleteTemplateLink(e)}>Delete</span>
           </div>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
     this.getTemplates('.+')
@@ -160,7 +160,7 @@ const TemplatePage = {
               <div class={[u.contactWrapper]}>
                 <div class={[u.gridWrapperBox]}>
                   { $slots.default }
-                  <Grid {...{ props }} />
+                  <Legacy.Grid {...{ props }} />
                 </div>
               </div>
               {NewTemplateView}
