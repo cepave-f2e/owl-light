@@ -1,4 +1,4 @@
-import { Input, Button, Grid, Icon, LightBox } from '@cepave/owl-ui'
+import { Input, Button, Grid, Icon, LightBox, Legacy } from '@cepave/owl-ui'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
@@ -31,13 +31,13 @@ const pluginsList = {
   created() {
     this.pluginData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>
+        <Legacy.Grid.Col>
           {row.dir}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           {row.create_user}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <ul>
             <li class={[s.operrationItem]}>
               <a
@@ -52,7 +52,7 @@ const pluginsList = {
               </a>
             </li>
           </ul>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
   },
@@ -118,7 +118,7 @@ const pluginsList = {
           </div>
         </div>
         <div class={[s.pluginsListWrapper]}>
-          <Grid {...{ props }}></Grid>
+          <Legacy.Grid {...{ props }}></Legacy.Grid>
         </div>
       </div>
     )
