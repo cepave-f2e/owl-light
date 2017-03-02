@@ -2,17 +2,17 @@
 # yarn lockfile v1
 
 
-"@cepave/owl-icons@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@cepave/owl-icons/-/owl-icons-1.0.2.tgz#456e0ba3df5c478e9cd0bcc585c76c2cc3de9e2d"
+"@cepave/owl-icons@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@cepave/owl-icons/-/owl-icons-1.1.1.tgz#51db8536bc697493814a43fe067a1621615ac0da"
 
-"@cepave/owl-ui@^0.5.0":
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.5.0.tgz#195d207b86734488d261837ec8e1a3da7796dc0f"
+"@cepave/owl-ui@^0.6.1":
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.6.1.tgz#8932c29deef5493ea9c55dd82abf38c13d6c1d65"
   dependencies:
-    "@cepave/owl-icons" "^1.0.2"
+    "@cepave/owl-icons" "^1.1.1"
     delegate-to "^0.1.4"
-    vue "^2.1.8"
+    vue "^2.1.10"
 
 JSONStream@^0.8.4:
   version "0.8.4"
@@ -5298,9 +5298,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue@^2.1.8:
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.8.tgz#ae30aa86024fccf5535292ce414e7b4c221a1756"
+vue@^2.1.10:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-2.2.1.tgz#ddbfd2f0caf38f374f5a36eea2e1edf25225b68e"
 
 walker@~1.0.5:
   version "1.0.7"
