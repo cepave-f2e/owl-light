@@ -51,6 +51,12 @@ const Nav = {
 
           <div class={[s.linkIcon, s.isBottom]}>
             <Icon typ="gear-1" />
+            <dl>
+              <dt><Icon typ="fold" />Settings</dt>
+              <dd><Link to="/nqm-agent-list">探測設備</Link></dd>
+              <dd><Link to="/nqm-target">被探測設備</Link></dd>
+              <dd><Link to="/nqm-ping-task">探测任务</Link></dd>
+            </dl>
           </div>
 
         </div>
