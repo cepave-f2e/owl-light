@@ -1,0 +1,27 @@
+language: node_js
+
+node_js:
+  - v7
+
+env:
+  global:
+  matrix:
+    - TRAVIS_MATRIX=test
+    - TRAVIS_MATRIX=lint
+    - TRAVIS_MATRIX=build
+
+script:
+  - npm run $TRAVIS_MATRIX
+
+after_success:
+  - node scripts/deploy
+
+
+notifications:
+  slack:
+    rooms:
+      - cepave:V5DHVLcQl6YsOOFfzaJKWCuE#notify-owl-light
+
+branches:
+  except:
+    - /^(v?\d+\.\d+\.\d+)$/
