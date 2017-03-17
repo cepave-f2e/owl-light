@@ -1,4 +1,27 @@
 module.exports = {
+  'complexQuery.items'(stage, { cats }) {
+    stage.complexQueryItems = Object.keys(cats).map((cat) => {
+      return {
+        name: cat,
+        children: cats[cat].map((host)=> {
+          return {
+            name: host.hostname,
+            value: host.hostname
+          }
+        })
+      }
+    })
+  },
+  'complexQuery.start'(state) {
+    state.complexQueryLoading = true
+  },
+  'complexQuery.success'(state) {
+
+  },
+  'complexQuery.end'(state) {
+    state.complexQueryLoading = false
+  },
+
   'switchViewPoint'(state, { viewpoint  }) {
     state.vport = viewpoint
   },

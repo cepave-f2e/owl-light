@@ -1,4 +1,10 @@
 @import "~sass/global";
+.section1, .section2 {
+  padding: 12px 28px;
+}
+.section1 {
+  background: #F0F3F4;
+}
 
 .tab {
   background: #fff;
@@ -87,7 +93,6 @@
     }
   }
 }
-
 
 .picker, .sampling {
   margin-left: 4px;

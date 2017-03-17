@@ -2,6 +2,58 @@ import vfetch from '~utils/vuex-fetch'
 const { _, moment } = window
 
 module.exports = {
+  complexQuery({ commit, state }, { category, value }) {
+    const opts = {
+      url: 'owlgraph/keyword_search',
+      params: {
+        q: value.trim(),
+        filter_type: category
+      },
+      commit,
+      mutation: 'complexQuery'
+    }
+    const cats = {}
+    return vfetch(opts)
+      .then((res) => {
+        res.data[category].map((item) => {
+          const { idc, isp, platform, province, hostname, ip } = item
+          const titleIDC = `IDC: ${idc}`
+          const titleISP = `ISP: ${isp}`
+          const titlePlatform = `Platform: ${platform}`
+          const titleProvince = `Province: ${province}`
+
+          if (category !== 'idc') {
+            if (!cats[titleIDC]) {
+              cats[titleIDC] = []
+            }
+            cats[titleIDC].push({ hostname, ip })
+          }
+
+          if (category !== 'isp') {
+            if (!cats[titleISP]) {
+              cats[titleISP] = []
+            }
+            cats[titleISP].push({ hostname, ip })
+          }
+
+          if (category !== 'platform') {
+            if (!cats[titlePlatform]) {
+              cats[titlePlatform] = []
+            }
+            cats[titlePlatform].push({ hostname, ip })
+          }
+
+          if (category !== 'province') {
+            if (!cats[titleProvince]) {
+              cats[titleProvince] = []
+            }
+            cats[titleProvince].push({ hostname, ip })
+          }
+        })
+        commit('complexQuery.items', { cats })
+      })
+  },
+
   'getEndpoints'({ commit, state }, { q }) {
     const opts = {
       url: 'graph/endpoint',

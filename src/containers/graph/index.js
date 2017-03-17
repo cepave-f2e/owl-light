@@ -1,10 +1,13 @@
-import { Tab, DualList, Loading, Button, Page, Icon, Select, Flex } from '@cepave/owl-ui'
+import {
+  Tab, DualList, Loading, Button, Page, Icon, Select, Flex,
+  ComplexQuery, DatePicker, Tip
+} from '@cepave/owl-ui'
 import LineChart from './line-chart/index.js'
 import sortHosts from './sort-hosts'
 import g from '~sass/global.scss'
 import s from './graph.scss'
 import delegate from 'delegate-to'
-import DatePicker from '~coms/date-picker'
+// import DatePicker from '~coms/date-picker'
 
 const GraphView = {
   name: 'GraphView',
@@ -23,6 +26,10 @@ const GraphView = {
   },
 
   methods: {
+    complexQuery(d) {
+      const { $store, $refs } = this
+      $store.dispatch('graph/complexQuery', d)
+    },
     getEndpoints(q) {
       const { $store, $refs } = this
       $store.dispatch('graph/getEndpoints', {
@@ -171,100 +178,92 @@ const GraphView = {
 
   render(h) {
     const { $store, $router, getEndpoints, getCounters, switchViewPoint, viewGraph, goToPage,
-      pageSum, switchGrid, checkBtnStatus, samplingOptions, onChangeStartTime, onChangeEndTime } = this
+      pageSum, switchGrid, checkBtnStatus, samplingOptions, onChangeStartTime, onChangeEndTime,
+    complexQuery } = this
     const { graph } = $store.state
 
     return (
       <div>
         <Tab class={[s.tab]}>
           <Tab.Head slot="tabHead" isSelected name="graph">Graph</Tab.Head>
-          <Tab.Content slot="tabContent" name="graph">
-            <Flex split class={[s.topCtrl]}>
-              <Flex.Col>
-                <Flex>
-                  <Flex.Col size="auto">
-                    <Flex mid>
-                      Start <DatePicker ref="startTime" onChange={onChangeStartTime} readOnly height={34} class={[s.picker]} opts={{
-                        max: new Date(),
-                        initialValue: new Date(graph.startTime * 1000),
-                      }} />
-                    </Flex>
-                  </Flex.Col>
-                  <Flex.Col size="auto">
-                    <Flex mid>
-                      End <DatePicker ref="endTime" onChange={onChangeEndTime} readOnly height={34} class={[s.picker]} opts={{
-                        max: new Date(),
-                        initialValue: new Date(graph.endTime * 1000),
-                      }} />
-                    </Flex>
-                  </Flex.Col>
-                  <Flex.Col size="auto">
-                    <Flex mid>
-                      Sampling
-                      <Select class={[s.sampling]} ref="sampling" options={samplingOptions} />
-                    </Flex>
-                  </Flex.Col>
-                </Flex>
-              </Flex.Col>
+          <Tab.Content slot="tabContent" name="graph" style={{ height: '100vh' }}>
+            <section class={[s.section1]}>
+              <Flex>
+                <Flex.Col size={6}>
+                  <ComplexQuery
+                    onQuery={complexQuery}
+                    items={graph.complexQueryItems}
+                    loading={graph.complexQueryLoading}
+                    categories={[
+                      { name: 'Host', value: 'hostname', on: true },
+                      { name: 'Platform', value: 'plaform' },
+                      { name: 'ISP', value: 'isp' },
+                      { name: 'IDC', value: 'idc' },
+                      { name: 'Province', value: 'province' },
+                    ]}
+                  />
+                </Flex.Col>
+                <Flex.Col size="auto">
+                  <Flex split>
+                    <Flex.Col size="auto">
+                      <ComplexQuery
+                        items={[]}
+                        categories={[]}
+                      />
+                    </Flex.Col>
+                    <Flex.Col>
+                      <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>Submit</Button>
+                    </Flex.Col>
+                  </Flex>
+                </Flex.Col>
+              </Flex>
+            </section>
 
-              <Flex.Col>
-                <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>View Graph</Button>
-              </Flex.Col>
-            </Flex>
+            <section class={[s.section2]}>
+              <Flex>
+                <Flex.Col>
+                  <DatePicker /> - <DatePicker />
+                </Flex.Col>
+                <Flex.Col>
+                  <Tip pos="up">
+                    <Tip.Context> View Port</Tip.Context>
+                    <Select style={{ width: '140px' }} options={[
+                      { title: 'Endpoint', value: 'endpoint' },
+                      { title: 'Counter', value: 'counter' },
+                      { title: 'Combo', value: 'combo' },
+                    ]} />
+                  </Tip>
+                </Flex.Col>
+                <Flex.Col>
+                  <Tip pos="up">
+                    <Tip.Context> Layout </Tip.Context>
+                    <Select style={{ width: '150px' }} options={[
+                      { title: '1 Column', value: 'endpoint' },
+                      { title: '2 Columns', value: 'counter', selected: true },
+                      { title: '3 Columns', value: 'combo' },
+                      { title: '4 Columns', value: 'combo' },
+                    ]} />
+                  </Tip>
+                </Flex.Col>
+                <Flex.Col>
+                  <Tip pos="up">
+                    <Tip.Context> Sorting </Tip.Context>
+                    <Select style={{ width: '180px' }} options={[
+                      { title: 'From A → Z', value: 'endpoint' },
+                      { title: 'From Z → A', value: 'counter', },
+                      { title: 'Descend by net.in', value: 'counter', },
+                      { title: 'Ascend by net.in', value: 'counter', },
+                      { title: 'Descend by net.out', value: 'counter', },
+                      { title: 'Ascend by net.out', value: 'counter', },
+                    ]} />
+                  </Tip>
+                </Flex.Col>
+                <Flex.Col mid>
+                  Y-axis
+                </Flex.Col>
+              </Flex>
+            </section>
 
-            <Flex class={[s.submitSection]}>
-              <span class={[s.vpoint]}>
-                View Point
-              </span>
-              <Button.Group onChange={switchViewPoint} options={[
-                 { value: 'endpoint', title: 'Endpoint', selected: true },
-                 { value: 'counter', title: 'Counter' },
-                 { value: 'combo', title: 'Combo' },
-              ]} />
-            </Flex>
-
-            <Flex class={[s.querySection]}>
-              <Flex.Col size="6">
-                <h4>Search Endpoints</h4>
-                <DualList
-                  ref="dualEndpoint"
-                  leftLoading={graph.hasEndpointLoading}
-                  apiMode
-                  displayKey="endpoint"
-                  items={graph.endpointItems}
-                  onChange={checkBtnStatus}
-                  onInputchange={getEndpoints}
-                />
-              </Flex.Col>
-              <Flex.Col size="6">
-                <h4>Search Counters</h4>
-                <DualList
-                  apiMode
-                  onChange={checkBtnStatus}
-                  ref="dualCounter"
-                  displayKey="counter"
-                  onInputchange={getCounters}
-                  items={graph.counterItems}
-                  leftLoading={graph.hasCounterLoading}
-                />
-              </Flex.Col>
-            </Flex>
-
-            {
-              graph.totalCharts.length
-              ? <div class={[s.pageSum, g.flexSplit]} data-grid={graph.grid}>
-                  <div>
-                    Total Charts: { pageSum } of { graph.totalCharts.length }
-                  </div>
-                  <div class={[s.chartGrid]} onClick={switchGrid}>
-                    <Icon typ="grid-1" data-grid="1" />
-                    <Icon typ="grid-4" data-grid="2" />
-                    <Icon typ="grid-9" data-grid="3" />
-                    <Icon typ="grid-16" data-grid="4" />
-                  </div>
-                </div>
-              : null
-            }
             <div class={[s.boxCharts]} data-grid={graph.grid}>
               {graph.charts.map((chart, i) => {
                 return (

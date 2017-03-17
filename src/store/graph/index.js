@@ -19,6 +19,8 @@ module.exports = {
     _cachePages: {},
     startTime: moment().add(-24, 'hours').unix(),
     endTime: moment().unix(),
+    complexQueryItems: [],
+    complexQueryLoading: false,
   },
   namespaced: true,
 
