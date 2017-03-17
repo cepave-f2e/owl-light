@@ -1,4 +1,5 @@
 import { isBrowser } from './is-env'
+import conf from '../../config/production.json'
 
 const { Cookies } = window
 
@@ -26,7 +27,7 @@ module.exports = (opts = {}) => {
           }
         ),
       },
-      baseURL: __conf.dev.apiBase,
+      baseURL: conf.apiBase,
     }, opts))
     .then((res)=> {
       if (hasSpin) {
