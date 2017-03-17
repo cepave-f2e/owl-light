@@ -5,7 +5,7 @@ const { TRAVIS_BRANCH, TRAVIS_MATRIX, TRAVIS_PULL_REQUEST_BRANCH,
   GH_TOKEN, GL_TOKEN } = process.env
 
 const github = repository.replace(/(github.com)/, `${GH_TOKEN}@$1`)
-const gitlab = `https://${GL_TOKEN}@gitlab.com/Cepave/owl-light.git`
+const gitlab = `https://gitlab-ci-token:${GL_TOKEN}@gitlab.com/Cepave/owl-light.git`
 
 const tag = `v${version}`
 
@@ -23,7 +23,7 @@ if (TRAVIS_MATRIX === 'build') {
       })
     },
     owlemon() {
-      exec(`git push ${gitlab} master -f`, {
+      exec(`git push ${gitlab} owlemon:master -f`, {
         silent: true
       })
 
