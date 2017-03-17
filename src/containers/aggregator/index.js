@@ -1,5 +1,5 @@
 import s from './aggregator.scss'
-import { Tab, Grid, Input, Button, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import { Tab, Grid, Input, Button, Icon, LightBox, Flex, Legacy } from '@cepave/owl-ui'
 import Link from '~coms/link'
 
 const AggregatorPage = {
@@ -56,19 +56,19 @@ const AggregatorPage = {
   created() {
     this.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{this.currentHostGroupName}</Grid.Col>,
-        <Grid.Col>{row.id}</Grid.Col>,
-        <Grid.Col>{row.endpoint}</Grid.Col>,
-        <Grid.Col>{row.metric}</Grid.Col>,
-        <Grid.Col>{row.tags}</Grid.Col>,
-        <Grid.Col>{row.creator}</Grid.Col>,
-        <Grid.Col>
+        <Legacy.Grid.Col>{this.currentHostGroupName}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.id}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.endpoint}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.metric}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.tags}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.creator}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <div class={[s.opeartionInline]}>
-            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row)}>edit</span>
+            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row)}>Edit</span>
             <span class={[s.opeartions]} on-click={(e) => this.duplicate(e, row)}>Duplicate</span>
             <span class={[s.opeartions]} on-click={(e) => this.delete(e, row.id)}>Delete</span>
           </div>
-        </Grid.Col>
+        </Legacy.Grid.Col>
       ]
     }
   },
@@ -292,7 +292,7 @@ const AggregatorPage = {
              </LightBox>
 
             </div>
-            <Grid { ...{ props } } />
+            <Legacy.Grid { ...{ props } } />
           </Tab.Content>
         </Tab>
       </div>

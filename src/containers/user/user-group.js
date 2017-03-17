@@ -1,5 +1,5 @@
 import s from './user.scss'
-import { Grid, Input, Button, Icon, LightBox, DualList, Loading } from '@cepave/owl-ui'
+import { Grid, Input, Button, Icon, LightBox, DualList, Loading, Legacy } from '@cepave/owl-ui'
 
 const UserGroup = {
   name: 'UserGroup',
@@ -121,16 +121,16 @@ const UserGroup = {
   created() {
     this.userGroupData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>{row.groupName}</Grid.Col>,
-        <Grid.Col>{row.groupMember}</Grid.Col>,
-        <Grid.Col>{row.creator}</Grid.Col>,
-        <Grid.Col>
+        <Legacy.Grid.Col>{row.groupName}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.groupMember}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>{row.creator}</Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <div class={[s.opeartionInline]}>
-            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row.id, row.groupName)}>edit</span>
+            <span class={[s.opeartions]} on-click={(e) => this.edit(e, row.id, row.groupName)}>Edit</span>
             <span class={[s.opeartions]} on-click={(e) => this.duplicate(e, row.id, row.groupName)}>Duplicate</span>
             <span class={[s.opeartions]} on-click={(e) => this.deleteTeam(e, row.id, row.groupName)}>Delete</span>
           </div>
-        </Grid.Col>
+        </Legacy.Grid.Col>
       ]
     }
   },
@@ -149,7 +149,7 @@ const UserGroup = {
           <LightBox ref="createGroup" closeOnClickMask closeOnESC>
             <LightBox.Open>
               <Button status="primary" class={[s.buttonIcon]}>
-                <Icon typ="plus" size={16} class={[s.plus]} />
+                <Icon typ="plus" fill="#fff" size={16} class={[s.plus]} />
                 Add new user group
               </Button>
             </LightBox.Open>
@@ -176,7 +176,7 @@ const UserGroup = {
         </div>
         <div class={[s.contactWrapper]}>
           <div class={[s.gridWrapperBox]}>
-            <Grid { ...{ props } } />
+            <Legacy.Grid { ...{ props } } />
           </div>
         </div>
         <LightBox ref="editGroup" closeOnClickMask closeOnESC>

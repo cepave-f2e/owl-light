@@ -1,4 +1,4 @@
-import { Button, Grid, Icon, LightBox, Flex } from '@cepave/owl-ui'
+import { Button, Grid, Icon, LightBox, Flex, Legacy } from '@cepave/owl-ui'
 import g from 'sass/global.scss'
 import s from './portal.scss'
 
@@ -29,10 +29,10 @@ const hostListInGroup = {
     const state = this.$store.state.portal
     this.hostListData.rowsRender = (h, { row, index }) => {
       return [
-        <Grid.Col>
+        <Legacy.Grid.Col>
           {row.hostname}
-        </Grid.Col>,
-        <Grid.Col>
+        </Legacy.Grid.Col>,
+        <Legacy.Grid.Col>
           <ul>
             <li class={[s.operrationItem]}>
               <a
@@ -48,7 +48,7 @@ const hostListInGroup = {
               </a>
             </li>
           </ul>
-        </Grid.Col>,
+        </Legacy.Grid.Col>,
       ]
     }
   },
@@ -73,7 +73,7 @@ const hostListInGroup = {
 
     return (
       <div class={[s.pluginsListWrapper]}>
-        <Grid {...{ props }}></Grid>
+        <Legacy.Grid {...{ props }}></Legacy.Grid>
 
         {/* Delete LightBox */}
         <LightBox class={[g.inline]} ref="lbDeleteHostFromGroup" closeOnClickMask closeOnESC>
