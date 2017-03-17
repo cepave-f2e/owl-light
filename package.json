@@ -11,6 +11,7 @@
     "npm": ">= 3.10.0"
   },
   "scripts": {
+    "start": "node src/server",
     "dev": "babel-node build/dev-server.js",
     "build": "babel-node build/build.js",
     "lint": "eslint src test && stylelint src/**/*.scss --syntax scss",
