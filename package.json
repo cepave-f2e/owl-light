@@ -1,6 +1,6 @@
 {
   "name": "@cepave/owl-light",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Open-Falcon client-side project",
   "author": "Cepave FrontEnd Team <f2e@cepave.com>",
   "main": "index.js",
