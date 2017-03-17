@@ -1,10 +1,5 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
-const { OWL_LIGHT_API_BASE } = process.env
-
-if (!OWL_LIGHT_API_BASE) {
-  throw new Error('Please set the environment variable: `OWL_LIGHT_API_BASE`')
-}
 
 module.exports = {
   build: {
@@ -33,6 +28,5 @@ module.exports = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false,
-    apiBase: OWL_LIGHT_API_BASE,
   }
 }
