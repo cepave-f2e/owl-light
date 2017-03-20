@@ -1,8 +1,9 @@
 const { version, repository } = require('../package.json')
+const axios = require('axios')
 require('shelljs/global')
 
 const { TRAVIS_BRANCH, TRAVIS_MATRIX, TRAVIS_PULL_REQUEST_BRANCH,
-  GH_TOKEN, GL_TOKEN } = process.env
+  GH_TOKEN, GL_TOKEN, SLACK_TOKEN } = process.env
 
 const github = repository.replace(/(github.com)/, `${GH_TOKEN}@$1`)
 const gitlab = `https://gitlab-ci-token:${GL_TOKEN}@gitlab.com/Cepave/owl-light.git`
@@ -29,6 +30,28 @@ if (TRAVIS_MATRIX === 'build') {
 
       exec(`git push ${gitlab} ${tag}`, {
         silent: true,
+      })
+
+      axios({
+        url: `https://hooks.slack.com/services/${SLACK_TOKEN}`,
+        method: 'post',
+        data: {
+          username: 'Mike',
+          icon_emoji: ':mikesay:',
+          channel: '#notify-owl-light',
+          text: `
+@robywei @myhung @minimum @cheminlin
+
+:star: *owl-light* \`${tag}\` 上版拉~
+:unicorn_face: https://gitlab.com/Cepave/owl-light/tags/${tag}
+`,
+        },
+      })
+      .then((res)=> {
+        console.log(res.statusText)
+      })
+      .catch((er)=> {
+        console.log(er.response.status)
       })
     }
   })[TRAVIS_BRANCH]
