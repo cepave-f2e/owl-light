@@ -6,9 +6,9 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@cepave/owl-icons/-/owl-icons-1.1.1.tgz#51db8536bc697493814a43fe067a1621615ac0da"
 
-"@cepave/owl-ui@^0.7.6":
-  version "0.7.6"
-  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.6.tgz#4cabdff47f7ce34f19fd7ccc10cec1e6fa2cec11"
+"@cepave/owl-ui@^0.7.7":
+  version "0.7.7"
+  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.7.tgz#3f38416288c0478a3c4f1f04b85fc34eeb6d6721"
   dependencies:
     "@cepave/owl-icons" "^1.1.1"
     delegate-to "^0.1.4"
@@ -286,7 +286,7 @@ babel-cli@^6.24.0:
   optionalDependencies:
     chokidar "^1.6.1"
 
-babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.20.0:
+babel-code-frame@^6.11.0, babel-code-frame@^6.16.0:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.20.0.tgz#b968f839090f9a8bc6d41938fb96cb84f7387b26"
   dependencies:
@@ -294,7 +294,7 @@ babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.20.0:
     esutils "^2.0.2"
     js-tokens "^2.0.0"
 
-babel-code-frame@^6.22.0:
+babel-code-frame@^6.20.0, babel-code-frame@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.22.0.tgz#027620bee567a88c32561574e7fd0801d33118e4"
   dependencies:
@@ -910,7 +910,7 @@ babel-traverse@^6.18.0, babel-traverse@^6.22.0, babel-traverse@^6.23.0, babel-tr
     invariant "^2.2.0"
     lodash "^4.2.0"
 
-babel-types@^6.15.0, babel-types@^6.21.0:
+babel-types@^6.15.0:
   version "6.21.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.21.0.tgz#314b92168891ef6d3806b7f7a917fdf87c11a4b2"
   dependencies:
@@ -919,7 +919,7 @@ babel-types@^6.15.0, babel-types@^6.21.0:
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23.0:
+babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.21.0, babel-types@^6.22.0, babel-types@^6.23.0:
   version "6.23.0"
   resolved "https://registry.yarnpkg.com/babel-types/-/babel-types-6.23.0.tgz#bb17179d7538bad38cd0c9e115d340f77e7e9acf"
   dependencies:
