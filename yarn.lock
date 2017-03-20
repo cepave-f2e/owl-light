@@ -6,9 +6,9 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@cepave/owl-icons/-/owl-icons-1.1.1.tgz#51db8536bc697493814a43fe067a1621615ac0da"
 
-"@cepave/owl-ui@^0.7.7":
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.7.tgz#3f38416288c0478a3c4f1f04b85fc34eeb6d6721"
+"@cepave/owl-ui@^0.7.8":
+  version "0.7.8"
+  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.8.tgz#ab5292e7846c6de4eebf61f4d44409aba75419cd"
   dependencies:
     "@cepave/owl-icons" "^1.1.1"
     delegate-to "^0.1.4"
