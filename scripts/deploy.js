@@ -40,7 +40,7 @@ if (TRAVIS_MATRIX === 'build') {
           icon_emoji: ':mikesay:',
           channel: '#notify-owl-light',
           text: `
-@robywei @myhung @minimum @cheminlin
+@channel
 
 :star: *owl-light* \`${tag}\` 上版拉~
 :unicorn_face: https://gitlab.com/Cepave/owl-light/tags/${tag}
