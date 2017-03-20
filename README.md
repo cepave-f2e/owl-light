@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <a href="https://circleci.com/gh/cepave-f2e/owl-light" alt="Build Status" target="_blank">
-    <img src="https://img.shields.io/circleci/project/github/cepave-f2e/owl-light/dev.svg" />
+  <a href="https://travis-ci.org/cepave-f2e/owl-light" alt="Build Status">
+    <img src="https://img.shields.io/travis/cepave-f2e/owl-light/dev.svg" />
   </a>
   <a href="https://codecov.io/gh/cepave-f2e/owl-light" alt="Coverage" target="_blank">
     <img src="https://img.shields.io/codecov/c/github/cepave-f2e/owl-light.svg" />
@@ -14,7 +14,6 @@
   </a>
   <img src="https://img.shields.io/github/license/cepave-f2e/owl-light.svg" />
 </p>
-
 
 # OWL Light
 
