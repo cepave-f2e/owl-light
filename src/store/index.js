@@ -7,6 +7,7 @@ module.exports = new window.Vuex.Store({
     graph: require('./graph'),
     templateList: require('./template/list'),
     templateUpdate: require('./template/update'),
+    alarms: require('./alarms'),
     profile: require('./profile'),
     aggregator: require('./aggregator'),
     portal: require('./portal'),
