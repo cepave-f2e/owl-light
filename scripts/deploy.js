@@ -32,26 +32,38 @@ if (TRAVIS_MATRIX === 'build') {
         silent: true,
       })
 
-      axios({
-        url: `https://hooks.slack.com/services/${SLACK_TOKEN}`,
-        method: 'post',
-        data: {
-          username: 'Mike',
-          icon_emoji: ':mikesay:',
-          channel: '#notify-owl-light',
-          text: `
-@channel
+      exec('git tag --list', { silent: true }, async (er, tags) => {
+        if (er) {
+          throw er
+        }
 
-:star: *owl-light* \`${tag}\` 上版拉~
-:unicorn_face: https://gitlab.com/Cepave/owl-light/tags/${tag}
-`,
-        },
-      })
-      .then((res)=> {
-        console.log(res.statusText)
-      })
-      .catch((er)=> {
-        console.log(er.response.status)
+        tags = (tags.split('\n'))
+        const lastTag = tags[tags.length - 3]
+        await new Promise((done) => {
+          setTimeout(done, 1000 * 10)
+        })
+
+        axios({
+          url: `https://hooks.slack.com/services/${SLACK_TOKEN}`,
+          method: 'post',
+          data: {
+            username: 'Mike',
+            icon_emoji: ':mikesay:',
+            channel: '#notify-owl-light',
+            text: `
+              <!channel>
+              \`${tag}\` 上版拉~
+              <https://gitlab.com/Cepave/owl-light/tags/${tag}|:spiral_note_pad: Release Note>
+              <https://gitlab.com/Cepave/owl-light/compare/${lastTag}...${tag}|:bug: Compare Changes>
+              `.replace(/^\s*/mg, ''),
+          },
+        })
+        .then((res)=> {
+          console.log(res.statusText)
+        })
+        .catch((er)=> {
+          console.log(er.response.status)
+        })
       })
     }
   })[TRAVIS_BRANCH]
