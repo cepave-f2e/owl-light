@@ -32,7 +32,7 @@ if (TRAVIS_MATRIX === 'build') {
         silent: true,
       })
 
-      exec('git tag --list', { silent: true }, async (er, tags) => {
+      exec('git tag --list | sort -V', { silent: true }, async (er, tags) => {
         if (er) {
           throw er
         }
@@ -40,7 +40,7 @@ if (TRAVIS_MATRIX === 'build') {
         tags = (tags.split('\n'))
         const lastTag = tags[tags.length - 3]
         await new Promise((done) => {
-          setTimeout(done, 1000 * 10)
+          setTimeout(done, 1000 * 20)
         })
 
         axios({
