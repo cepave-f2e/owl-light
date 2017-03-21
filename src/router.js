@@ -75,6 +75,18 @@ const router = new window.VueRouter({
         require(['./containers/nqm-target'], resolve)
       }
     },
+    {
+      path: '/nqm-ping-task',
+      component(resolve) {
+        require(['./containers/nqm-ping-task'], resolve)
+      }
+    },
+    {
+      path: '/nqm-ping-task/:id',
+      component(resolve) {
+        require(['./containers/nqm-ping-task-edit-agents'], resolve)
+      }
+    },
     { path: '*', redirect: '/graph' },
   ],
 })

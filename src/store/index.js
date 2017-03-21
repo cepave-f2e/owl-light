@@ -12,5 +12,6 @@ module.exports = new window.Vuex.Store({
     portal: require('./portal'),
     nqmAgentList: require('./nqm-agent-list'),
     nqmTarget: require('./nqm-target'),
+    nqmPingTask: require('./nqm-ping-task')
   }
 })
