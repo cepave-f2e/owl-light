@@ -23,13 +23,13 @@
     ]
   },
   "dependencies": {
-    "@cepave/owl-ui": "^0.7.8",
+    "@cepave/owl-ui": "^0.7.9",
     "delegate-to": "^0.1.2"
   },
   "devDependencies": {
     "axios": "^0.15.3",
     "babel-cli": "^6.24.0",
-    "babel-eslint": "^7.0.0",
+    "babel-eslint": "^7.2.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.2",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
@@ -44,7 +44,7 @@
     "css-loader": "^0.27.3",
     "eslint": "^3.18.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-react": "^6.10.2",
+    "eslint-plugin-react": "^6.10.3",
     "eventsource-polyfill": "^0.9.6",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^1.0.1",
@@ -58,7 +58,7 @@
     "sass-loader": "^6.0.3",
     "semver": "^5.3.0",
     "shelljs": "^0.7.7",
-    "style-loader": "^0.14.1",
+    "style-loader": "^0.15.0",
     "stylelint": "^7.9.0",
     "url-loader": "^0.5.8",
     "webpack": "^1.14.0",
