@@ -7,7 +7,8 @@ module.exports = {
       url: 'owlgraph/keyword_search',
       params: {
         q: value.trim(),
-        filter_type: category
+        filter_type: category,
+        limit: 50,
       },
       commit,
       mutation: 'complexQuery'
@@ -15,81 +16,43 @@ module.exports = {
     const cats = {}
     return vfetch(opts)
       .then((res) => {
-        res.data[category].map((item) => {
-          const { idc, isp, platform, province, hostname, ip } = item
-          const titleIDC = `IDC: ${idc}`
-          const titleISP = `ISP: ${isp}`
-          const titlePlatform = `Platform: ${platform}`
-          const titleProvince = `Province: ${province}`
-
-          if (category !== 'idc') {
-            if (!cats[titleIDC]) {
-              cats[titleIDC] = []
-            }
-            cats[titleIDC].push({ hostname, ip })
-          }
-
-          if (category !== 'isp') {
-            if (!cats[titleISP]) {
-              cats[titleISP] = []
-            }
-            cats[titleISP].push({ hostname, ip })
-          }
-
-          if (category !== 'platform') {
-            if (!cats[titlePlatform]) {
-              cats[titlePlatform] = []
-            }
-            cats[titlePlatform].push({ hostname, ip })
-          }
-
-          if (category !== 'province') {
-            if (!cats[titleProvince]) {
-              cats[titleProvince] = []
-            }
-            cats[titleProvince].push({ hostname, ip })
-          }
-        })
-        commit('complexQuery.items', { cats })
+        commit('complexQuery.items', { endpoints: res.data[category], category })
       })
   },
 
-  'getEndpoints'({ commit, state }, { q }) {
+  // 'getEndpoints'({ commit, state }, { q }) {
+  //   const opts = {
+  //     url: 'graph/endpoint',
+  //     params: {
+  //       limit: 50,
+  //       q,
+  //     },
+  //     commit,
+  //     mutation: 'getEndpoints',
+  //   }
+
+  //   return vfetch(opts)
+  // },
+
+  'getCounters'({ commit, state }, { endpoints = 'cnc', metricQuery = '.+' }) {
     const opts = {
-      url: 'graph/endpoint',
+      url: 'graph/endpointstr_counter',
       params: {
         limit: 50,
-        q,
-      },
-      commit,
-      mutation: 'getEndpoints',
-    }
-
-    return vfetch(opts)
-  },
-
-  'getCounters'({ commit, state }, { eid = '6,7', metricQuery = '.+' }) {
-    const opts = {
-      url: 'graph/endpoint_counter',
-      params: {
-        limit: 50,
-        eid,
+        endpoints,
         metricQuery,
       },
       commit,
       mutation: 'getCounters',
     }
 
-    if (Array.isArray(opts.params.eid)) {
-      opts.params.eid = opts.params.eid.join(',')
+    if (Array.isArray(opts.params.endpoints)) {
+      opts.params.endpoints = opts.params.endpoints.join(',')
     }
 
     return vfetch(opts)
       .then((res) => {
-        const items = res.data.map((counter) => {
-          return { counter }
-        })
-        commit('getCounters.items', items)
+        commit('getCounters.items', { counters: res.data })
       })
   },
 

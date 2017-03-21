@@ -1,5 +1,47 @@
 module.exports = {
-  'complexQuery.items'(stage, { cats }) {
+  'complexQuery.items'(stage, { endpoints, category }) {
+    const cats = {}
+    endpoints.forEach((endpoint) => {
+      // Grouping logic
+      const { idc, isp, platform, province, hostname, ip } = endpoint
+      const titleIDC = `IDC: ${idc}`
+      const titleISP = `ISP: ${isp}`
+      const titlePlatform = `平台: ${platform}`
+      const titleProvince = `省份: ${province}`
+
+      if (!cats[titleIDC]) {
+        cats[titleIDC] = []
+      }
+
+      if (!cats[titleISP]) {
+        cats[titleISP] = []
+      }
+
+      if (!cats[titlePlatform]) {
+        cats[titlePlatform] = []
+      }
+
+      if (!cats[titleProvince]) {
+        cats[titleProvince] = []
+      }
+
+      if (category !== 'idc') {
+        cats[titleIDC].push({ hostname, ip })
+      }
+
+      if (category !== 'isp') {
+        cats[titleISP].push({ hostname, ip })
+      }
+
+      if (category !== 'platform') {
+        cats[titlePlatform].push({ hostname, ip })
+      }
+
+      if (category !== 'province') {
+        cats[titleProvince].push({ hostname, ip })
+      }
+    })
+
     stage.complexQueryItems = Object.keys(cats).map((cat) => {
       return {
         name: cat,
@@ -26,22 +68,6 @@ module.exports = {
     state.vport = viewpoint
   },
 
-  'getEndpoints.start'(state) {
-    state.hasEndpointLoading = true
-  },
-
-  'getEndpoints.end'(state) {
-    state.hasEndpointLoading = false
-  },
-
-  'getEndpoints.success'(state, { data }) {
-    state.endpointItems = data
-  },
-
-  'getEndpoints.fail'(state) {
-
-  },
-
   'getCounters.start'(state) {
     state.hasCounterLoading = true
   },
@@ -50,8 +76,30 @@ module.exports = {
     state.hasCounterLoading = false
   },
 
-  'getCounters.items'(state, counters) {
-    state.counterItems = counters
+  'getCounters.items'(state, { counters }) {
+    const cats = {}
+
+    counters.forEach((counter) => {
+      const m = /^(http|disk|net|cpu)\./.test(counter) && RegExp.$1
+      const cat = m || 'others'
+
+      if (!cats[cat]) {
+        cats[cat] = []
+      }
+      cats[cat].push(counter)
+    })
+
+    state.counterItems = Object.keys(cats).map((name) => {
+      return {
+        name,
+        children: cats[name].map((counter)=> {
+          return {
+            name: counter,
+            value: counter,
+          }
+        })
+      }
+    })
   },
 
   'viewGraph.start'(state, { totalCharts }) {
@@ -79,8 +127,8 @@ module.exports = {
     state.grid = grid
   },
 
-  'checkViewGraphBtnStatus'(state, { disabled }) {
-    state.viewGraphBtnDisabled = disabled
+  'submitBtnStatus'(state, { disabled }) {
+    state.submitBtnDisabled = disabled
   },
 
   'syncStartTime'(state, { unix }) {

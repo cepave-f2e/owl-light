@@ -7,7 +7,7 @@ import sortHosts from './sort-hosts'
 import g from '~sass/global.scss'
 import s from './graph.scss'
 import delegate from 'delegate-to'
-// import DatePicker from '~coms/date-picker'
+const { moment } = window
 
 const GraphView = {
   name: 'GraphView',
@@ -25,28 +25,32 @@ const GraphView = {
 
   },
 
+  watch: {
+
+  },
+
   methods: {
     complexQuery(d) {
       const { $store, $refs } = this
       $store.dispatch('graph/complexQuery', d)
     },
-    getEndpoints(q) {
-      const { $store, $refs } = this
-      $store.dispatch('graph/getEndpoints', {
-        q,
-      })
-    },
+    // getEndpoints(q) {
+    //   const { $store, $refs } = this
+    //   $store.dispatch('graph/getEndpoints', {
+    //     q,
+    //   })
+    // },
 
-    getCounters(metricQuery) {
-      const { $store, $refs } = this
+    // getCounters(metricQuery) {
+    //   const { $store, $refs } = this
 
-      $store.dispatch('graph/getCounters', {
-        eid: Object.keys($refs.dualEndpoint.rightList).map((k)=>{
-          return $refs.dualEndpoint.rightList[k].id
-        }),
-        metricQuery
-      })
-    },
+    //   $store.dispatch('graph/getCounters', {
+    //     eid: Object.keys($refs.dualEndpoint.rightList).map((k)=>{
+    //       return $refs.dualEndpoint.rightList[k].id
+    //     }),
+    //     metricQuery
+    //   })
+    // },
 
     switchViewPoint(d) {
       const { $store } = this
@@ -58,12 +62,12 @@ const GraphView = {
 
     viewGraph() {
       const { $store, $refs, goToPage } = this
-      if ($store.state.graph.viewGraphBtnDisabled) {
+      if ($store.state.graph.submitBtnDisabled) {
         return
       }
-
-      const endpoints = Object.keys($refs.dualEndpoint.rightList).map((k) => $refs.dualEndpoint.rightList[k].endpoint)
-      const counters = Object.keys($refs.dualCounter.rightList).map((k) => $refs.dualCounter.rightList[k].counter)
+      debugger
+      const endpoints = Object.keys($refs.hostQuery.selectedItems).map((k) => $refs.dualEndpoint.selectedItems[k].endpoint)
+      const counters = Object.keys($refs.counterQuery.selectedItems).map((k) => $refs.dualCounter.rightList[k].counter)
       const vport = $store.state.graph.vport
 
       let totalCharts
@@ -162,6 +166,31 @@ const GraphView = {
       const { $store } = this
 
       $store.commit('graph/syncEndTime', { unix })
+    },
+
+    queryCounter({ value }) {
+      debugger
+    },
+
+    focusCounter() {
+      const { $refs, $store } = this
+      const graph = $store.state.graph
+      const endpoints = Object.keys($refs.hostQuery.storeSelectedItems)
+
+      if (!endpoints.length || graph.counterItems.length) {
+        return
+      }
+
+      $store.dispatch('graph/getCounters', {
+        endpoints,
+      })
+    },
+
+    watchCounterQuery({ selectedItems }) {
+      const { $store } = this
+      $store.commit('graph/submitBtnStatus', {
+        disabled: !Object.keys(selectedItems).length
+      })
     }
   },
 
@@ -179,7 +208,7 @@ const GraphView = {
   render(h) {
     const { $store, $router, getEndpoints, getCounters, switchViewPoint, viewGraph, goToPage,
       pageSum, switchGrid, checkBtnStatus, samplingOptions, onChangeStartTime, onChangeEndTime,
-    complexQuery } = this
+    complexQuery, focusCounter, queryCounter, watchCounterQuery } = this
     const { graph } = $store.state
 
     return (
@@ -191,15 +220,17 @@ const GraphView = {
               <Flex>
                 <Flex.Col size={6}>
                   <ComplexQuery
+                    ref="hostQuery"
                     onQuery={complexQuery}
                     items={graph.complexQueryItems}
                     loading={graph.complexQueryLoading}
+                    text={{ selectedItems: '選中' }}
                     categories={[
-                      { name: 'Host', value: 'hostname', on: true },
-                      { name: 'Platform', value: 'plaform' },
+                      { name: '主機', value: 'hostname', on: true },
+                      { name: '平台', value: 'plaform' },
                       { name: 'ISP', value: 'isp' },
                       { name: 'IDC', value: 'idc' },
-                      { name: 'Province', value: 'province' },
+                      { name: '省份', value: 'province' },
                     ]}
                   />
                 </Flex.Col>
@@ -207,12 +238,18 @@ const GraphView = {
                   <Flex split>
                     <Flex.Col size="auto">
                       <ComplexQuery
-                        items={[]}
+                        ref="counterQuery"
+                        onChange={watchCounterQuery}
+                        loading={graph.hasCounterLoading}
+                        onQuery={queryCounter}
+                        onFocus={focusCounter}
+                        items={graph.counterItems}
                         categories={[]}
+                        text={{ selectedItems: '選中' }}
                       />
                     </Flex.Col>
                     <Flex.Col>
-                      <Button disabled={graph.viewGraphBtnDisabled} status="primary" nativeOnClick={viewGraph}>Submit</Button>
+                      <Button disabled={graph.submitBtnDisabled} status="primary" nativeOnClick={viewGraph}>Submit</Button>
                     </Flex.Col>
                   </Flex>
                 </Flex.Col>
@@ -222,7 +259,7 @@ const GraphView = {
             <section class={[s.section2]}>
               <Flex>
                 <Flex.Col>
-                  <DatePicker /> - <DatePicker />
+                  <DatePicker defaultValue={moment().subtract(1, 'd').format('YYYY/MM/DD')} ref="dateStart" /> - <DatePicker ref="dateEnd" />
                 </Flex.Col>
                 <Flex.Col>
                   <Tip pos="up">
