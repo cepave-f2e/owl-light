@@ -6,9 +6,9 @@
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@cepave/owl-icons/-/owl-icons-1.1.1.tgz#51db8536bc697493814a43fe067a1621615ac0da"
 
-"@cepave/owl-ui@^0.7.9":
-  version "0.7.9"
-  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.9.tgz#7d68fcc842f2346979dc63bc92a8764d9ad387c5"
+"@cepave/owl-ui@^0.7.10":
+  version "0.7.10"
+  resolved "https://registry.yarnpkg.com/@cepave/owl-ui/-/owl-ui-0.7.10.tgz#5e5ab9c96407ebca54a9c8caad74fe04086f1991"
   dependencies:
     "@cepave/owl-icons" "^1.1.1"
     delegate-to "^0.1.4"
@@ -286,15 +286,7 @@ babel-cli@^6.24.0:
   optionalDependencies:
     chokidar "^1.6.1"
 
-babel-code-frame@^6.11.0, babel-code-frame@^6.16.0:
-  version "6.20.0"
-  resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.20.0.tgz#b968f839090f9a8bc6d41938fb96cb84f7387b26"
-  dependencies:
-    chalk "^1.1.0"
-    esutils "^2.0.2"
-    js-tokens "^2.0.0"
-
-babel-code-frame@^6.22.0:
+babel-code-frame@^6.11.0, babel-code-frame@^6.16.0, babel-code-frame@^6.22.0:
   version "6.22.0"
   resolved "https://registry.yarnpkg.com/babel-code-frame/-/babel-code-frame-6.22.0.tgz#027620bee567a88c32561574e7fd0801d33118e4"
   dependencies:
@@ -905,11 +897,7 @@ babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.22.0, babel-types@^6.23
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@^6.11.0, babylon@^6.13.0:
-  version "6.14.1"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.14.1.tgz#956275fab72753ad9b3435d7afe58f8bf0a29815"
-
-babylon@^6.15.0, babylon@^6.16.1:
+babylon@^6.11.0, babylon@^6.13.0, babylon@^6.15.0, babylon@^6.16.1:
   version "6.16.1"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.16.1.tgz#30c5a22f481978a9e7f8cdfdf496b11d94b404d3"
 
