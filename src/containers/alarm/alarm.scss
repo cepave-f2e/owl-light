@@ -1,14 +1,22 @@
 @import "~sass/colors";
+@import "~sass/global";
+
 .alarmPage {
   font-size: 14px;
 }
-.wrapper {
+.queryWrapper {
   padding: 12px 24px;
-  height: 40px;
-  position: relative;
   background: $colorGrayLightest;
-  position: relative;
-  display: flex;
+  .queryMargin {
+    margin-top: 20px;
+  }
+}
+.gridWrapper {
+  padding: 20px 24px;
+  background: $colorGrayLighter;
+  .gridContent {
+    background: #fff;
+  }
 }
 .opeartionInline {
   display: flex;
@@ -17,5 +25,56 @@
     margin: 0 5px;
     text-decoration: underline;
     color: $colorPrimary;
+    cursor: pointer
   }
+  .capitalize {
+    text-transform: capitalize;
+  }
+}
+.vpoint {
+  @extend .flex;
+  margin-right: 8px;
+  margin-left: 8px;
+  align-items: center;
+}
+.checkboxMargin {
+  margin-right: 8px
+}
+.w100 {
+  width: 100%;
+}
+.mTop {
+  margin-top: 5px;
+}
+.required {
+  vertical-align: top;
+  color: #e6175c;
+  font-size: 18px;
+}
+.validationMsg {
+  color: #e6175c;
+  border: 2px solid #e6175c;
+  padding: 3px;
+}
+.noteInfo {
+  font-size: 14px;
+  font-weight: 300;
+  border-top: 1px solid #dfe4e6;
+  padding: 16px 0;
+  &:first-of-type {
+    border: 0
+  }
+  p {
+    margin: 0;
+    padding: 2px 0;
+  }
+  .noteStatus {
+    color: #919799;
+  }
+  .noteComment {
+    margin-top: 8px;
+  }
+}
+.timePicker {
+  margin-left: 5px;
 }
