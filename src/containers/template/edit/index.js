@@ -468,7 +468,7 @@ const TemplatePage = {
                   </Flex.Col>
                   <Flex.Col size="7">
                     <span class={[s.title]}>parent:</span>
-                    <input type="hidden" class='newParent' placeholder="请输入模板名称" ref="updateParent" value={tplProps.pid}></input>
+                    <input type="hidden" class='newParent' placeholder="Enter template name..." ref="updateParent" value={tplProps.pid}></input>
                     <Select2 { ...{ props: tplProps } } />
                   </Flex.Col>
                   <Flex.Col size="1">
@@ -494,12 +494,16 @@ const TemplatePage = {
                   </Flex.Col>
                 </Flex>
                 <div>
-                  <p class={[s.templateTitle]}>call address(only support http get callback):</p>
+                  <p class={[s.templateTitle]}>callback address(only support HTTP get callback):</p>
                   <div class={[s.questionBlock]}>
                     <Input class={s.searchInput} name="q" placeholder="callback url" val={props.action.url} ref="action.url" />
                   </div>
                   <div class={[s.questionBlock]}>
                     <Checkbox.Group onChange={this.getCheckboxData}>
+                      <Checkbox name="1" checked={props.action.before_callback_sms} >Send reminder SMS before the callback</Checkbox>
+                      <Checkbox name="2" checked={props.action.before_callback_mail} >Send reminder email before the callback</Checkbox>
+                      <Checkbox name="3" checked={props.action.after_callback_sms} >Send the SMS after the callback</Checkbox>
+                      <Checkbox name="4" checked={props.action.after_callback_mail} >Send the email after the callback</Checkbox>
                       <Flex>
                         <Flex.Col size="2">
                           <Checkbox name="1" checked={props.action.before_callback_sms} >send text message before callback</Checkbox>

@@ -14,7 +14,7 @@ const Select2Muti =  {
   data() {
     return {
       select2Base: {
-        placeholder: '请选择',
+        placeholder: 'please select',
         tags: true,
         tokenSeparators: [',']
       }
