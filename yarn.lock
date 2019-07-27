@@ -12,7 +12,7 @@
   dependencies:
     "@cepave/owl-icons" "^1.1.1"
     delegate-to "^0.1.4"
-    lodash.escaperegexp "^4.1.2"
+    lodash.escaperegexp "^4.6.2"
     vue "^2.2.4"
 
 JSONStream@^0.8.4:
