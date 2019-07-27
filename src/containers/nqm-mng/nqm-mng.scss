@@ -1,0 +1,133 @@
+@import "~sass/colors";
+
+.nqmMngPage {
+  background: #fff;
+  font-size: 14px;
+}
+
+.nqmMngApp{
+  background: #E6EBF0; //$owlBg
+  font-size: 14px;
+}
+
+.optionWrapper {
+  padding: 12px 24px;
+  position: relative;
+  background: $colorGrayLightest;
+  .options {
+    display: flex;
+  }
+  .selectIsp {
+    margin-right: 20px;
+  }
+  .searchBar {
+    display: flex;
+  }
+}
+
+.searchButton {
+  margin-right: 10px;
+}
+
+.buttonIcon {
+  padding: 8px 16px;
+  .plus {
+    margin-right: 4px;
+    fill: #fff;
+  }
+}
+
+.lightboxFooter {
+  padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  .submitBtn {
+    margin-left: 20px;
+  }
+}
+  
+
+.nqmMngListWrapper {
+  padding: 20px 24px;
+  background: #e6ebf0;
+}
+
+.nqmListGrid {
+  background: #fff;
+  font-size: 12px;
+}
+
+.opeartionInline {
+  display: flex;
+  align-items: baseline;
+  .opeartions {
+    margin: 0 5px;
+    text-decoration: underline;
+    color: $colorPrimary;
+    cursor: pointer;
+  }
+}
+
+.lbTitle {
+  font-size: 20px;
+  margin-bottom: 22px;
+}
+
+.inputGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  font-size: 14px;
+  .formTitleGroup {
+    flex-grow: 1;
+  }
+  .formTitle {
+    margin: 0 0 5px 0;
+  }
+  .formTitleInfo {
+    margin: 0;
+    font-size: 12px;
+    color: $colorGrayDark;
+  }
+  .lbInput {
+    width: 497px;
+  }
+  .lbSelect{
+    margin-right: 297px;
+  }
+  .lbSwitch {
+    margin-right: 434px;
+  }
+}
+
+.normalCircle {
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  border: 2px solid $colorSecondaryGreen;
+}
+
+.disableCircle {
+  margin: 0 auto;
+  border-radius: 50%;
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  border: 2px solid $colorGrayLight;
+}
+
+.buttonBack {
+  padding: 8px 12px;
+}
+
+.buttonContent {
+  text-decoration: none;
+}
+
+.back {
+  fill: #fff;
+  margin-right: 4px;
+}
